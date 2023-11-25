@@ -21,7 +21,7 @@
   </head>
   <body>
   <?php
-  if(isset($_SESSION["User_Id"])){header('location:?p=dashboard');}
+  if(isset($_SESSION["StfId"])){header('location:?p=dashboard');}
   if(isset($_GET["out"]) == "ok"){
 	  session_unset();
 	  header("location:?p=login");

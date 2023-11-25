@@ -1,7 +1,8 @@
 <?php 
-if(!$_SESSION["User_Id"]){header('location:?p=login');}
-include('common/header.php');
-	$UsrID = $_SESSION["User_Id"];
+	if(!$_SESSION["StfId"]){header('location:?p=login');}
+	include('common/header.php');
+	$StfId = $_SESSION["StfId"];
+	$StfNm = $_SESSION["StfNm"];
 	$CollDt = date('m/d/Y');
 	
 		
@@ -19,7 +20,7 @@ include('common/header.php');
 			<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Collection Summary of Member Name</h4>
+                    <h4 class="card-title">Collection Summary of <?=$StfNm?></h4>
                     <p class="card-description"> Welcome to Mahila Bikash dashboard </p>
                     <table class="table table-bordered">
                       <thead>

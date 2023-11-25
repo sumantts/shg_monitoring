@@ -6,14 +6,42 @@
 	//Login function
 	if($fn == 'doLogin'){
 		$return_result = array();
-		$param1 = $_POST["username"];
-		$param2 = $_POST["password"];
-		$status = false;
-		$message = 'Username not match';
+		$PrmUsrNm = $_POST["username"];
+		$PrmUsrPwd = $_POST["password"];
+		$status = true;
+		$StfId = '';
+		$StfNm = '';
 
-		$_SESSION["User_Id"] = 1;
+		$query = "CALL usp_StaffLogIn('".$PrmUsrNm."', '".$PrmUsrPwd."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				$status = true;
+				$message = 'Username or password match';
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$StfId = $row['StfId'];
+					$StfNm = $row['StfNm']; 
+					
+					$_SESSION['StfId'] = $StfId;
+					$_SESSION['StfNm'] = $StfNm;
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+
+		if($StfId == ''){
+			$status = false;
+			$message = 'Username or password does not match';
+		}
 		$return_result['status'] = $status;
 		$return_result['message'] = $message;
+		$return_result['StfId'] = $StfId;
+		$return_result['StfNm'] = $StfNm;
 		
 		echo json_encode($return_result);
 	}//end function doLogin
