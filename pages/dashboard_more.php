@@ -21,15 +21,14 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Collection Summary of <?=$StfNm?></h4>
-                    <p class="card-description"> Welcome to Mahila Bikash dashboard </p>
+                    <p class="card-description"> Collection Data On 22-11-2023</p>
                     <div class="table-responsive-sm">
 						<table class="table table-bordered">
 						<thead>
 							<tr>
-							<td scope="col" style="text-align: center;">Date</td>
-							<td scope="col" style="text-align: center;">No. of Groups</td>
+							<td scope="col" style="text-align: center;">Group Name</td>
+							<td scope="col" style="text-align: center;">Attendance</td>
 							<td scope="col" style="text-align: center;">Amount Collected</td>
-							<td scope="col" style="text-align: center;">View</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -37,24 +36,15 @@
 							<td style="text-align: center;">22-11-2023</td>
 							<td style="text-align: right;"> </td>
 							<td style="text-align: right;"> </td>
-							<td style="text-align: center;"><a href="?p=dashboard-more">Show</a></td>
 							</tr>
 							<tr>
 							<td style="text-align: center;">21-11-2023</td>
 							<td style="text-align: right;"> </td>
 							<td style="text-align: right;"> </td>
-							<td style="text-align: center;"><a href="?p=dashboard-more">Show</a></td>
 							</tr>
 							<tr>
 							<td style="text-align: center;">20-11-2023</td>
 							<td style="text-align: right;"> </td>
-							<td style="text-align: right;"> </td>
-							<td style="text-align: center;"><a href="?p=dashboard-more">Show</a></td>
-							</tr>
-							<tr>
-							<td style="text-align: center;">Total</td>
-							<td></td> 
-							<td></td> 
 							<td style="text-align: right;"> </td>
 							</tr>
 						</tbody>

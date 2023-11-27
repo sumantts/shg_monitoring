@@ -7,8 +7,8 @@
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <ul class="navbar-nav">
-            <li class="nav-item font-weight-semibold d-none d-lg-block"><?=$title?></li>
-            <!--<li class="nav-item dropdown language-dropdown">
+             <!--<li class="nav-item font-weight-semibold d-none d-lg-block"><?=$title?></li>
+           <li class="nav-item dropdown language-dropdown">
               <a class="nav-link dropdown-toggle px-2 d-flex align-items-center" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="d-inline-flex mr-0 mr-md-3">
                   <div class="flag-icon-holder">
@@ -133,7 +133,7 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
                   <img class="img-md rounded-circle" src="assets/images/mohila-bikash-small.png" alt="Profile image">
-                  <p class="mb-1 mt-3 font-weight-semibold"><?=ucfirst($_SESSION["Staff_Name"])?></p>
+                  <p class="mb-1 mt-3 font-weight-semibold"><?=ucfirst($_SESSION["StfNm"])?></p>
                   <!--<p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>-->
                 </div>
                 <!--<a class="dropdown-item">My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>

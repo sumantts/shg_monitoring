@@ -17,24 +17,29 @@
 		include('pages/dashboard.php');		
 		break;
 		
-		case 'receipt':
-		$title = "Receipt";
-		include('pages/receipt.php');		
+		case 'dashboard-more':
+		$title = "Dashboard";
+		include('pages/dashboard_more.php');		
 		break;
 		
-		case 'payment':
-		$title = "Payment";
-		include('pages/payment.php');		
+		case 'group-upload':
+		$title = "Group Upload";
+		include('pages/group_upload.php');		
 		break;
 		
-		case 'loan_collection':
-		$title = "Loan Collection";
-		include('pages/loan_collection.php');		
+		case 'member-upload':
+		$title = "Member Upload";
+		include('pages/member_upload.php');		
 		break;
 		
-		case 'mem_collection':
-		$title = "View Receipt";
-		include('pages/mem_collection.php');		
+		case 'meeting-data':
+		$title = "Meeting Data";
+		include('pages/meeting_data.php');		
+		break;
+		
+		case 'link-member':
+		$title = "Link Member";
+		include('pages/link_member.php');		
 		break;
 		
 		default:

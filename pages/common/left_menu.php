@@ -9,13 +9,13 @@
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name"><?=$_SESSION["Staff_Name"]?></p>
+                  <p class="profile-name"><?=$_SESSION["StfNm"]?></p>
                   <!--<p class="designation">Premium user</p>-->
                 </div>
               </a>
             </li>
             <!--<li class="nav-item nav-category">Main Menu</li>-->
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="?p=dashboard">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Dashboard</span>
@@ -24,32 +24,46 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
-                <span class="menu-title">Deposit</span>
+                <span class="menu-title">Upload</span>
                 <i class="menu-arrow"></i>
               </a>
-              <div <?php if($p == 'receipt' || $p == 'payment'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
+              <div <?php if($p == 'group-upload' || $p == 'member-upload'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="?p=receipt">Receipt</a>
+                    <a class="nav-link" href="?p=group-upload">Group Upload</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="?p=payment">Payment</a>
+                    <a class="nav-link" href="?p=member-upload">Member Upload</a>
                   </li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="?p=loan_collection">
+              <a class="nav-link" href="?p=meeting-data">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Loan Collection</span>
+                <span class="menu-title">Meeting Data</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="?p=mem_collection">
+              <a class="nav-link" href="?p=link-member">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">View Receipt</span>
+                <span class="menu-title"> Link Member</span>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Data Export</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Change Password</span>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="?p=login&out=ok">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
