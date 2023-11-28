@@ -9,18 +9,12 @@ if(isset($_POST["importSubmit"])){
   $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
     
   // Validate whether selected file is a CSV file
-  if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
-      
+  if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){      
       // If the file is uploaded
       if(is_uploaded_file($_FILES['file']['tmp_name'])){
           //echo 'inside 1.1';
           // Open uploaded CSV file with read-only mode
-          $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-          
-          //echo ' open: ' . $csvFile;
-          // Skip the first line
-          //fgetcsv($csvFile);
-          
+          $csvFile = fopen($_FILES['file']['tmp_name'], 'r');          
           $data_saved = 0;
 
           // Parse data from CSV file line by line
@@ -32,8 +26,6 @@ if(isset($_POST["importSubmit"])){
             $SBAnNo = $line[3];
             $MemSav = 0.0;
             $StfId = $line[4];
-
-            //echo ' GroupId: '.$GroupId.' '.$StfId;
 
             //Call SP to save data into DB
             if($data_saved > 0){
