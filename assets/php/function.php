@@ -286,59 +286,76 @@
 	
 	//End Payment page function
 	
-	//Loan Page page function Start
-	if($fn == 'checkLoanAccountNumber'){
+	//Meeting Data
+	if($fn == 'getGroupMembers'){
 		$return_result = array();
 		$status = true;
 		$error_msg = '';
-		$param1 = $_POST["loan_account_number"];
-		$Staff_Id = $_POST["Staff_Id"];
-		$param2 = date('m/d/Y');
+		$collectionDate = $_POST["collectionDate"];
+		$groupCode = $_POST["groupCode"];
+		$StfId = $_POST["StfId"];	
 		
-		$sql = "{call dbo.USP_GetLoan_Demand(?,?)}";
+		$GrpNm = '';
+		$GrpAdd = '';
+		$group_members = array();
+		$grantCAmt = 0;
 
-		$params = array($param1, $Staff_Id); 
-
-		if ($stmt = sqlsrv_prepare($conn, $sql, $params)) {
-			//echo "Statement prepared.<br><br>\n"; 
-		} else {  
-			//echo "Statement could not be prepared.\n";  
-			//die(print_r(sqlsrv_errors(), true));  
-			$status = false;
-			$error_msg .= "Statement could not be prepared";
-		} 
-
-		if( sqlsrv_execute( $stmt ) === false ) {
-			die( print_r( sqlsrv_errors(), true));
-			$error_msg .= " SP Execution error";
-		}else{
-			$rows = sqlsrv_fetch_array($stmt);
-			$return_result['rows'] = $rows;
-			if(sizeof($rows) > 0){				
-				$acExists = $rows["AcExists"];				
-				$return_result["acExists"] = $acExists;
-				if($acExists == 0){
-					$status = false;
-					$error_msg .= " Wrong Account number";	
-				}else{
-					$status = true;
-					$return_result["customer_name"] = $rows["CstNm"];
-					$return_result["ContNo"] = $rows["ContNo"];
-					$return_result["product_name"] = $rows["PrdNm"];					
-					$return_result["total_demand"] = $rows["LoanAmt"];
-					$return_result["OutsAmt"] = $rows["OutsAmt"];
-					$return_result["IntDue"] = $rows["IntDue"];
-					$return_result["LastPay"] = $rows["LastPay"];
+		//GetGroup
+		$query = "CALL usp_GetGroup('".$groupCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$GrpNm = $row['GrpNm'];
+					$GrpAdd = $row['GrpAdd'];
 				}
-								
-			}else{
-				$status = false;
-				$error_msg .= " Wrong Account number";		
 			}
-		}
-		
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */
+
+		//Get Group Members
+		$query2 = "CALL usp_GetGroupMembers('".$groupCode."', '".$StfId."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			/* store the result set in PHP */
+			if ($result2 = mysqli_store_result($con)) {
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$MemId = $row2['MemId'];
+					$MemNm = $row2['MemNm'];
+					$Attnd = $row2['Attnd'];
+					$CAmt = $row2['CAmt'];
+					$grantCAmt = $grantCAmt + $CAmt;
+					$group_member = new stdClass();
+					
+					$group_member->MemId = $MemId; 
+					$group_member->MemNm = $MemNm;
+					$group_member->Attnd = $Attnd;
+					$group_member->CAmt = $CAmt;
+
+					array_push($group_members, $group_member);
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */
+
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
+		$return_result['GrpNm'] = $GrpNm;
+		$return_result['GrpAdd'] = $GrpAdd;
+		$return_result['group_members'] = $group_members;
+		$return_result['grantCAmt'] = $grantCAmt;
+
 		sleep(1);
 		echo json_encode($return_result);
 	}//end function checkAccountNumber

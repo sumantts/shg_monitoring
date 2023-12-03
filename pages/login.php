@@ -41,7 +41,7 @@
               <div class="auto-form-wrapper">
 					  <span class="text-warning" id="error_text"></span>
                   <div class="form-group">
-                    <label class="label">Username</label>
+                    <label class="label">Staff Code</label>
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="Username" id="username">
                       <div class="input-group-append">

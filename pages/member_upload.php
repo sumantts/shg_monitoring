@@ -31,7 +31,7 @@ if(isset($_POST["importSubmit"])){
             //Call SP to save data into DB
             if($data_saved > 0){
               $query = "CALL usp_InsertMember('".$MemId."', '".$GrpId."', '".$MemberNm."', '".$GuardianNm."', '".$MemAdd."', '".$OpenBal."', '".$StaffId."')";
-              echo $query;
+              //echo $query;
               mysqli_multi_query($con, $query);
             }
             $data_saved++;
@@ -48,7 +48,7 @@ if(isset($_POST["importSubmit"])){
       $qstring = 'invalid_file';
   }
 
-  //header("location: ?p=member-upload&qstring=$qstring&data_saved=$data_saved");
+  header("location: ?p=member-upload&qstring=$qstring&data_saved=$data_saved");
   exit();
 }//end isset
 

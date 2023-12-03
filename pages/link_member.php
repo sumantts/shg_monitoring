@@ -28,7 +28,7 @@ include('common/header.php');?>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Group Code*</label>
                             <div class="col-sm-8">
@@ -37,7 +37,7 @@ include('common/header.php');?>
                               <span class="col-form-label text-success" id="groupCode_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-md-6">
                           <div class="form-group row">
@@ -49,6 +49,7 @@ include('common/header.php');?>
 
                     <p>Member Name:</p>
                     <p>Gurdian Name:</p>
+                    <p>Group Code:</p>
                     <p>Group Name:</p>
                     <p>Staff Code:</p>
                   </div>

@@ -5,7 +5,7 @@
 		$password = $('#password').val();
 
 		if($username == '' || $password == ''){
-			$('#error_text').html('Please enter username and password');
+			$('#error_text').html('Please enter staff code and password');
 		}else{
 			$('#error_text').html('');
 
@@ -290,33 +290,58 @@
 	}
 	//End Payment Page Function
 	
-	//Start Loan Page Function
-	$( "#check_loan_account_number" ).on( "click", function() {
-		$loan_account_number = $('#loan_account_number').val();
-		$Staff_Id = $('#Staff_Id').val();
+	//Meeting Data
+	$( "#getGroupMembers" ).on( "click", function() {
+		$collectionDate = $('#collectionDate').val();
+		$groupCode = $('#groupCode').val();
+		$StfId = $('#StfId').val();
 		
-		$('#loan_account_number_success').html('');
-		$('#loan_account_number_error').html('');
-		
-		if($loan_account_number == ''){
-			$('#loan_account_number_error').html('Please Provide Account Number');
+		$('#collectionDate_success').html('');
+		$('#collectionDate_error').html('');
+		$('#groupCode_success').html('');
+		$('#groupCode_error').html('');
+		$('#GrpNm').html('Group Name: ');
+		$('#GrpAdd').html('Group Address: ');
+		$html = '';
+		$('#group_members_list').html($html);
+		$('#part_two').hide();
+
+		if($collectionDate == ''){
+			$('#collectionDate_error').html('Please Enter Collection Date');
+			return false;
+		}else if($groupCode == ''){
+			$('#groupCode_error').html('Please Enter Group Code');
 			return false;
 		}else{	
-			$('#loan_account_number_error').html('');
+			$('#collectionDate_error').html('');
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "checkLoanAccountNumber", loan_account_number: $loan_account_number, Staff_Id: $Staff_Id }
+			  data: { fn: "getGroupMembers", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					$('#loan_account_name_span').html($res1.customer_name);
-					$('#ContNo').val($res1.ContNo);
-					$('#loan_account_product_span').html($res1.product_name);					
+					$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
+					$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
 					
-					$('#IntDue_span').html($res1.IntDue);
+					$group_members = $res1.group_members;					
+
+					if($group_members.length > 0){
+						for(var i = 0; i < $group_members.length; i++){
+							$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'"> <input type="hidden" name="GroupId[]" id="GroupId_'+$group_members[i].MemId+'" value="'+$groupCode+'"> <input type="hidden" name="MemId[]" id="MemId_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+						}
+					}else{
+						$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
+					}
+
+					$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
+
+					$('#group_members_list').html($html);
+					$('#part_two').show();
+
+					/*$('#IntDue_span').html($res1.IntDue);
 					$('#IntDue').val($res1.IntDue);
 					$('#LastPay_span').html($res1.LastPay);
 					$('#LastPay').val($res1.LastPay);
@@ -327,11 +352,11 @@
 					$('#TotalOutstanding').val($res1.OutsAmt);
 					
 					$('#part_one').show();
-					$('#part_two').show();
+					*/
 				}else{
-					$('#loan_account_number_success').html('');
-					$('#loan_account_number_error').html($res1.error_msg);
-					return false;
+					/*$('#collectionDate_success').html('');
+					$('#collectionDate_error').html($res1.error_msg);
+					return false;*/
 				}
 			});
 		}//end if
