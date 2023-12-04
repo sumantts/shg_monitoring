@@ -56,19 +56,23 @@ include('common/header.php');?>
                       </div> 
                     </form>
 
-                    <p id="MemNm">Member Name:</p>
-                    <p id="GurdNm">Gurdian Name:</p>
-                    <p id="GrpCd">Group Code:</p>                    
-                    <p id="GrpNm">Group Name:</p>
-                    <p id="StfCd">Staff Code:</p>
+                    <div id="part_tow" style="display: none">
+                      <p id="MemNm">Member Name:</p>
+                      <p id="GurdNm">Gurdian Name:</p>
+                      <p id="GrpCd">Group Code:</p>                    
+                      <p id="GrpNm">Group Name:</p>
+                      <p id="StfCd">Staff Code:</p>
 
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <input type="hidden" name="group_code" id="group_code" value="">
-                        <input type="hidden" name="staff_code" id="staff_code" value="">
-                      <button type="button" id="updtMemStaff" class="btn btn-inverse-success btn-fw">Update</button>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <input type="hidden" name="group_code" id="group_code" value="">
+                          <input type="hidden" name="staff_code" id="staff_code" value="">
+                        <button type="button" id="updtMemStaff" class="btn btn-inverse-success btn-fw">Update</button>
+                        </div>
                       </div>
                     </div>
+
+                    <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>
 
                   </div>
                 </div>

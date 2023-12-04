@@ -156,14 +156,17 @@
 					$Attnd = $row2['Attnd'];
 					$CAmt = $row2['CAmt'];
 					$grantCAmt = $grantCAmt + $CAmt;
-					$group_member = new stdClass();
-					
-					$group_member->MemId = $MemId; 
-					$group_member->MemNm = $MemNm;
-					$group_member->Attnd = $Attnd;
-					$group_member->CAmt = $CAmt;
 
-					array_push($group_members, $group_member);
+					if($MemId != ''){
+						$group_member = new stdClass();
+						
+						$group_member->MemId = $MemId; 
+						$group_member->MemNm = $MemNm;
+						$group_member->Attnd = $Attnd;
+						$group_member->CAmt = $CAmt;
+
+						array_push($group_members, $group_member);
+					}
 				}
 			}
 			/* print divider */

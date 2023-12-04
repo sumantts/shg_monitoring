@@ -32,6 +32,9 @@
 	//Link Member
 	$( "#getMember" ).on( "click", function() {
 		$memberCode = $('#memberCode').val();
+		$('#part_tow').hide();
+		$('#part_three').hide();
+
 		if($memberCode == ''){
 			$('#memberCode_error').html('Please Enter Member Code');
 			return false;
@@ -46,13 +49,18 @@
 				console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					$('#MemNm').html('Member Name: ' + $res1.MemNm);
-					$('#GurdNm').html('Gurdian Name: ' + $res1.GurdNm);
-					$('#GrpCd').html('Group Code: ' + $res1.GrpCd);
-					$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
-					$('#StfCd').html('Staff Code: ' + $res1.StfCd);
-					$('#group_code').val($res1.GrpCd);
-					$('#staff_code').val($res1.StfCd);
+					if($res1.MemNm != ''){
+						$('#MemNm').html('Member Name: ' + $res1.MemNm);
+						$('#GurdNm').html('Gurdian Name: ' + $res1.GurdNm);
+						$('#GrpCd').html('Group Code: ' + $res1.GrpCd);
+						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
+						$('#StfCd').html('Staff Code: ' + $res1.StfCd);
+						$('#group_code').val($res1.GrpCd);
+						$('#staff_code').val($res1.StfCd);
+						$('#part_tow').show();
+					}else{
+						$('#part_three').show();
+					}
 				}else{
 					$('#form_success').html('');
 					$('#form_error').html($res1.error_msg);
@@ -107,6 +115,7 @@
 		$html = '';
 		$('#group_members_list').html($html);
 		$('#part_two').hide();
+		$('#part_three').hide();
 
 		if($collectionDate == ''){
 			$('#collectionDate_error').html('Please Enter Collection Date');
@@ -125,24 +134,28 @@
 				console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
-					$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
-					
-					$group_members = $res1.group_members;					
+					if($res1.GrpNm != ''){
+						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
+						$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
+						
+						$group_members = $res1.group_members;					
 
-					if($group_members.length > 0){
-						for(var i = 0; i < $group_members.length; i++){
-							$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+						if($group_members.length > 0){
+							for(var i = 0; i < $group_members.length; i++){
+								$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+							}
+						}else{
+							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
 						}
-					}else{
-						$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
+
+						$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
+
+						$('#group_members_list').html($html);
+						$('#GroupId').val($groupCode);
+						$('#part_two').show();
+					}else{					
+						$('#part_three').show();
 					}
-
-					$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
-
-					$('#group_members_list').html($html);
-					$('#GroupId').val($groupCode);
-					$('#part_two').show();
 				}else{
 					/*$('#collectionDate_success').html('');
 					$('#collectionDate_error').html($res1.error_msg);

@@ -129,6 +129,8 @@ if(isset($_POST['insertMeetingData'])){
                       </div>
                     </div>
 
+                    <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>
+
                   </div>
                 </div>
               </div> 		  
