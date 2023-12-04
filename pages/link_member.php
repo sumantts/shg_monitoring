@@ -41,17 +41,35 @@ include('common/header.php');?>
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                          <button type="button" id="check_member_Id" class="btn btn-inverse-success btn-fw">Show</button>
+                          <button type="button" id="getMember" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
+                        
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                          <span class="col-form-label text-danger" id="form_error" style="font-size: 12px;"> </span>
+                          <span class="col-form-label text-success" id="form_success" style="font-size: 12px;"> </span>
+                          </div>
+                        </div>
+
                       </div> 
                     </form>
 
-                    <p>Member Name:</p>
-                    <p>Gurdian Name:</p>
-                    <p>Group Code:</p>
-                    <p>Group Name:</p>
-                    <p>Staff Code:</p>
+                    <p id="MemNm">Member Name:</p>
+                    <p id="GurdNm">Gurdian Name:</p>
+                    <p id="GrpCd">Group Code:</p>                    
+                    <p id="GrpNm">Group Name:</p>
+                    <p id="StfCd">Staff Code:</p>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <input type="hidden" name="group_code" id="group_code" value="">
+                        <input type="hidden" name="staff_code" id="staff_code" value="">
+                      <button type="button" id="updtMemStaff" class="btn btn-inverse-success btn-fw">Update</button>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div> 		  
