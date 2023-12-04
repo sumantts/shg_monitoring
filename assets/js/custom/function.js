@@ -330,7 +330,7 @@
 
 					if($group_members.length > 0){
 						for(var i = 0; i < $group_members.length; i++){
-							$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'"> <input type="hidden" name="GroupId[]" id="GroupId_'+$group_members[i].MemId+'" value="'+$groupCode+'"> <input type="hidden" name="MemId[]" id="MemId_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+							$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
 						}
 					}else{
 						$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
@@ -339,6 +339,7 @@
 					$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
 
 					$('#group_members_list').html($html);
+					$('#GroupId').val($groupCode);
 					$('#part_two').show();
 
 					/*$('#IntDue_span').html($res1.IntDue);
@@ -361,7 +362,27 @@
 			});
 		}//end if
 	});
-	//End Loan Page Function
+	//End Loan Page Function  
+	
+	//Check uncheck
+	$('#myTable').on('click', '.check_class', function(){
+		$member_id = $(this).data('member_id');
+		console.log('checkbox member_id: ' + $member_id);
+
+		//$attendance_id = $('#attendance_' + $member_id).checked();
+		if ($('#attendance_' + $member_id).is(':checked')) {
+		// The checkbox is checked
+			console.log('checked');			
+			$hiddenCAmt = $('#hiddenCAmt_' + $member_id).val();
+			$('#CAmt_' + $member_id).val($hiddenCAmt);
+		} else {
+		// The checkbox is not checked
+			console.log('unchecked: ');
+			$val = 0;
+			$('#CAmt_' + $member_id).val($val);
+		}
+
+	});
 	
 	//Member Receipt Function Start
 	$( "#check_member_Id" ).on( "click", function() {

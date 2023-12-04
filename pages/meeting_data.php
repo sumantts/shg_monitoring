@@ -3,25 +3,35 @@ if(!$_SESSION["StfId"]){header('location:?p=login');}
 include('common/header.php');
 
 if(isset($_POST['insertMeetingData'])){
-  echo json_encode($_POST);
+  //echo json_encode($_POST);
   //exit();
 
   $CAmt = $_POST['CAmt'];
   $collectionDate = $_POST['collectionDate'];
   $GroupId = $_POST['GroupId'];
-  $MemId = $_POST['MemId'];
+  $my_id = $_POST['my_id'];
   $attendance = $_POST['attendance'];
+  //echo 'my_id: '.$my_id[1];
   
+  $data_saved = 0;
   for($i = 0; $i < sizeof($CAmt); $i++){
     if($CAmt[$i] > 0){
       $MeetingDt = $collectionDate[$i];
       $StfId = $_SESSION["StfId"];
-      $GroupId = $GroupId[$i];
-      $MemId = $MemId[$i];
-      $MeetingDt = $collectionDate[$i];
-      $MeetingDt = $collectionDate[$i];
+      $MemId = $my_id[$i];
+      //echo 'MemId: '.$MemId[$i];
+      $Attendance = 1;
+      $CollAmt = $CAmt[$i];
+
+      //Insert Meeting data
+      $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
+      mysqli_multi_query($con, $query);
+      $data_saved++;
+      
     }//end if
   }//end for
+
+  header("location:?p=meeting-data&save=ok&data_saved=$data_saved");
 
 }//end form submit
 
@@ -38,6 +48,12 @@ if(isset($_POST['insertMeetingData'])){
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
+                    <?php 
+                    if(isset($_GET["save"])){
+                    if($_GET["save"] == "ok"){?> 
+                      <span class="col-form-label  text-success" style="font-size: 18px;"><?=$_GET["data_saved"]?> Data inserted successfully</span>
+                    <?php } }?>
+                    
                     <h4 class="card-title"><?=$title?></h4>
                     <form class="form-sample">
                       <!--<p class="card-description"> Personal info </p>-->
@@ -78,7 +94,7 @@ if(isset($_POST['insertMeetingData'])){
                       <p class="card-description" id="GrpAdd">Group Address: </p>
                       <div class="table-responsive-sm">
                         <form name="form1" id="form1" method="POST" action="">
-                          <table class="table table-bordered">
+                          <table class="table table-bordered" id="myTable">
                             <thead>
                               <tr>
                                 <td scope="col" style="text-align: center;">Member Id</td>
@@ -105,6 +121,7 @@ if(isset($_POST['insertMeetingData'])){
 
                           <div class="form-group row">
                             <div class="col-md-12 mt-2">
+                            <input type="hidden" name="GroupId" id="GroupId" value="'">
                               <input type="submit" name="insertMeetingData" id="insertMeetingData" class="btn btn-inverse-success btn-fw" value="Save">
                             </div>
                           </div>
