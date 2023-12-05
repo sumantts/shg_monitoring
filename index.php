@@ -47,6 +47,11 @@
 		include('pages/data_export.php');		
 		break;
 		
+		case 'change-password':
+		$title = "Change Password";
+		include('pages/change_password.php');		
+		break;
+		
 		default:
 		include('pages/login.php');
 	}

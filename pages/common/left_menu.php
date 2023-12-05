@@ -58,7 +58,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="?p=change-password">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Change Password</span>
               </a>

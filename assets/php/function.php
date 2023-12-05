@@ -187,6 +187,25 @@
 		echo json_encode($return_result);
 	}//end function checkAccountNumber
 	
-	//Loan Page page function End
+	
+	//Update Passowrd
+	
+	
+	//Update Password
+	if($fn == 'updtStaffPwd'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$new_password = $_POST["new_password"];
+		$StfId = $_POST["StfId"];
+		
+		$query = "CALL usp_UpdtStaffPwd('".$StfId."', '".$new_password."')";
+		mysqli_multi_query($con, $query);
+		
+		sleep(1);
+		$return_result['status'] = $status;
+		echo json_encode($return_result);
+	}//end function getMember
+
 	
 ?>

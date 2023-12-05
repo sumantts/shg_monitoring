@@ -185,8 +185,38 @@
 		}
 
 	});	
-	
-	//Save Loan Collection
+
+	//Update Password
+	$( "#update_password" ).on( "click", function() {
+		$new_password = $('#new_password').val();
+		$StfId = $('#StfId').val();
+
+		if($new_password == ''){
+			$('#new_password_error').html('Please Enter Password');
+			return false;
+		}else{	
+			$('#new_password_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "updtStaffPwd", new_password: $new_password, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					alert('Password updated successfully')
+					window.location.href = '?p=login&out=ok';
+				}else{
+					//$('#form_success').html('');
+					//$('#form_error').html($res1.error_msg);
+					return false;
+				}
+			});
+		}//end if
+	});
+	//Update Password End
+
 	
 	//Loading screen
 	$body = $("body");
