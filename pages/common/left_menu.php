@@ -52,7 +52,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="?p=data-export">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Data Export</span>
               </a>
