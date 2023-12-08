@@ -49,9 +49,9 @@
       <?php include('common/left_menu.php');?>
         <!-- partial -->
         <div class="main-panel">
-          <div class=""> 
+          <div class="content-wrapper"> 
 		  
-			<div class="col-lg-12 grid-margin stretch-card">
+			<div class="col-lg-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-description">Dashboard </h4>

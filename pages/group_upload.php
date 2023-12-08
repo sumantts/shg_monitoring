@@ -92,7 +92,7 @@ if(isset($_POST["importSubmit"])){
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group row">
+                          <div class=" mb-2">
                           <input type="submit" class="btn btn-primary mb-3" name="importSubmit" value="Import">
                           </div>
                         </div>

@@ -40,7 +40,7 @@ include('common/header.php');?>
                         </div> -->
 
                         <div class="col-md-6">
-                          <div class="form-group row">
+                          <div class=" mb-2">
                           <button type="button" id="getMember" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
