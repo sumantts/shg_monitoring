@@ -54,7 +54,7 @@
 			<div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-description"> Welcome to Mahila Bikash dashboard </h4>
+                    <h4 class="card-description">Dashboard </h4>
                     <p class="card-title mt-5">Collection Summary of <?=$StfNm?></p>
                     <div class="table-responsive-sm">
 						<table class="table table-bordered">
@@ -73,7 +73,7 @@
 							?>
 							<tr>
 							<td style="text-align: center;"><?=$all_results[$i]->Dt?></td>
-							<td style="text-align: right;"><?=$all_results[$i]->GrpNo?></td>
+							<td style="text-align: center;"><?=$all_results[$i]->GrpNo?></td>
 							<td style="text-align: right;"><?=number_format($all_results[$i]->AmtColl, 2)?></td>
 							<td style="text-align: center;"><a href="?p=dashboard-more&dt=<?=$all_results[$i]->Dt?>">Show</a></td>
 							</tr>
@@ -88,9 +88,7 @@
 							<tr>
 							<td style="text-align: center;" colspan="4">Sorry! No data Found</td>
 							</tr>
-							<?php } ?>
-							
-							
+							<?php } ?>	
 						</tbody>
 						</table>
 					</div>

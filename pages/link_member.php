@@ -66,7 +66,7 @@ include('common/header.php');?>
                       <div class="col-md-6">
                         <div class="form-group row">
                           <input type="hidden" name="group_code" id="group_code" value="">
-                          <input type="hidden" name="staff_code" id="staff_code" value="">
+                          <input type="hidden" name="staff_code" id="staff_code" value="<?=$_SESSION["StfId"]?>">
                         <button type="button" id="updtMemStaff" class="btn btn-inverse-success btn-fw">Update</button>
                         </div>
                       </div>

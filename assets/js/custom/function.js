@@ -56,7 +56,7 @@
 						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
 						$('#StfCd').html('Staff Code: ' + $res1.StfCd);
 						$('#group_code').val($res1.GrpCd);
-						$('#staff_code').val($res1.StfCd);
+						//$('#staff_code').val($res1.StfCd);
 						$('#part_tow').show();
 					}else{
 						$('#part_three').show();
@@ -148,7 +148,7 @@
 							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
 						}
 
-						$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
+						//$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
 
 						$('#group_members_list').html($html);
 						$('#GroupId').val($groupCode);

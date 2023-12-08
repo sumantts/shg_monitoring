@@ -21,13 +21,13 @@ include('common/header.php');
                     <?php } }?>
                     
                     <h4 class="card-title"><?=$title?></h4>
-                    <form class="form-sample" name="form1" id="form1" method="POST" action="pages/download.php" target="_blank">
+                    <form class="form-sample" name="form1" id="form1" method="POST" action="pages/csv.php" target="_blank">
                       <!--<p class="card-description"> Personal info </p>-->
                       <div class="row">
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Meeting Date*</label>
+                            <label class="col-sm-4 col-form-label text-danger">Collection Date*</label>
                             <div class="col-sm-8">
                               <input type="date" id="meetingDate" name="meetingDate" value="<?=date('Y-m-d')?>" class="form-control" />
                               <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>

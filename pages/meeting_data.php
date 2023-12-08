@@ -51,7 +51,7 @@ if(isset($_POST['insertMeetingData'])){
                     <?php 
                     if(isset($_GET["save"])){
                     if($_GET["save"] == "ok"){?> 
-                      <span class="col-form-label  text-success" style="font-size: 18px;"><?=$_GET["data_saved"]?> Data inserted successfully</span>
+                      <span class="col-form-label  text-success" style="font-size: 18px;"><?=$_GET["data_saved"]?> Records inserted successfully</span>
                     <?php } }?>
                     
                     <h4 class="card-title"><?=$title?></h4>
@@ -97,7 +97,7 @@ if(isset($_POST['insertMeetingData'])){
                           <table class="table table-bordered" id="myTable">
                             <thead>
                               <tr>
-                                <td scope="col" style="text-align: center;">Member Id</td>
+                                <td scope="col" style="text-align: center;">Member Code</td>
                                 <td scope="col" style="text-align: center;">Member Name</td>
                                 <td scope="col" style="text-align: center;">Attendance </td>
                                 <td scope="col" style="text-align: center;">Collection Amount </td>

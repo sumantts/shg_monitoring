@@ -103,7 +103,8 @@ if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
 // File Name & Content Header For Download
 $file_name = "meeting_data_$meeting_date_str.xls";
 header("Content-Disposition: attachment; filename=\"$file_name\"");
-header("Content-Type: application/vnd.ms-excel");
+//header("Content-Type: application/vnd.ms-excel");
+header('Content-Type: application/csv');
 
 //Step 4
 //To define column name in first row.
