@@ -22,7 +22,7 @@ include('common/header.php');?>
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Member Code*</label>
                             <div class="col-sm-8">
-                              <input type="text" id="memberCode" class="form-control" />
+                              <input type="tel" id="memberCode" class="form-control" />
                               <span class="col-form-label text-danger" id="memberCode_error" style="font-size: 12px;"></span>
                               <span class="col-form-label text-success" id="memberCode_success" style="font-size: 12px;"></span>
                             </div>
@@ -57,11 +57,11 @@ include('common/header.php');?>
                     </form>
 
                     <div id="part_tow" style="display: none">
-                      <p id="MemNm">Member Name:</p>
-                      <p id="GurdNm">Gurdian Name:</p>
-                      <p id="GrpCd">Group Code:</p>                    
-                      <p id="GrpNm">Group Name:</p>
-                      <p id="StfCd">Staff Code:</p>
+                      <p><strong>Member Name:</strong> <span id="MemNm"></span></p>
+                      <p><strong>Gurdian Name:</strong> <span id="GurdNm"></span></p>
+                      <p><strong>Group Code:</strong> <span id="GrpCd"></span></p>                    
+                      <p><strong>Group Name:</strong> <span id="GrpNm"></span></p>
+                      <p><strong>Staff Code:</strong> <span id="StfCd"></span></p>
 
                       <div class="col-md-6">
                         <div class="form-group row">

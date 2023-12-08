@@ -73,7 +73,7 @@ if(isset($_POST['insertMeetingData'])){
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Enter Group Code*</label>
                             <div class="col-sm-8">
-                              <input type="text" id="groupCode" class="form-control" />
+                              <input type="tel" id="groupCode" class="form-control" />
                               <span class="col-form-label  text-danger" id="groupCode_error" style="font-size: 12px;"></span>
                               <span class="col-form-label  text-success" id="groupCode_success" style="font-size: 12px;"></span>
                             </div>

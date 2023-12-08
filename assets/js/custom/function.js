@@ -50,11 +50,11 @@
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					if($res1.MemNm != ''){
-						$('#MemNm').html('Member Name: ' + $res1.MemNm);
-						$('#GurdNm').html('Gurdian Name: ' + $res1.GurdNm);
-						$('#GrpCd').html('Group Code: ' + $res1.GrpCd);
-						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
-						$('#StfCd').html('Staff Code: ' + $res1.StfCd);
+						$('#MemNm').html( $res1.MemNm);
+						$('#GurdNm').html( $res1.GurdNm);
+						$('#GrpCd').html( $res1.GrpCd);
+						$('#GrpNm').html( $res1.GrpNm);
+						$('#StfCd').html( $res1.StfCd);
 						$('#group_code').val($res1.GrpCd);
 						//$('#staff_code').val($res1.StfCd);
 						$('#part_tow').show();

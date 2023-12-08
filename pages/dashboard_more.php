@@ -44,7 +44,7 @@
 		/* execute multi query */
 	}//end if
 		
-	echo json_encode($all_results);
+	//echo json_encode($all_results);
 
 	
 		
