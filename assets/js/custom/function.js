@@ -69,27 +69,66 @@
 			});
 		}//end if
 	});
+
+	//Validate	
+	$( "#savings_ac_no_validate" ).on( "click", function() {
+		$savings_ac_no = $('#savings_ac_no').val();
+
+		$('#savings_ac_no_success').html('');
+		$('#savings_ac_no_error').html('');
+		$('#last_part').hide();
+
+		if($savings_ac_no == ''){
+			$('#savings_ac_no_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{	
+			$('#savings_ac_no_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "usp_GetGroup", savings_ac_no: $savings_ac_no }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#last_part').show();
+					$('#GrpId').val($res1.GrpId);					
+					$('#savings_ac_no_success').html('Validated successfully'); 
+				}else{
+					$('#savings_ac_no_error').html('Not Validated'); 					
+					return false;
+				}
+			});
+		}//end if
+	});
+	//End Validate
+
 	//Update Linked Member
 	$( "#updtMemStaff" ).on( "click", function() {
 		$memberCode = $('#memberCode').val();
 		$group_code = $('#group_code').val();
 		$staff_code = $('#staff_code').val();
+		$GrpId = $('#GrpId').val();
 
 		if($memberCode == ''){
 			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else if($GrpId == ''){
+			$('#savings_ac_no_error').html('Account Validation Error');
 			return false;
 		}else{	
 			$('#memberCode_error').html('');
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "updtMemStaff", memberCode: $memberCode, group_code: $group_code, staff_code: $staff_code }
+			  data: { fn: "updtMemStaff", memberCode: $memberCode, group_code: $group_code, staff_code: $staff_code, GrpId: $GrpId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					
+					alert('Member Linked successfully');
 				}else{
 					$('#form_success').html('');
 					$('#form_error').html($res1.error_msg);
@@ -293,8 +332,8 @@
 			$val = 0;
 			$('#attendance_text_' + $member_id).val($val);
 		}
-
 	});	
+	
 	
 	//Loading screen
 	$body = $("body");

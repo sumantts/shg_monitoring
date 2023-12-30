@@ -79,17 +79,19 @@ include('common/header.php');?>
                         
                         <div class="col-sm-6">
                           <button type="button" id="savings_ac_no_validate" class="btn btn-inverse-success btn-fw">Validate</button>
-                        </div>
-                        
+                        </div>                        
                       </div>
+                    </div>
 
-                      <div class="col-md-6">
-                        <div class="form-group row">
+                    <div class="row" id="last_part" style="display: none"> 
+                      <div class="col-md-6 mt-4">
+                        <div class="form-group">
                           <input type="hidden" name="group_code" id="group_code" value="">
                           <input type="hidden" name="staff_code" id="staff_code" value="<?=$_SESSION["StfId"]?>">
+                          <input type="hidden" name="GrpId" id="GrpId" value="">
                         <button type="button" id="updtMemStaff" class="btn btn-inverse-success btn-fw">Update</button>
                         </div>
-                      </div>
+                      </div>                       
                     </div>
 
                     <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>

@@ -92,7 +92,46 @@
 		sleep(1);
 		echo json_encode($return_result);
 	}//end function getMember
-	
+	//Validate function
+	if($fn == 'usp_GetGroup'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$GrpId = '';
+		$GrpNm = '';
+		$GrpAdd = '';
+		$savings_ac_no = $_POST["savings_ac_no"];
+		
+		$query = "CALL usp_GetGroup('".$savings_ac_no."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					$GrpId = $row['GrpId'];
+					$GrpNm = $row['GrpNm'];
+					$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		
+		if($GrpId != ''){
+			$status = true;			
+		}else{
+			$status = false;
+		}
+		sleep(1);
+		$return_result['status'] = $status;
+		$return_result['GrpId'] = $GrpId;
+		$return_result['GrpNm'] = $GrpNm;
+		$return_result['GrpAdd'] = $GrpAdd;
+		echo json_encode($return_result);
+	}//end function getMember
+
 	//Update Linked Member
 	if($fn == 'updtMemStaff'){
 		$return_result = array();
@@ -101,8 +140,9 @@
 		$memberCode = $_POST["memberCode"];
 		$group_code = $_POST["group_code"];
 		$staff_code = $_POST["staff_code"];
+		$GrpId = $_POST["GrpId"];
 		
-		$query = "CALL usp_UpdtMemStaff('".$memberCode."', '".$group_code."', '".$staff_code."')";
+		$query = "CALL usp_UpdtMemStaff('".$memberCode."', '".$GrpId."', '".$staff_code."')";
 		mysqli_multi_query($con, $query);
 		
 		sleep(1);
