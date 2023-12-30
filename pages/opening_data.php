@@ -10,13 +10,13 @@ if(isset($_POST['insertMeetingData'])){
   $collectionDate = $_POST['collectionDate'];
   $GroupId = $_POST['GroupId'];
   $my_id = $_POST['my_id'];
-  $attendance = $_POST['attendance'];
-  $attendance_text = $_POST['attendance_text'];
+  //$attendance = $_POST['attendance'];
+  //$attendance_text = $_POST['attendance_text'];
   //echo 'my_id: '.$my_id[1];
   
   $data_saved = 0;
-  for($i = 0; $i < sizeof($attendance_text); $i++){
-    if($attendance_text[$i] > 0){
+  for($i = 0; $i < sizeof($my_id); $i++){
+    if($CAmt[$i] > 0){
       $MeetingDt = $collectionDate[$i];
       $StfId = $_SESSION["StfId"];
       $MemId = $my_id[$i];
@@ -25,13 +25,14 @@ if(isset($_POST['insertMeetingData'])){
       $CollAmt = $CAmt[$i];
 
       //Insert Meeting data
-      $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
+      $query = "CALL usp_UpdtMemBalance('".$MemId."', '".$CollAmt."')";
+    
       mysqli_multi_query($con, $query);
       $data_saved++;      
     }//end if
   }//end for
 
-  header("location:?p=meeting-data&save=ok&data_saved=$data_saved");
+  header("location:?p=opening-data&save=ok&data_saved=$data_saved");
 
 }//end form submit
 
@@ -61,7 +62,7 @@ if(isset($_POST['insertMeetingData'])){
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Collection Date*</label>
+                            <label class="col-sm-4 col-form-label text-danger">As on  Date*</label>
                             <div class="col-sm-8">
                               <input type="date" id="collectionDate" value="<?=date('Y-m-d')?>" class="form-control" />
                               <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
@@ -83,7 +84,7 @@ if(isset($_POST['insertMeetingData'])){
                         <div class="col-md-6">
                           <div class=" mb-2">
                             <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
-                          <button type="button" id="getGroupMembers" class="btn btn-inverse-success btn-fw">Show</button>
+                          <button type="button" id="getGroupMembers1" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
                       </div> 
@@ -99,11 +100,10 @@ if(isset($_POST['insertMeetingData'])){
                               <tr>
                                 <td scope="col" style="text-align: center;">Member Code</td>
                                 <td scope="col" style="text-align: center;">Member Name</td>
-                                <td scope="col" style="text-align: center;">Attendance </td>
-                                <td scope="col" style="text-align: center;">Collection Amount </td>
+                                <td scope="col" style="text-align: center;">Opening Balance</td>
                               </tr>
                             </thead>
-                            <tbody id="group_members_list">
+                            <tbody id="group_members_list1">
                             </tbody>
                           </table>
 

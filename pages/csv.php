@@ -32,7 +32,6 @@
 			if ($result2 = mysqli_store_result($con)) {
 				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
 				//printf("%s\n", $row[0]);
-				$i++;
 				$MettingDt = $row2['MettingDt'];
 				$StfCd = $row2['StfCd'];
 				$GrpCd = $row2['GrpCd'];
@@ -52,6 +51,7 @@
 				$csv_export1 .= "$CollAmt,";
 				$csv_export1 .= "$CollDt,";
 				$csv_export1 .= "\n";
+				$i++;
 			}
 		}
 		/* print divider */

@@ -15,7 +15,7 @@
 			data: { fn: "doLogin", username: $username, password: $password }
 			})
 			.done(function( res ) {
-				console.log(res);
+				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					window.location.href = '?p=dashboard';
@@ -46,7 +46,7 @@
 			  data: { fn: "getMember", memberCode: $memberCode }
 			})
 			  .done(function( res ) {
-				console.log(res);
+				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					if($res1.MemNm != ''){
@@ -86,7 +86,7 @@
 			  data: { fn: "updtMemStaff", memberCode: $memberCode, group_code: $group_code, staff_code: $staff_code }
 			})
 			  .done(function( res ) {
-				console.log(res);
+				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					
@@ -99,6 +99,66 @@
 		}//end if
 	});
 	//Update Linked Member End
+
+	//Opening Data
+	$( "#getGroupMembers1" ).on( "click", function() {
+		$collectionDate = $('#collectionDate').val();
+		$groupCode = $('#groupCode').val();
+		$StfId = $('#StfId').val();
+		
+		$('#collectionDate_success').html('');
+		$('#collectionDate_error').html('');
+		$('#groupCode_success').html('');
+		$('#groupCode_error').html('');
+		$('#GrpNm').html('Group Name: ');
+		$('#GrpAdd').html('Group Address: ');
+		$html = '';
+		$('#group_members_list1').html($html);
+		$('#part_two').hide();
+		$('#part_three').hide();
+
+		if($collectionDate == ''){
+			$('#collectionDate_error').html('Please Enter Collection Date');
+			return false;
+		}else if($groupCode == ''){
+			$('#groupCode_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{	
+			$('#collectionDate_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "getGroupMembers", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					if($res1.GrpNm != ''){
+						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
+						$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
+						
+						$group_members1 = $res1.group_members;				
+
+						if($group_members1.length > 0){
+							for(var i = 0; i < $group_members1.length; i++){
+								$html += '<tr> <td style="text-align: center;">'+$group_members1[i].MemId+'</td> <td style="text-align: center;">'+$group_members1[i].MemNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members1[i].MemId+'" value="0" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members1[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members1[i].MemId+'" value="'+$group_members1[i].MemId+'"> </td> </tr>';
+							}
+						}else{
+							$html += '<tr> <td style="text-align: center;" colspan="3">No data Available</td> </tr>';
+						}
+
+						$('#group_members_list1').html($html);
+						$('#GroupId').val($groupCode);
+						$('#part_two').show();
+					}else{					
+						$('#part_three').show();
+					}
+				}else{
+				}
+			});
+		}//end if
+	});
 
 	//Meeting Data
 	$( "#getGroupMembers" ).on( "click", function() {
@@ -121,7 +181,7 @@
 			$('#collectionDate_error').html('Please Enter Collection Date');
 			return false;
 		}else if($groupCode == ''){
-			$('#groupCode_error').html('Please Enter Group Code');
+			$('#groupCode_error').html('Please Enter Savings A/c. No.');
 			return false;
 		}else{	
 			$('#collectionDate_error').html('');
@@ -131,7 +191,7 @@
 			  data: { fn: "getGroupMembers", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
 			})
 			  .done(function( res ) {
-				console.log(res);
+				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					if($res1.GrpNm != ''){
@@ -142,7 +202,7 @@
 
 						if($group_members.length > 0){
 							for(var i = 0; i < $group_members.length; i++){
-								$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+								$html += '<tr> <td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /><input type="hidden" name="attendance_text[]" id="attendance_text_'+$group_members[i].MemId+'" value="1" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
 							}
 						}else{
 							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
@@ -202,7 +262,7 @@
 			  data: { fn: "updtStaffPwd", new_password: $new_password, StfId: $StfId }
 			})
 			  .done(function( res ) {
-				console.log(res);
+				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					alert('Password updated successfully')
@@ -217,6 +277,24 @@
 	});
 	//Update Password End
 
+	//Check uncheck
+	$('#myTable').on('click', '.check_class', function(){
+		$member_id = $(this).data('member_id');
+		console.log('checkbox member_id: ' + $member_id);
+		
+		if ($('#attendance_' + $member_id).is(':checked')) {
+		// The checkbox is checked
+			console.log('checked');	
+			$val = 1;
+			$('#attendance_text_' + $member_id).val($val);
+		} else {
+		// The checkbox is not checked
+			console.log('unchecked: ');
+			$val = 0;
+			$('#attendance_text_' + $member_id).val($val);
+		}
+
+	});	
 	
 	//Loading screen
 	$body = $("body");

@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -15,13 +17,14 @@
               </a>
             </li>
             <!--<li class="nav-item nav-category">Main Menu</li>-->
-            <li class="nav-item active">
+            <li class="nav-item <?php if($p == 'dashboard'){?>active<?php } ?>">
               <a class="nav-link" href="?p=dashboard">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
-            <li class="nav-item">
+            <?php if($_SESSION["StfId"] == 99){?>
+            <li class="nav-item <?php if($p == 'group-upload' || $p == 'member-upload'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
                 <span class="menu-title">Upload</span>
@@ -38,26 +41,33 @@
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
+            <?php } ?>
+            <li class="nav-item <?php if($p == 'opening-data'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=opening-data">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Opening Data</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'meeting-data'){?>active<?php } ?>">
               <a class="nav-link" href="?p=meeting-data">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Meeting Data</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($p == 'link-member'){?>active<?php } ?>">
               <a class="nav-link" href="?p=link-member">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title"> Link Member</span>
               </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item <?php if($p == 'data-export'){?>active<?php } ?>">
               <a class="nav-link" href="?p=data-export">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Data Export</span>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($p == 'change-password'){?>active<?php } ?>">
               <a class="nav-link" href="?p=change-password">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Change Password</span>

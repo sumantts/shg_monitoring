@@ -748,3 +748,8 @@
     display: none; }
 
 /*# sourceMappingURL=style.css.map */
+
+.sidebar > .nav .nav-item.active > .nav-link {
+  background: #0f25d5;
+  padding-left: 65px;
+}

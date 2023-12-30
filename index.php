@@ -37,6 +37,11 @@
 		include('pages/meeting_data.php');		
 		break;
 		
+		case 'opening-data':
+		$title = "Opening Data";
+		include('pages/opening_data.php');		
+		break;
+		
 		case 'link-member':
 		$title = "Link Member";
 		include('pages/link_member.php');		

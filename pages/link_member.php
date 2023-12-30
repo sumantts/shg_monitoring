@@ -28,6 +28,7 @@ include('common/header.php');?>
                             </div>
                           </div>
                         </div>
+
                         <!-- <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Group Code*</label>
@@ -44,7 +45,6 @@ include('common/header.php');?>
                           <button type="button" id="getMember" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
-                        
 
                         <div class="col-md-6">
                           <div class="form-group row">
@@ -62,6 +62,26 @@ include('common/header.php');?>
                       <p><strong>Group Code:</strong> <span id="GrpCd"></span></p>                    
                       <p><strong>Group Name:</strong> <span id="GrpNm"></span></p>
                       <p><strong>Staff Code:</strong> <span id="StfCd"></span></p>
+
+                      
+                      
+                      <div class="row"> 
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">Savings A/c. No.*</label>
+                            <div class="col-sm-8">
+                              <input type="number" id="savings_ac_no" class="form-control" />
+                              <span class="col-form-label text-danger" id="savings_ac_no_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="savings_ac_no_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                          <button type="button" id="savings_ac_no_validate" class="btn btn-inverse-success btn-fw">Validate</button>
+                        </div>
+                        
+                      </div>
 
                       <div class="col-md-6">
                         <div class="form-group row">
