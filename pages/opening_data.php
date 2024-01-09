@@ -32,7 +32,12 @@ if(isset($_POST['insertMeetingData'])){
     }//end if
   }//end for
 
-  header("location:?p=opening-data&save=ok&data_saved=$data_saved");
+  //header("location:?p=opening-data&save=ok&data_saved=$data_saved");
+  ?>
+  <script>
+    window.location.href = '?p=opening-data&save=ok&data_saved=<?=$data_saved?>';
+  </script>
+  <?php
 
 }//end form submit
 

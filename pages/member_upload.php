@@ -48,7 +48,12 @@ if(isset($_POST["importSubmit"])){
       $qstring = 'invalid_file';
   }
 
-  header("location: ?p=member-upload&qstring=$qstring&data_saved=$data_saved");
+  //header("location: ?p=member-upload&qstring=$qstring&data_saved=$data_saved");
+  ?>
+  <script>
+    window.location.href = '?p=member-upload&qstring=<?=$qstring?>&data_saved=<?=$data_saved?>';
+  </script>
+  <?php
   exit();
 }//end isset
 
