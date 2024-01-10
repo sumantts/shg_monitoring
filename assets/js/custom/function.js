@@ -250,7 +250,7 @@
 						//$html += '<tr> <td style="text-align: center;"> </td> <td style="text-align: center;">Total </td> <td style="text-align: center;"> </td> <td style="text-align: right;">'+$res1.grantCAmt+'</td> </tr>';
 
 						$('#group_members_list').html($html);
-						$('#GroupId').val($groupCode);
+						//$('#GroupId').val($groupCode);
 						$('#part_two').show();
 					}else{					
 						$('#part_three').show();
@@ -259,6 +259,20 @@
 					/*$('#collectionDate_success').html('');
 					$('#collectionDate_error').html($res1.error_msg);
 					return false;*/
+				}
+			});
+
+			//Check group id
+			$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "usp_GetGroup", savings_ac_no: $groupCode }
+			  })
+			.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#GroupId').val($res1.GrpId);
 				}
 			});
 		}//end if
