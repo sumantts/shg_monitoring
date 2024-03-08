@@ -23,6 +23,12 @@
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>
+            <li class="nav-item <?php if($p == 'group-list'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=group-list">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Group List</span>
+              </a>
+            </li>
             <?php if($_SESSION["StfId"] == 99){?>
             <li class="nav-item <?php if($p == 'group-upload' || $p == 'member-upload'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -48,7 +54,7 @@
                 <span class="menu-title">Opening Data</span>
               </a>
             </li>
-            <li class="nav-item <?php if($p == 'meeting-data'){?>active<?php } ?>">
+            <li class="nav-item <?php if($p == 'meeting-data' || $p == 'meeting-data-report'){?>active<?php } ?>">
               <a class="nav-link" href="?p=meeting-data">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Meeting Data</span>

@@ -22,6 +22,11 @@
 		include('pages/dashboard_more.php');		
 		break;
 		
+		case 'group-list':
+		$title = "Group List";
+		include('pages/group_list.php');		
+		break;
+		
 		case 'group-upload':
 		$title = "Group Upload";
 		include('pages/group_upload.php');		
@@ -40,6 +45,11 @@
 		case 'opening-data':
 		$title = "Opening Data";
 		include('pages/opening_data.php');		
+		break;
+		
+		case 'meeting-data-report':
+		$title = "Meeting Data Report";
+		include('pages/meeting_data_report.php');		
 		break;
 		
 		case 'link-member':

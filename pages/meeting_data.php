@@ -3,16 +3,13 @@ if(!$_SESSION["StfId"]){header('location:?p=login');}
 include('common/header.php');
 
 if(isset($_POST['insertMeetingData'])){
-  //echo json_encode($_POST);
-  //exit();
-
   $CAmt = $_POST['CAmt'];
   $collectionDate = $_POST['collectionDate'];
   $GroupId = $_POST['GroupId'];
   $my_id = $_POST['my_id'];
   $attendance = $_POST['attendance'];
   $attendance_text = $_POST['attendance_text'];
-  //echo 'my_id: '.$my_id[1];
+  $GrpSBAc = $_POST['GrpSBAc'];
   
   $data_saved = 0;
   for($i = 0; $i < sizeof($attendance_text); $i++){
@@ -34,11 +31,23 @@ if(isset($_POST['insertMeetingData'])){
   //header("location:?p=meeting-data&save=ok&data_saved=$data_saved");
   ?>
   <script>
-    window.location.href = '?p=meeting-data&save=ok&data_saved=<?=$data_saved?>';
+    window.location.href = '?p=meeting-data&save=ok&data_saved=<?=$data_saved?>&MeetingDt=<?=$MeetingDt?>&GrpSBAc=<?=$GrpSBAc?>';
   </script>
   <?php
 
 }//end form submit
+
+if(isset($_GET['data_saved'])){
+  if($_GET['data_saved'] > 0){
+    $MeetingDt = $_GET['MeetingDt'];
+    $GrpSBAc = $_GET['GrpSBAc'];
+    ?>
+    <script>
+      window.location.href = '?p=meeting-data-report&MeetingDt=<?=$MeetingDt?>&GrpSBAc=<?=$GrpSBAc?>';
+    </script>
+    <?php    
+  }
+}//end if
 
 ?>
   <body>
@@ -114,7 +123,8 @@ if(isset($_POST['insertMeetingData'])){
 
                           <div class="form-group row">
                             <div class="col-md-12 mt-2">
-                            <input type="hidden" name="GroupId" id="GroupId" value="'">
+                            <input type="hidden" name="GroupId" id="GroupId" value="">
+                            <input type="hidden" name="GrpSBAc" id="GrpSBAc" value="">
                               <input type="submit" name="insertMeetingData" id="insertMeetingData" class="btn btn-inverse-success btn-fw" value="Save">
                             </div>
                           </div>
