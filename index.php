@@ -51,6 +51,25 @@
 		$title = "Meeting Data Report";
 		include('pages/meeting_data_report.php');		
 		break;
+
+		//		
+		case 'interest-receipt':
+		$title = "Interest Receipt";
+		include('pages/interest_receipt.php');		
+		break;	
+		case 'voucher-entry':
+		$title = "Voucher Entry";
+		include('pages/voucher_entry.php');		
+		break;	
+		case 'cash-book':
+		$title = "Cash Book";
+		include('pages/cash_book.php');		
+		break;	
+		case 'link-group':
+		$title = "Link Group";
+		include('pages/link_group.php');		
+		break;
+		//
 		
 		case 'link-member':
 		$title = "Link Member";

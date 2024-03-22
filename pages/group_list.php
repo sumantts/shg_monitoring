@@ -81,7 +81,7 @@
 							<tr>
 							<td style="text-align: center;"><?=$all_results[$i]->SlNo?></td>
 							<td style="text-align: center;"><?=$all_results[$i]->GrpId?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->GrpNm?></td>
+							<td style="text-align: left;"><?=$all_results[$i]->GrpNm?></td>
 							<td style="text-align: center;"><?=$all_results[$i]->GrpAdd?></td>
 							<td style="text-align: center;"><?=$all_results[$i]->AcNo?></td>
 							</tr>

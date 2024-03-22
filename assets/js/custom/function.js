@@ -250,6 +250,7 @@
 
 						$('#group_members_list').html($html);
 						$('#GrpSBAc').val($groupCode);
+						calculateSubtotal();
 						$('#part_two').show();
 					}else{					
 						$('#part_three').show();

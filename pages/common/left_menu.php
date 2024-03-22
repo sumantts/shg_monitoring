@@ -60,6 +60,32 @@
                 <span class="menu-title">Meeting Data</span>
               </a>
             </li>
+
+            <li class="nav-item <?php if($p == 'interest-receipt'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=interest-receipt">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Interest Receipt</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'voucher-entry'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=voucher-entry">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Voucher Entry</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'cash-book'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=cash-book">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Cash Book</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'link-group'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=link-group">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Link Group</span>
+              </a>
+            </li>
+
             <li class="nav-item <?php if($p == 'link-member'){?>active<?php } ?>">
               <a class="nav-link" href="?p=link-member">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>

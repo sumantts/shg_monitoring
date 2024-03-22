@@ -3,7 +3,7 @@
 
 	session_start();
 	
-    $p_name = 'Bagnan Mahila Bikash';
+  $p_name = 'Bagnan Mahila Bikash';
 	$logo = 'logo.jpg';
 	$ico = 'logo-mahila.ico';
 

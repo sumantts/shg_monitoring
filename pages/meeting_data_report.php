@@ -70,38 +70,28 @@
 					
                     <div class="table-responsive-sm">
 						<table class="table table-bordered">
-						<thead>
+						
 							<tr>
-							<td scope="col" style="text-align: center;">Meeting Date</td>
-							<td scope="col" style="text-align: center;">Staff Name</td>
-							<td scope="col" style="text-align: center;">Group Name</td>
-							<td scope="col" style="text-align: center;">Memo No</td>
-							<td scope="col" style="text-align: center;">Total Member</td>
-							<td scope="col" style="text-align: center;">Collection Amount</td>
-							<td scope="col" style="text-align: center;">Collection Time</td>
+							<td>Meeting Date:</td><td > <?=$all_results[0]->MDt?></td>
 							</tr>
-						</thead>
-						<tbody>
-							<?php
-							if(sizeof($all_results) > 0){
-								for($i = 0; $i < sizeof($all_results); $i++){
-							?>
 							<tr>
-							<td style="text-align: center;"><?=$all_results[$i]->MDt?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->StfNm?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->GrpNm?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->MemNo?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->TotMem?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->CollAmt?></td>
-							<td style="text-align: center;"><?=$all_results[$i]->CollTm?></td>
+							<td>Staff Name: </td><td ><?=$all_results[0]->StfNm?></td>
 							</tr>
-							<?php } }else{ ?>
 							<tr>
-							<td style="text-align: center;" colspan="4">Sorry! No data Found</td>
+							<td>Group Name: </td><td ><?=$all_results[0]->GrpNm?></td>
 							</tr>
-							<?php } ?>
-
-						</tbody>
+							<tr>
+							<td>Present:</td><td > <?=$all_results[0]->MemNo?></td>
+							</tr>
+							<tr>
+							<td>Total Member: </td><td ><?=$all_results[0]->TotMem?></td>
+							</tr>
+							<tr>
+							<td>Collection Amount:</td><td > <?=$all_results[0]->CollAmt?></td>
+							</tr>
+							<tr>
+							<td>Collection Time: </td><td ><?=$all_results[0]->CollTm?></td>
+							</tr>
 						</table>
 					</div>
                   </div>
