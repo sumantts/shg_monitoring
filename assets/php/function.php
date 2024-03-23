@@ -428,4 +428,73 @@
 	}//end fu
 
 	
+	
+	//Link Group 1st Part
+	if($fn == 'linkGroupShow'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$groupAcNo = $_POST["groupAcNo"];
+		$StfId = $_POST["StfId"];	
+		
+		$interestAmt = 100;
+
+		//GetGroup
+		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$GrpNm = $row['GrpNm'];
+					$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));*/
+		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['interestAmt'] = $interestAmt;
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+	//Link Group 2nd part	
+	if($fn == 'linkGroupSave'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$groupAcNo = $_POST["groupAcNo"];
+		$StfId = $_POST["StfId"];	
+		
+		$interestAmt = 100;
+
+		//GetGroup
+		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$GrpNm = $row['GrpNm'];
+					$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));*/
+		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['interestAmt'] = $interestAmt;
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+
+	
 ?>

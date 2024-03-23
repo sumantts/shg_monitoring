@@ -574,6 +574,69 @@
 	});
 
 	
+
+	//Link Group 1st Part
+	$( "#linkGroupShow" ).on( "click", function() {
+		$groupAcNo = $('#groupAcNo').val();
+		$StfId = $('#StfId').val();	
+		$('#groupAcNo_error').html('');		
+		
+		$('#interestAmount').html('Interest Amount: ');
+		$('#part_two').hide();		
+
+		if($groupAcNo == ''){
+			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "linkGroupShow", groupAcNo: $groupAcNo, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#interestAmount').html('Linked Group Description: '  );
+					
+					$('#part_two').show();
+				}else{
+					alert('No Data Available');
+				}
+			});
+		}//end if
+	});
+	//Link Group 2nd part	
+	$( "#linkGroupSave" ).on( "click", function() {
+		$groupAcNo = $('#groupAcNo').val();
+		$StfId = $('#StfId').val();	
+		$('#groupAcNo_error').html('');		
+		
+		$('#interestAmount').html('Linked Group Description: ');
+		//$('#part_two').hide();		
+
+		if($groupAcNo == ''){
+			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "linkGroupSave", groupAcNo: $groupAcNo, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					alert('Group Linkup Done');
+				}else{
+					alert('No Interest amount');
+				}
+			});
+		}//end if
+	});
+
+	
 	
 	//Loading screen
 	$body = $("body");

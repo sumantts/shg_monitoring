@@ -17,7 +17,7 @@
               </a>
             </li>
             <!--<li class="nav-item nav-category">Main Menu</li>-->
-            <li class="nav-item <?php if($p == 'dashboard'){?>active<?php } ?>">
+            <li class="nav-item <?php if($p == 'dashboard' || $p == 'dashboard-more'){?>active<?php } ?>">
               <a class="nav-link" href="?p=dashboard">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Dashboard</span>
