@@ -1,7 +1,7 @@
 <?php 
 if(!$_SESSION["StfId"]){header('location:?p=login');}
 include('common/header.php');
-
+//usp_GetPurpose
 ?>
   <body>
     <div class="container-scroller">
@@ -50,16 +50,6 @@ include('common/header.php');
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Amount*</label>
-                            <div class="col-sm-8">
-                              <input type="number" id="voucherAmount" name="voucherAmount" value="" class="form-control" />
-                              <span class="col-form-label text-danger" id="voucherAmount_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label text-success" id="voucherAmount_success" style="font-size: 12px;"></span>
-                            </div>
-                          </div>
-                        </div>
 
                         <div class="col-md-6">
                           <div class="form-group row">
@@ -72,6 +62,17 @@ include('common/header.php');
                               </select>
                               <span class="col-form-label text-danger" id="particulars_error" style="font-size: 12px;"></span>
                               <span class="col-form-label text-success" id="particulars_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">Amount*</label>
+                            <div class="col-sm-8">
+                              <input type="number" id="voucherAmount" name="voucherAmount" value="" class="form-control" />
+                              <span class="col-form-label text-danger" id="voucherAmount_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="voucherAmount_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
                         </div>

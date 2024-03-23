@@ -403,13 +403,15 @@
 	$( "#saveInterestAmount" ).on( "click", function() {
 		$intRcptDate = $('#intRcptDate').val();
 		$groupAcNo = $('#groupAcNo').val();
+		$intAmount = $('#intAmount').val();
 		$StfId = $('#StfId').val();
 		
 		$('#intRcptDate_error').html('');
-		$('#groupAcNo_error').html('');		
+		$('#groupAcNo_error').html('');	
+		$('#intAmount_error').html('');		
 		
 		$('#interestAmount').html('Interest Amount: ');
-		$('#part_two').hide();		
+		//$('#part_two').hide();		
 
 		if($intRcptDate == ''){
 			$('#intRcptDate_error').html('Please Select Date');
@@ -417,11 +419,14 @@
 		}else if($groupAcNo == ''){
 			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
 			return false;
+		}else if($intAmount <= 0){
+			$('#intAmount_error').html('Please Enter Interest Amount');
+			return false;
 		}else{
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "saveInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $groupAcNo, StfId: $StfId }
+			  data: { fn: "saveInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $groupAcNo, intAmount: $intAmount, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -429,6 +434,7 @@
 				if($res1.status == true){
 					if($res1.interestAmt > 0){
 						$('#groupAcNo').val('');
+						$('#intAmount').val('');
 						alert('Interest Amount Saved');
 						//$('#interestAmount').html('Interest Amount: ' + $res1.interestAmt);
 						

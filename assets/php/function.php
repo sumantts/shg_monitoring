@@ -291,6 +291,7 @@
 		$error_msg = '';
 		$intRcptDate = $_POST["intRcptDate"];
 		$groupAcNo = $_POST["groupAcNo"];
+		$intAmount = $_POST["intAmount"];
 		$StfId = $_POST["StfId"];	
 		
 		$interestAmt = 100;

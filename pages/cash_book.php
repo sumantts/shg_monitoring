@@ -67,7 +67,8 @@ include('common/header.php');
                     </form>
 
                     <div id="part_two" style="display: none;">
-                      <p class="card-description" id="interestAmount">Cashbook Report Details: </p>
+                      <p class="card-description" id="interestAmount">Group Name: </p>
+                      <p class="card-description" id="interestAmount">Group Address: </p>
                       
                       <div class="table-responsive-sm">
                         <form name="form1" id="form1" method="POST" action="">

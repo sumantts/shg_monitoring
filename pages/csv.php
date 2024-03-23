@@ -19,6 +19,7 @@
 	
 	if(isset($_POST['meetingDate'])){
 		$meetingDate = $_POST['meetingDate'];
+		$fieldOffices = $_POST['fieldOffices'];
 		$StfId = $_POST["StfId"];
 		$meeting_rows = array();
 	

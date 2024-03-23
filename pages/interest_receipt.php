@@ -57,7 +57,19 @@ include('common/header.php');
                     </form>
 
                     <div id="part_two" style="display: none;">
-                      <p class="card-description" id="interestAmount">Interest Amount: </p>
+                      <p class="card-description" id="interestAmount">Group Name: </p>
+                      <p class="card-description" id="interestAmount">Group Address: </p>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">Interest Amount*</label>
+                            <div class="col-sm-8">
+                              <input type="number" id="intAmount" name="intAmount" class="form-control" />
+                              <span class="col-form-label text-danger" id="intAmount_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="intAmount_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
                       
                       <div class="table-responsive-sm">
                         <form name="form1" id="form1" method="POST" action="">

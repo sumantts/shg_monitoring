@@ -55,6 +55,8 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-description">Dashboard </h4>
+
+					
                     <p class="card-title mt-5">Collection Summary of <?=$StfNm?></p>
                     <div class="table-responsive-sm">
 						<table class="table table-bordered">

@@ -1,6 +1,35 @@
 <?php 
 if(!$_SESSION["StfId"]){header('location:?p=login');}
 include('common/header.php');
+//usp_GetStaffName
+
+//Get Staff Name
+$staff_names = array();
+
+$query3 = "CALL usp_GetStaffName()";
+mysqli_multi_query($con, $query3);
+do {
+  if ($result3 = mysqli_store_result($con)) {
+    while ($row3 = mysqli_fetch_array($result3, MYSQLI_ASSOC)) {
+      $Id = $row3['Id'];
+      $Name = $row3['StfNm'];
+
+      if($Id != ''){
+        $staff_name = new stdClass();
+        
+        $staff_name->Id = $Id; 
+        $staff_name->Name = $Name;
+
+        array_push($staff_names, $staff_name);
+      }
+    }
+  }
+  if (mysqli_more_results($con)) {
+  }
+} while (mysqli_next_result($con));
+  
+//echo json_encode($staff_names);
+
 ?>
   <body>
     <div class="container-scroller">
@@ -35,6 +64,29 @@ include('common/header.php');
                             </div>
                           </div>
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">FO Name*</label>
+                            <div class="col-sm-8">
+                              <select id="fieldOffices" name="fieldOffices" class="form-control" >
+                                <option value="0">Select</option>
+                                <?php
+                                if(sizeof($staff_names) > 0){
+                                  for($g = 0; $g < sizeof($staff_names); $g++){
+                                    ?>
+                                    <option value="<?=$staff_names[$g]->Id?>" style="font-size: 16px;"><?=$staff_names[$g]->Name?></option>                                  
+                                    <?php
+                                  }
+                                }
+                              ?>
+                              </select>
+                              <span class="col-form-label text-danger" id="fieldOffices_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="fieldOffices_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
 
                         <div class="col-md-6">
                           <div class=" mb-2">
