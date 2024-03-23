@@ -642,6 +642,37 @@
 		}//end if
 	});
 
+
+	//Get Particulars
+	$( "#voucherType" ).on( "change", function() {
+		$voucherType = $('#voucherType').val();
+		
+		$html = '<option value="0">Select</option>';
+
+		if($voucherType != '0'){	
+			
+			$.ajax({
+			method: "POST",
+			url: "assets/php/function.php",
+			data: { fn: "getPurpose", voucherType: $voucherType }
+			})
+			.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$purposes = $res1.purposes;
+					for($i = 0; $i < $purposes.length; $i++){
+						$html += "<option value='"+$purposes[$i].Id+"'>"+$purposes[$i].Purpose+"</option>";
+						//$html += "<input type='number' id="+$purposes[$i].OptId+" name="+$purposes[$i].OptId+" class='form-control' />";
+					}//end for
+					$('#particulars').html($html);
+				}
+			});
+		}else{
+			$('#particulars').html($html);
+		}//end if
+	});
+	//Get Particulars
 	
 	
 	//Loading screen

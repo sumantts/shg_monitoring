@@ -496,6 +496,41 @@
 		sleep(1);
 		echo json_encode($return_result);
 	}//end fu
+	
+	//Get Particulars
+	if($fn == 'getPurpose'){
+		$return_result = array();
+		$purposes = array();
+		$status = true;
+		$error_msg = '';
+		$voucherType = $_POST["voucherType"];
+
+		$query2 = "CALL usp_GetPurpose('".$voucherType."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) {
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$Id = $row2['Id'];
+					$Purpose = $row2['Purpose'];
+
+					if($Id != ''){
+						$purpose = new stdClass();						
+						$purpose->Id = $Id; 
+						$purpose->Purpose = $Purpose;
+						array_push($purposes, $purpose);
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+		sleep(1);
+		$return_result['status'] = $status;
+		$return_result['purposes'] = $purposes;
+		echo json_encode($return_result);
+	}//end function 
 
 	
 ?>
