@@ -489,6 +489,91 @@
 	});
 
 	
+
+	//Show cashbook Report 1st Part
+	$( "#showCashBook" ).on( "click", function() {
+		$fromDate = $('#fromDate').val();
+		$uptoDate = $('#uptoDate').val();
+		$groupAcNo = $('#groupAcNo').val();
+		$StfId = $('#StfId').val();
+		
+		$('#fromDate_error').html('');
+		$('#uptoDate_error').html('');	
+		$('#groupAcNo_error').html('');		
+		
+		$('#interestAmount').html('Interest Amount: ');
+		$('#part_two').hide();		
+
+		if($fromDate == ''){
+			$('#fromDate_error').html('Please Select From Date');
+			return false;
+		}else if($uptoDate == ''){
+			$('#uptoDate_error').html('Please Select Upto Date');
+			return false;
+		}else if($groupAcNo == ''){
+			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showCashBook", fromDate: $fromDate, uptoDate: $uptoDate, groupAcNo: $groupAcNo, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#interestAmount').html('Cashbook Report Details: '  );
+					
+					$('#part_two').show();
+				}else{
+					alert('No Interest amount');
+				}
+			});
+		}//end if
+	});
+	//Show Cashbook report	
+	$( "#showCashBookReport" ).on( "click", function() {
+		$fromDate = $('#fromDate').val();
+		$uptoDate = $('#uptoDate').val();
+		$groupAcNo = $('#groupAcNo').val();
+		$StfId = $('#StfId').val();
+		
+		$('#fromDate_error').html('');
+		$('#uptoDate_error').html('');	
+		$('#groupAcNo_error').html('');		
+		
+		$('#interestAmount').html('Interest Amount: ');
+		//$('#part_two').hide();		
+
+		if($fromDate == ''){
+			$('#fromDate_error').html('Please Select From Date');
+			return false;
+		}else if($uptoDate == ''){
+			$('#uptoDate_error').html('Please Select Upto Date');
+			return false;
+		}else if($groupAcNo == ''){
+			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showCashBookReport", fromDate: $fromDate, uptoDate: $uptoDate, groupAcNo: $groupAcNo, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					alert('Cashbook Report Shown');
+				}else{
+					alert('No Interest amount');
+				}
+			});
+		}//end if
+	});
+
+	
 	
 	//Loading screen
 	$body = $("body");
