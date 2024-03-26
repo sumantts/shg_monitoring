@@ -525,13 +525,14 @@
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "showCashBook", fromDate: $fromDate, uptoDate: $uptoDate, groupAcNo: $groupAcNo, StfId: $StfId }
+			  data: { fn: "showInterestAmount", intRcptDate: $fromDate, groupAcNo: $groupAcNo, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					$('#interestAmount').html('Cashbook Report Details: '  );
+					$('#cb_GroupName').html('Group Name: '+$res1.GrpNm);
+					$('#cb_GroupAddress').html('Group Address: '+$res1.GrpAdd);
 					
 					$('#part_two').show();
 				}else{
@@ -587,6 +588,7 @@
 	$( "#linkGroupShow" ).on( "click", function() {
 		$groupAcNo = $('#groupAcNo').val();
 		$StfId = $('#StfId').val();	
+		$intRcptDate = '';
 		$('#groupAcNo_error').html('');		
 		
 		$('#interestAmount').html('Interest Amount: ');
@@ -599,13 +601,14 @@
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "linkGroupShow", groupAcNo: $groupAcNo, StfId: $StfId }
+			  data: { fn: "showInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $groupAcNo, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					$('#interestAmount').html('Linked Group Description: '  );
+					$('#lg_GroupName').html('Group Name: '+$res1.GrpNm);
+					$('#lg_GroupAddress').html('Group Address: '+$res1.GrpAdd);
 					
 					$('#part_two').show();
 				}else{
@@ -636,6 +639,8 @@
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
+					$('#groupAcNo').val('');
+					$('#part_two').hide();
 					alert('Group Linkup Done');
 				}else{
 					alert('No Interest amount');

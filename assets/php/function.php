@@ -402,29 +402,77 @@
 		$fromDate = $_POST["fromDate"];
 		$uptoDate = $_POST["uptoDate"];
 		$groupAcNo = $_POST["groupAcNo"];
-		$StfId = $_POST["StfId"];	
+		$StfId = $_POST["StfId"];
 		
-		$interestAmt = 100;
+		$cb_rows = array();
+		
+		$OpnCash = '';
+		$OpnBank = '';
+		$ClsCash = '';
+		$ClsBank = '';
 
-		//GetGroup
-		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		//Get Cas Bank Fig
+		$query = "CALL usp_GetCasBankFig('".$groupAcNo."', '".$fromDate."', '".$uptoDate."')";
 		mysqli_multi_query($con, $query);
 		do {
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
-					$GrpNm = $row['GrpNm'];
-					$GrpAdd = $row['GrpAdd'];
+					$OpnCash = $row['OpnCash'];
+					$OpnBank = $row['OpnBank'];
+					$ClsCash = $row['ClsCash'];
+					$ClsBank = $row['ClsBank'];
 				}
 			}
 			if (mysqli_more_results($con)) {
 			}
-		} while (mysqli_next_result($con));*/
+		} while (mysqli_next_result($con));
+
+		//View Cash Book
+		$query = "CALL usp_ViewCashBook('".$groupAcNo."', '".$fromDate."', '".$uptoDate."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);
+						$SlNo = $row['SlNo'];
+						$RDate = $row['RDate'];
+						$RParti = $row['RParti'];
+						$RCash = $row['RCash'];
+						$RBank = $row['RBank'];
+						$PDate = $row['PDate'];
+						$PParti = $row['PParti'];
+						$PCash = $row['PCash'];
+						$PBank = $row['PBank'];
+
+						$cb_row = new stdClass();
+						$cb_row->SlNo = $SlNo;
+						$cb_row->RDate = $RDate;
+						$cb_row->RParti = $RParti;
+						$cb_row->RCash = $RCash;
+						$cb_row->RBank = $RBank;
+						$cb_row->PDate = $PDate;
+						$cb_row->PParti = $PParti;
+						$cb_row->PCash = $PCash;
+						$cb_row->PBank = $PBank;
+
+						array_push($cb_rows, $cb_row);
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
 		
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
-		$return_result['interestAmt'] = $interestAmt;
+		$return_result['OpnCash'] = $OpnCash;
+		$return_result['OpnBank'] = $OpnBank;
+		$return_result['ClsCash'] = $ClsCash;
+		$return_result['ClsBank'] = $ClsBank;
+		$return_result['cb_rows'] = $cb_rows;
 
 		sleep(1);
 		echo json_encode($return_result);
@@ -476,24 +524,23 @@
 		$interestAmt = 100;
 
 		//GetGroup
-		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		$query = "CALL usp_UpdtGroupStaff('".$groupAcNo."', '".$StfId."')";
 		mysqli_multi_query($con, $query);
 		do {
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
-					$GrpNm = $row['GrpNm'];
-					$GrpAdd = $row['GrpAdd'];
+					//$GrpNm = $row['GrpNm'];
+					//$GrpAdd = $row['GrpAdd'];
 				}
 			}
 			if (mysqli_more_results($con)) {
 			}
-		} while (mysqli_next_result($con));*/
+		} while (mysqli_next_result($con));
 		
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
-		$return_result['interestAmt'] = $interestAmt;
 
 		sleep(1);
 		echo json_encode($return_result);

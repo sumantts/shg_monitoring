@@ -47,8 +47,8 @@ include('common/header.php');
                     </form>
 
                     <div id="part_two" style="display: none;">
-                      <p class="card-description" id="interestAmount">Group Name: </p>
-                      <p class="card-description" id="interestAmount">Group Address: </p>
+                      <p class="card-description" id="lg_GroupName">Group Name: </p>
+                      <p class="card-description" id="lg_GroupAddress">Group Address: </p>
                       
                       <div class="table-responsive-sm">
                         <form name="form1" id="form1" method="POST" action="">
@@ -56,7 +56,7 @@ include('common/header.php');
                             <div class="col-md-12 mt-2">
                             <input type="hidden" name="GroupId" id="GroupId" value="">
                             <input type="hidden" name="GrpSBAc" id="GrpSBAc" value="">
-                              <button type="button" name="linkGroupSave" id="linkGroupSave" class="btn btn-inverse-success btn-fw">Save</button>
+                              <button type="button" name="linkGroupSave" id="linkGroupSave" class="btn btn-inverse-success btn-fw">Link Up</button>
                             </div>
                           </div>
                         </form>
