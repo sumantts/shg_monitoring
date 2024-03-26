@@ -38,6 +38,27 @@ include('common/header.php');
                         </div>
                         <div class="col-md-6">
                           <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">Group S/B A/c No*</label>
+                            <div class="col-sm-8">
+                              <input type="tel" id="groupAcNo" name="groupAcNo" class="form-control" />
+                              <span class="col-form-label text-danger" id="groupAcNo_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="groupAcNo_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class=" mb-2">
+                            <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
+                          <button type="button" id="showVoucherEntryGroup" class="btn btn-inverse-success btn-fw">Show</button>
+                          </div>
+                        </div>
+
+                      <div id="part_two" style="display: none;">
+                      <p class="card-description" id="ve_GroupName">Group Name: </p>
+                      <p class="card-description" id="ve_GroupAddress">Group Address: </p>
+                        <div class="col-md-6">
+                          <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Voucher Type*</label>
                             <div class="col-sm-8">
                               <select id="voucherType" name="voucherType" class="form-control" >
@@ -83,7 +104,8 @@ include('common/header.php');
                             <button type="button" id="saveVoucher" class="btn btn-inverse-success btn-fw">Save</button>
                           </div>
                         </div>
-                      </div> 
+                      </div>
+                    </div> 
                     </form>
 
                     <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>

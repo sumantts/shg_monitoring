@@ -326,26 +326,28 @@
 		$status = true;
 		$error_msg = '';
 		$entryDate = $_POST["entryDate"];
+		$groupAcNo = $_POST["groupAcNo"];
 		$voucherType = $_POST["voucherType"];
 		$voucherAmount = $_POST["voucherAmount"];
 		$particulars = $_POST["particulars"];
 		$StfId = $_POST["StfId"];	
 		
 
-		//GetGroup
-		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		//usp_InsertVoucher
+		$VouPurpId = $voucherType;
+		$query = "CALL usp_InsertVoucher('".$groupAcNo."', '".$entryDate."', '".$VouPurpId."', '".$voucherAmount."')";
 		mysqli_multi_query($con, $query);
 		do {
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
-					$GrpNm = $row['GrpNm'];
-					$GrpAdd = $row['GrpAdd'];
+					//$GrpNm = $row['GrpNm'];
+					//$GrpAdd = $row['GrpAdd'];
 				}
 			}
 			if (mysqli_more_results($con)) {
 			}
-		} while (mysqli_next_result($con));*/
+		} while (mysqli_next_result($con));
 		
 
 		$return_result['status'] = $status;

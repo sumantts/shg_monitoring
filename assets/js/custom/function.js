@@ -449,6 +449,7 @@
 	//Save Voucher Entry	
 	$( "#saveVoucher" ).on( "click", function() {
 		$entryDate = $('#entryDate').val();
+		$groupAcNo = $('#groupAcNo').val();
 		$voucherType = $('#voucherType').val();
 		$voucherAmount = $('#voucherAmount').val();
 		$particulars = $('#particulars').val();
@@ -465,26 +466,28 @@
 		}else if($voucherType == '0'){
 			$('#voucherType_error').html('Please Select Voucher Type');
 			return false;
-		}else if($voucherAmount <= 0){
-			$('#voucherAmount_error').html('Please Enter Voucher Amount');
-			return false;
 		}else if($particulars == '0'){
 			$('#particulars_error').html('Please Select Particulars');
+			return false;
+		}else if($voucherAmount <= 0){
+			$('#voucherAmount_error').html('Please Enter Voucher Amount');
 			return false;
 		}else{
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "saveVoucher", entryDate: $entryDate, voucherType: $voucherType, voucherAmount: $voucherAmount, particulars: $particulars, StfId: $StfId }
+			  data: { fn: "saveVoucher", entryDate: $entryDate, groupAcNo: $groupAcNo, voucherType: $voucherType, voucherAmount: $voucherAmount, particulars: $particulars, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					$('#entryDate').val('');
-					$('#voucherType').val('');
+					$('#groupAcNo').val('');
+					$('#voucherType').val('0').trigger('change');
 					$('#voucherAmount').val('');
-					$('#particulars').val('');
+					$('#particulars').val('0').trigger('change');
+					$('#part_two').hide();
 					alert('Particular saved successfully');
 				}else{
 					//alert('No Interest amount');
@@ -673,6 +676,45 @@
 	});
 	//Get Particulars
 	
+	//Show voucher entry group
+	$( "#showVoucherEntryGroup" ).on( "click", function() {
+		$intRcptDate = $('#entryDate').val();
+		$groupAcNo = $('#groupAcNo').val();
+		$StfId = $('#StfId').val();
+		
+		$('#intRcptDate_error').html('');
+		$('#groupAcNo_error').html('');		
+		
+		$('#interestAmount').html('Interest Amount: ');
+		$('#part_two').hide();		
+
+		if($intRcptDate == ''){
+			$('#intRcptDate_error').html('Please Select Date');
+			return false;
+		}else if($groupAcNo == ''){
+			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $groupAcNo, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#ve_GroupName').html('Group Name: '+$res1.GrpNm);
+					$('#ve_GroupAddress').html('Group Address: '+$res1.GrpAdd);
+					
+					$('#part_two').show();
+				}else{
+					alert('No Data Found');
+				}
+			});
+		}//end if
+	});
+
 	
 	//Loading screen
 	$body = $("body");
