@@ -257,28 +257,32 @@
 		$intRcptDate = $_POST["intRcptDate"];
 		$groupAcNo = $_POST["groupAcNo"];
 		$StfId = $_POST["StfId"];	
-		
-		$interestAmt = 100;
+		$GrpId = '';
+		$GrpNm = '';
+		$GrpAdd = '';
 
-		//GetGroup
-		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		$query = "CALL usp_GetGroup('".$groupAcNo."')";
 		mysqli_multi_query($con, $query);
 		do {
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-					//printf("%s\n", $row[0]);
+					$GrpId = $row['GrpId'];
 					$GrpNm = $row['GrpNm'];
 					$GrpAdd = $row['GrpAdd'];
 				}
 			}
 			if (mysqli_more_results($con)) {
 			}
-		} while (mysqli_next_result($con));*/
+		} while (mysqli_next_result($con));
 		
-
+		if($GrpNm == ''){
+			$status = false;
+		}
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
-		$return_result['interestAmt'] = $interestAmt;
+		$return_result['GrpId'] = $GrpId;
+		$return_result['GrpNm'] = $GrpNm;
+		$return_result['GrpAdd'] = $GrpAdd;
 
 		sleep(1);
 		echo json_encode($return_result);
@@ -292,29 +296,25 @@
 		$intRcptDate = $_POST["intRcptDate"];
 		$groupAcNo = $_POST["groupAcNo"];
 		$intAmount = $_POST["intAmount"];
-		$StfId = $_POST["StfId"];	
-		
-		$interestAmt = 100;
+		$StfId = $_POST["StfId"];
+		$VouPurpId = 2;
 
-		//GetGroup
-		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		//Insert Voucher
+		$query = "CALL usp_InsertVoucher('".$groupAcNo."', '".$intRcptDate."', '".$VouPurpId."', '".$intAmount."')";
 		mysqli_multi_query($con, $query);
 		do {
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
-					$GrpNm = $row['GrpNm'];
-					$GrpAdd = $row['GrpAdd'];
 				}
 			}
 			if (mysqli_more_results($con)) {
 			}
-		} while (mysqli_next_result($con));*/
+		} while (mysqli_next_result($con));
 		
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
-		$return_result['interestAmt'] = $interestAmt;
 
 		sleep(1);
 		echo json_encode($return_result);

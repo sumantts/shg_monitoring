@@ -57,8 +57,8 @@ include('common/header.php');
                     </form>
 
                     <div id="part_two" style="display: none;">
-                      <p class="card-description" id="interestAmount">Group Name: </p>
-                      <p class="card-description" id="interestAmount">Group Address: </p>
+                      <p class="card-description" id="ir_GroupName">Group Name: </p>
+                      <p class="card-description" id="ir_GroupAddress">Group Address: </p>
 
                         <div class="col-md-6">
                           <div class="form-group row">

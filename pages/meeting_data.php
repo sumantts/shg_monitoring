@@ -25,6 +25,18 @@ if(isset($_POST['insertMeetingData'])){
       $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
       mysqli_multi_query($con, $query);
       $data_saved++;      
+
+      //Insert Voucher VouPurpId=1
+      $VouPurpId = 1;
+      $query_2 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$CollAmt."')";
+      mysqli_multi_query($con, $query_2);     
+
+      //Insert Voucher VouPurpId=6
+      $VouPurpId = 6;
+      $query_3= "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$CollAmt."')";
+      mysqli_multi_query($con, $query_3);
+
+
     }//end if
   }//end for
 
@@ -111,6 +123,7 @@ if(isset($_GET['data_saved'])){
                           <table class="table table-bordered" id="myTable">
                             <thead>
                               <tr>
+                                <td scope="col" style="text-align: center;">SL#</td>
                                 <td scope="col" style="text-align: center;">Member Code</td>
                                 <td scope="col" style="text-align: center;">Member Name</td>
                                 <td scope="col" style="text-align: center;">Attendance </td>
