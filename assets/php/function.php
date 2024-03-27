@@ -337,7 +337,7 @@
 		
 
 		//usp_InsertVoucher
-		$VouPurpId = $voucherType;
+		$VouPurpId = $particulars;
 		$query = "CALL usp_InsertVoucher('".$groupAcNo."', '".$entryDate."', '".$VouPurpId."', '".$voucherAmount."')";
 		mysqli_multi_query($con, $query);
 		do {

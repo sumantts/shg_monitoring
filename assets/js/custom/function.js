@@ -538,7 +538,7 @@
 					$cb_GrName = $res1.GrpNm;
 					$('#cb_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#cb_GroupAddress').html('Group Address: '+$res1.GrpAdd);
-					
+					$('#GroupId').val($res1.GrpId);
 					$('#part_two').show();
 				}else{
 					alert('No Data found');
@@ -550,7 +550,7 @@
 	$( "#showCashBookReport" ).on( "click", function() {
 		$fromDate = $('#fromDate').val();
 		$uptoDate = $('#uptoDate').val();
-		$groupAcNo = $('#groupAcNo').val();
+		$groupAcNo = $('#GroupId').val();
 		$StfId = $('#StfId').val();
 		$html = '';
 		

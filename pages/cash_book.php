@@ -60,6 +60,7 @@ include('common/header.php');
                         <div class="col-md-6">
                           <div class=" mb-2">
                             <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
+                            <input type="hidden" name="GroupId" id="GroupId" value="">
                           <button type="button" id="showCashBook" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
@@ -74,8 +75,6 @@ include('common/header.php');
                         <form name="form1" id="form1" method="POST" action="">
                           <div class="form-group row">
                             <div class="col-md-12 mt-2">
-                            <input type="hidden" name="GroupId" id="GroupId" value="">
-                            <input type="hidden" name="GrpSBAc" id="GrpSBAc" value="">
                               <button type="button" name="showCashBookReport" id="showCashBookReport" class="btn btn-inverse-success btn-fw">View Report</button>
                             </div>
                           </div>
