@@ -411,6 +411,16 @@
 		$ClsCash = '';
 		$ClsBank = '';
 
+		$sTotalRCash = 0;
+		$sTotalRBank = 0;
+		$sTotalPCash = 0;
+		$sTotalPBank = 0;
+
+		$TotalRCash = 0;
+		$TotalRBank = 0;
+		$TotalPCash = 0;
+		$TotalPBank = 0;
+
 		//Get Cas Bank Fig
 		$query = "CALL usp_GetCasBankFig('".$groupAcNo."', '".$fromDate."', '".$uptoDate."')";
 		mysqli_multi_query($con, $query);
@@ -437,27 +447,33 @@
 					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 						//printf("%s\n", $row[0]);
 						$SlNo = $row['SlNo'];
-						$RDate = $row['RDate'];
+						$RDate =$row['RDate'];
 						$RParti = $row['RParti'];
 						$RCash = $row['RCash'];
 						$RBank = $row['RBank'];
-						$PDate = $row['PDate'];
+						$PDate =$row['PDate'];
 						$PParti = $row['PParti'];
 						$PCash = $row['PCash'];
 						$PBank = $row['PBank'];
 
 						$cb_row = new stdClass();
 						$cb_row->SlNo = $SlNo;
-						$cb_row->RDate = $RDate;
-						$cb_row->RParti = $RParti;
-						$cb_row->RCash = $RCash;
-						$cb_row->RBank = $RBank;
-						$cb_row->PDate = $PDate;
-						$cb_row->PParti = $PParti;
-						$cb_row->PCash = $PCash;
-						$cb_row->PBank = $PBank;
+						
+						$cb_row->RDate = ($RDate != null)? date('d-m-Y', strtotime($RDate)) : '';
+						$cb_row->RParti = ($RParti != null)? $RParti : '';
+						$cb_row->RCash = ($RCash != null)? $RCash : '0.00';
+						$cb_row->RBank = ($RBank != null)? $RBank : '0.00';
+						$cb_row->PDate = ($PDate != null)? date('d-m-Y', strtotime($PDate)) : '';
+						$cb_row->PParti = ($PParti != null)? $PParti : '';
+						$cb_row->PCash = ($PCash != null)? $PCash : '0.00';
+						$cb_row->PBank = ($PBank != null)? $PBank : '0.00';
 
 						array_push($cb_rows, $cb_row);
+
+						$sTotalRCash = $sTotalRCash + $RCash;
+						$sTotalRBank = $sTotalRBank + $RBank;
+						$sTotalPCash = $sTotalPCash + $PCash;
+						$sTotalPBank = $sTotalPBank + $PBank;
 					}
 				}
 			}
@@ -466,6 +482,11 @@
 		} while (mysqli_next_result($con));
 		
 
+		$TotalRCash = $sTotalRCash - $OpnCash;
+		$TotalRBank = $sTotalRBank - $OpnBank;
+		$TotalPCash = $sTotalPCash - $ClsCash;
+		$TotalPBank = $sTotalPBank - $ClsBank;
+
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 		$return_result['OpnCash'] = $OpnCash;
@@ -473,6 +494,19 @@
 		$return_result['ClsCash'] = $ClsCash;
 		$return_result['ClsBank'] = $ClsBank;
 		$return_result['cb_rows'] = $cb_rows;
+		
+		$return_result['sTotalRCash'] = number_format($sTotalRCash, 2);
+		$return_result['sTotalRBank'] = number_format($sTotalRBank, 2);
+		$return_result['sTotalPCash'] = number_format($sTotalPCash, 2);
+		$return_result['sTotalPBank'] = number_format($sTotalPBank, 2);
+		
+		$return_result['TotalRCash'] = number_format($TotalRCash, 2);
+		$return_result['TotalRBank'] = number_format($TotalRBank, 2);
+		$return_result['TotalPCash'] = number_format($TotalPCash, 2);
+		$return_result['TotalPBank'] = number_format($TotalPBank, 2);
+
+		$return_result['fromDateN'] = date('d-m-Y', strtotime($fromDate));
+		$return_result['uptoDateN'] = date('d-m-Y', strtotime($uptoDate));
 
 		sleep(1);
 		echo json_encode($return_result);

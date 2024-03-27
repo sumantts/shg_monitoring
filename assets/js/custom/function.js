@@ -511,6 +511,7 @@
 		
 		$('#interestAmount').html('Interest Amount: ');
 		$('#part_two').hide();		
+		$('#part_three').hide();
 
 		if($fromDate == ''){
 			$('#fromDate_error').html('Please Select From Date');
@@ -531,12 +532,13 @@
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
+					$cb_GrName = $res1.GrpNm;
 					$('#cb_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#cb_GroupAddress').html('Group Address: '+$res1.GrpAdd);
 					
 					$('#part_two').show();
 				}else{
-					alert('No Interest amount');
+					alert('No Data found');
 				}
 			});
 		}//end if
@@ -547,13 +549,12 @@
 		$uptoDate = $('#uptoDate').val();
 		$groupAcNo = $('#groupAcNo').val();
 		$StfId = $('#StfId').val();
+		$html = '';
 		
 		$('#fromDate_error').html('');
 		$('#uptoDate_error').html('');	
-		$('#groupAcNo_error').html('');		
-		
-		$('#interestAmount').html('Interest Amount: ');
-		//$('#part_two').hide();		
+		$('#groupAcNo_error').html('');	
+		$('#part_three').hide();		
 
 		if($fromDate == ''){
 			$('#fromDate_error').html('Please Select From Date');
@@ -571,12 +572,33 @@
 			  data: { fn: "showCashBookReport", fromDate: $fromDate, uptoDate: $uptoDate, groupAcNo: $groupAcNo, StfId: $StfId }
 			})
 			  .done(function( res ) {
-				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					alert('Cashbook Report Shown');
+					$('#cbTitle').html('Cash Book For The Period '+$res1.fromDateN+' To '+$res1.uptoDateN);
+					$('#cbTitle2').html('Group Name: '+$cb_GrName);
+
+					$cb_rows = $res1.cb_rows;
+
+					$('#cb_tbody').html($html);
+					if($cb_rows.length > 0){
+						for($i = 0; $i < $cb_rows.length; $i++){
+							$html += '<tr> <td>'+$cb_rows[$i].RDate+'</td> <td>'+$cb_rows[$i].RParti+'</td> <td class="text-right">'+$cb_rows[$i].RCash+'</td> <td class="text-right">'+$cb_rows[$i].RBank+'</td> <td>'+$cb_rows[$i].PDate+'</td> <td>'+$cb_rows[$i].PParti+'</td> <td class="text-right">'+$cb_rows[$i].PCash+'</td> <td class="text-right">'+$cb_rows[$i].PBank+'</td> </tr>';
+						}//end for
+
+						$html += '<tr> <td scope="col" class="text-left">Sub Total</td> <td scope="col" class="text-center"></td> <td scope="col" class="text-right">'+$res1.sTotalRCash+'</td> <td scope="col" class="text-right">'+$res1.sTotalRBank+'</td> <td scope="col" class="text-left">Sub Total</td> <td scope="col" class="text-center"></td> <td scope="col" class="text-right">'+$res1.sTotalPCash+'</td> <td scope="col" class="text-right">'+$res1.sTotalPBank+'</td> </tr>';
+
+						$html += '<tr> <td scope="col" class="text-left">Opening</td> <td scope="col" class="text-center"></td> <td scope="col" class="text-right">'+$res1.OpnCash+'</td> <td scope="col" class="text-right">'+$res1.OpnBank+'</td> <td scope="col" class="text-left">Closing</td> <td scope="col" class="text-center"></td> <td scope="col" class="text-right">'+$res1.ClsCash+'</td> <td scope="col" class="text-right">'+$res1.ClsBank+'</td> </tr>';
+
+						$html += '<tr> <td scope="col" class="text-left">Total</td> <td scope="col" class="text-center"></td> <td scope="col" class="text-right">'+$res1.TotalRCash+'</td> <td scope="col" class="text-right">'+$res1.TotalRBank+'</td> <td scope="col" class="text-left">Total</td> <td scope="col" class="text-center"></td> <td scope="col" class="text-right">'+$res1.TotalPCash+'</td> <td scope="col" class="text-right">'+$res1.TotalPBank+'</td> </tr>';
+
+					}else{
+						$html += '<tr> <td colspan="8">Sorry! No data Found</td> </tr>';
+					}//end if
+
+					$('#cb_tbody').html($html);
+					$('#part_three').show();		
 				}else{
-					alert('No Interest amount');
+					alert('No Data found');
 				}
 			});
 		}//end if

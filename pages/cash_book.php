@@ -83,7 +83,84 @@ include('common/header.php');
                       </div>
                     </div>
 
-                    <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>
+
+                      <!-- Table Start -->
+                      <div id="part_three" style="display: none">  
+                    <h4 class="card-title" id="cbTitle">Cash Book For The Period dd-mm-yyyy To dd-mm-yyyy</h4>
+                    <p class="card-description" id="cbTitle2">Group Name: </p>
+                    <div class="table-responsive-sm">
+                      <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <td colspan="4" class="text-center">Receipt</td>
+                          <td colspan="4" class="text-center">Payment</td>
+                        </tr>
+                        <tr>
+                          <td scope="col" class="text-center">Date</td>
+                          <td scope="col" class="text-center">Particulars</td>
+                          <td scope="col" class="text-center">Cash</td>
+                          <td scope="col" class="text-center">Bank</td>
+                          <td scope="col" class="text-center">Date</td>
+                          <td scope="col" class="text-center">Particulars</td>
+                          <td scope="col" class="text-center">Cash</td>
+                          <td scope="col" class="text-center">Bank</td>
+                        </tr>
+                      </thead>
+                      <tbody id="cb_tbody">
+                        <!-- <tr>
+                          <td>0</td>
+                          <td>1</td>
+                          <td class="text-right">0</td>
+                          <td class="text-right">1</td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td class="text-right">0</td>
+                          <td class="text-right">1</td>
+                        </tr>
+                        <tr>
+                          <td scope="col" class="text-left">Sub Total</td>
+                          <td scope="col" class="text-center"></td>
+                          <td scope="col" class="text-right">100</td>
+                          <td scope="col" class="text-right">260</td>
+                          <td scope="col" class="text-left">Sub Total</td>
+                          <td scope="col" class="text-center"></td>
+                          <td scope="col" class="text-right">30</td>
+                          <td scope="col" class="text-right">150</td>
+                        </tr>
+                        <tr>
+                          <td scope="col" class="text-left">Opening</td>
+                          <td scope="col" class="text-center"></td>
+                          <td scope="col" class="text-right">100</td>
+                          <td scope="col" class="text-right">260</td>
+                          <td scope="col" class="text-left">Closing</td>
+                          <td scope="col" class="text-center"></td>
+                          <td scope="col" class="text-right">30</td>
+                          <td scope="col" class="text-right">150</td>
+                        </tr>
+                        <tr>
+                          <td scope="col" class="text-left">Total</td>
+                          <td scope="col" class="text-center"></td>
+                          <td scope="col" class="text-right">100</td>
+                          <td scope="col" class="text-right">260</td>
+                          <td scope="col" class="text-left">Total</td>
+                          <td scope="col" class="text-center"></td>
+                          <td scope="col" class="text-right">30</td>
+                          <td scope="col" class="text-right">150</td>
+                        </tr> -->
+
+                        <tr>
+                          <td colspan="8">Sorry! No data Found</td>
+                        </tr>
+
+                      </tbody>
+                      </table>
+                    </div>
+                    </div>
+                    <!-- Table end -->
+
+                    
+
+                    
 
                   </div>
                 </div>
