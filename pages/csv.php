@@ -4,7 +4,7 @@
 	$i=1;
 	$csv_export1 = "";
 
-	$csv_fileName = 'meeting_data_'.date('Y-m-d').'.csv';
+	
 	$csv_export = '';
 	$csv_export .="Sl. No.," ;
 	$csv_export .="Metting Date," ;
@@ -24,9 +24,10 @@
 		$meeting_rows = array();
 	
 		$meeting_date_str = date('d-m-Y', strtotime($meetingDate));
+		$csv_fileName = 'meeting_data_'.$fieldOffices.'_'.$meetingDate.'.csv';
 		
 		//Get Meeting Data
-		$query2 = "CALL usp_GetMeetingData('".$StfId."', '".$meetingDate."')";
+		$query2 = "CALL usp_GetMeetingData('".$fieldOffices."', '".$meetingDate."')";
 		mysqli_multi_query($con, $query2);
 		do {
 			/* store the result set in PHP */

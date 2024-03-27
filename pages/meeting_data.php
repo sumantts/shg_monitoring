@@ -10,35 +10,39 @@ if(isset($_POST['insertMeetingData'])){
   $attendance = $_POST['attendance'];
   $attendance_text = $_POST['attendance_text'];
   $GrpSBAc = $_POST['GrpSBAc'];
+  $sub_total = $_POST['sub_total'];
   
   $data_saved = 0;
-  for($i = 0; $i < sizeof($attendance_text); $i++){
-    if($attendance_text[$i] > 0){
+  for($i = 0; $i < sizeof($attendance_text); $i++){    
       $MeetingDt = $collectionDate[$i];
       $StfId = $_SESSION["StfId"];
       $MemId = $my_id[$i];
       //echo 'MemId: '.$MemId[$i];
-      $Attendance = 1;
+      if($attendance_text[$i] > 0){
+        $Attendance = true;
+      }else{
+        $Attendance = false;
+      }
       $CollAmt = $CAmt[$i];
 
       //Insert Meeting data
       $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
       mysqli_multi_query($con, $query);
-      $data_saved++;      
-
-      //Insert Voucher VouPurpId=1
-      $VouPurpId = 1;
-      $query_2 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$CollAmt."')";
-      mysqli_multi_query($con, $query_2);     
-
-      //Insert Voucher VouPurpId=6
-      $VouPurpId = 6;
-      $query_3= "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$CollAmt."')";
-      mysqli_multi_query($con, $query_3);
-
-
-    }//end if
+      $data_saved++;     
   }//end for
+       
+
+  //Insert Voucher VouPurpId=1
+  if($sub_total > 0){
+    $VouPurpId = 1;
+    $query_2 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
+    mysqli_multi_query($con, $query_2);     
+
+    //Insert Voucher VouPurpId=6
+    $VouPurpId = 6;
+    $query_3= "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
+    mysqli_multi_query($con, $query_3);
+  }//end if
 
   //header("location:?p=meeting-data&save=ok&data_saved=$data_saved");
   ?>

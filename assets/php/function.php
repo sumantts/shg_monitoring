@@ -164,6 +164,7 @@
 		$GrpAdd = '';
 		$group_members = array();
 		$grantCAmt = 0;
+		$OpnAmt = 0;
 
 		//GetGroup
 		$query = "CALL usp_GetGroup('".$groupCode."')";
@@ -180,16 +181,13 @@
 			}
 			/* print divider */
 			if (mysqli_more_results($con)) {
-				//printf("-----------------\n");
 			}
 		} while (mysqli_next_result($con));
-		/* execute multi query */
 
 		//Get Group Members
 		$query2 = "CALL usp_GetGroupMembers('".$groupCode."', '".$StfId."')";
 		mysqli_multi_query($con, $query2);
 		do {
-			/* store the result set in PHP */
 			if ($result2 = mysqli_store_result($con)) {
 				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
@@ -197,6 +195,7 @@
 					$MemNm = $row2['MemNm'];
 					$Attnd = $row2['Attnd'];
 					$CAmt = $row2['CAmt'];
+					$OpnAmt = $row2['OpnAmt'];
 					$grantCAmt = $grantCAmt + $CAmt;
 
 					if($MemId != ''){
@@ -206,17 +205,15 @@
 						$group_member->MemNm = $MemNm;
 						$group_member->Attnd = $Attnd;
 						$group_member->CAmt = $CAmt;
+						$group_member->OpnAmt = $OpnAmt;
 
 						array_push($group_members, $group_member);
 					}
 				}
 			}
-			/* print divider */
 			if (mysqli_more_results($con)) {
-				//printf("-----------------\n");
 			}
 		} while (mysqli_next_result($con));
-		/* execute multi query */
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
@@ -485,10 +482,10 @@
 		} while (mysqli_next_result($con));
 		
 
-		$TotalRCash = $sTotalRCash - $OpnCash;
-		$TotalRBank = $sTotalRBank - $OpnBank;
-		$TotalPCash = $sTotalPCash - $ClsCash;
-		$TotalPBank = $sTotalPBank - $ClsBank;
+		$TotalRCash = $sTotalRCash + $OpnCash;
+		$TotalRBank = $sTotalRBank + $OpnBank;
+		$TotalPCash = $sTotalPCash + $ClsCash;
+		$TotalPBank = $sTotalPBank + $ClsBank;
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
