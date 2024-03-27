@@ -36,6 +36,7 @@ include('common/header.php');
                             </div>
                           </div>
                         </div>
+
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Group S/B A/c No*</label>
@@ -53,10 +54,12 @@ include('common/header.php');
                           <button type="button" id="showVoucherEntryGroup" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
+                      </div> 
+                    </form>
 
-                      <div id="part_two" style="display: none;">
-                      <p class="card-description" id="ve_GroupName">Group Name: </p>
-                      <p class="card-description" id="ve_GroupAddress">Group Address: </p>
+                        <div id="part_two" style="display: none;">
+                        <p class="card-description" id="ve_GroupName">Group Name: </p>
+                        <p class="card-description" id="ve_GroupAddress">Group Address: </p>
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Voucher Type*</label>
@@ -100,13 +103,12 @@ include('common/header.php');
 
                         <div class="col-md-6">
                           <div class=" mb-2">
-                            <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
+                            <input type="hidden" name="GroupId" id="GroupId" value="">
                             <button type="button" id="saveVoucher" class="btn btn-inverse-success btn-fw">Save</button>
                           </div>
                         </div>
-                      </div>
-                    </div> 
-                    </form>
+                      </div> 
+                     
 
                     <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>
 

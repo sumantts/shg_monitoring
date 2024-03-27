@@ -159,6 +159,7 @@
 		$groupCode = $_POST["groupCode"];
 		$StfId = $_POST["StfId"];	
 		
+		$GrpId = ''; 
 		$GrpNm = '';
 		$GrpAdd = '';
 		$group_members = array();
@@ -172,6 +173,7 @@
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
+					$GrpId = $row['GrpId'];
 					$GrpNm = $row['GrpNm'];
 					$GrpAdd = $row['GrpAdd'];
 				}
@@ -218,6 +220,7 @@
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
+		$return_result['GrpId'] = $GrpId;
 		$return_result['GrpNm'] = $GrpNm;
 		$return_result['GrpAdd'] = $GrpAdd;
 		$return_result['group_members'] = $group_members;

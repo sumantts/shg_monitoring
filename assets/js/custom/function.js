@@ -188,7 +188,7 @@
 						}
 
 						$('#group_members_list1').html($html);
-						$('#GroupId').val($groupCode);
+						$('#GroupId').val($res1.GrpId);
 						$('#part_two').show();
 					}else{					
 						$('#part_three').show();
@@ -390,6 +390,7 @@
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
+					$('#GroupId').val($res1.GrpId);
 					$('#ir_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#ir_GroupAddress').html('Group Address: '+$res1.GrpAdd);
 					
@@ -406,6 +407,7 @@
 		$groupAcNo = $('#groupAcNo').val();
 		$intAmount = $('#intAmount').val();
 		$StfId = $('#StfId').val();
+		$GroupId = $('#GroupId').val();
 		
 		$('#intRcptDate_error').html('');
 		$('#groupAcNo_error').html('');	
@@ -427,7 +429,7 @@
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "saveInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $groupAcNo, intAmount: $intAmount, StfId: $StfId }
+			  data: { fn: "saveInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $GroupId, intAmount: $intAmount, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -454,6 +456,7 @@
 		$voucherAmount = $('#voucherAmount').val();
 		$particulars = $('#particulars').val();
 		$StfId = $('#StfId').val();
+		$GroupId = $('#GroupId').val();
 		
 		$('#entryDate_error').html('');
 		$('#voucherType_error').html('');	
@@ -476,7 +479,7 @@
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "saveVoucher", entryDate: $entryDate, groupAcNo: $groupAcNo, voucherType: $voucherType, voucherAmount: $voucherAmount, particulars: $particulars, StfId: $StfId }
+			  data: { fn: "saveVoucher", entryDate: $entryDate, groupAcNo: $GroupId, voucherType: $voucherType, voucherAmount: $voucherAmount, particulars: $particulars, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -631,7 +634,7 @@
 				if($res1.status == true){
 					$('#lg_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#lg_GroupAddress').html('Group Address: '+$res1.GrpAdd);
-					
+					$('#GroupId').val($res1.GrpId);
 					$('#part_two').show();
 				}else{
 					alert('No Data Available');
@@ -641,7 +644,7 @@
 	});
 	//Link Group 2nd part	
 	$( "#linkGroupSave" ).on( "click", function() {
-		$groupAcNo = $('#groupAcNo').val();
+		$groupAcNo = $('#GroupId').val();
 		$StfId = $('#StfId').val();	
 		$('#groupAcNo_error').html('');		
 		
@@ -733,7 +736,7 @@
 				if($res1.status == true){
 					$('#ve_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#ve_GroupAddress').html('Group Address: '+$res1.GrpAdd);
-					
+					$('#GroupId').val($res1.GrpId);
 					$('#part_two').show();
 				}else{
 					alert('No Data Found');
