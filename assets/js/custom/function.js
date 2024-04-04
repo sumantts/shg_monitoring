@@ -69,6 +69,49 @@
 			});
 		}//end if
 	});
+	
+	
+	//UnLink Member
+	$( "#delinkMember" ).on( "click", function() {
+		$memberCode = $('#memberCode').val();
+		$('#part_tow').hide();
+		$('#part_three').hide();
+
+		if($memberCode == ''){
+			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else{	
+			$('#memberCode_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "delinkMember", memberCode: $memberCode }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					if($res1.MemNm != ''){
+						alert('Member Delinked successfully');
+						/*$('#MemNm').html( $res1.MemNm);
+						$('#GurdNm').html( $res1.GurdNm);
+						$('#GrpCd').html( $res1.GrpCd);
+						$('#GrpNm').html( $res1.GrpNm);
+						$('#StfCd').html( $res1.StfCd);
+						$('#group_code').val($res1.GrpCd);*/
+						//$('#staff_code').val($res1.StfCd);
+						//$('#part_tow').show();
+					}else{
+						//$('#part_three').show();
+					}
+				}else{
+					$('#form_success').html('');
+					$('#form_error').html($res1.error_msg);
+					return false;
+				}
+			});
+		}//end if
+	});
 
 	//Validate	
 	$( "#savings_ac_no_validate" ).on( "click", function() {
@@ -141,7 +184,7 @@
 
 	//Opening Data
 	$( "#getGroupMembers1" ).on( "click", function() {
-		$collectionDate = $('#collectionDate').val();
+		$collectionDate = '';//$('#collectionDate').val();
 		$groupCode = $('#groupCode').val();
 		$StfId = $('#StfId').val();
 		
@@ -156,10 +199,7 @@
 		$('#part_two').hide();
 		$('#part_three').hide();
 
-		if($collectionDate == ''){
-			$('#collectionDate_error').html('Please Enter Collection Date');
-			return false;
-		}else if($groupCode == ''){
+		if($groupCode == ''){
 			$('#groupCode_error').html('Please Enter Savings A/c. No.');
 			return false;
 		}else{	
@@ -364,7 +404,7 @@
 
 	//Interest Receipt
 	$( "#showInterestAmount" ).on( "click", function() {
-		$intRcptDate = $('#intRcptDate').val();
+		$intRcptDate = '';//$('#intRcptDate').val();
 		$groupAcNo = $('#groupAcNo').val();
 		$StfId = $('#StfId').val();
 		
@@ -374,17 +414,14 @@
 		$('#interestAmount').html('Interest Amount: ');
 		$('#part_two').hide();		
 
-		if($intRcptDate == ''){
-			$('#intRcptDate_error').html('Please Select Date');
-			return false;
-		}else if($groupAcNo == ''){
+		if($groupAcNo == ''){
 			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
 			return false;
 		}else{
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "showInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $groupAcNo, StfId: $StfId }
+			  data: { fn: "showInterestAmount", groupAcNo: $groupAcNo, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -393,6 +430,8 @@
 					$('#GroupId').val($res1.GrpId);
 					$('#ir_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#ir_GroupAddress').html('Group Address: '+$res1.GrpAdd);
+					$('#openingAmtCash').val($res1.COpen);
+					$('#openingAmtBank').val($res1.BOpen);
 					
 					$('#part_two').show();
 				}else{
@@ -403,9 +442,10 @@
 	});
 	//Save Interest Amount	
 	$( "#saveInterestAmount" ).on( "click", function() {
-		$intRcptDate = $('#intRcptDate').val();
+		$openingAmtCash = $('#openingAmtCash').val();
+		$openingAmtBank = $('#openingAmtBank').val();
 		$groupAcNo = $('#groupAcNo').val();
-		$intAmount = $('#intAmount').val();
+		//$intAmount = $('#intAmount').val();
 		$StfId = $('#StfId').val();
 		$GroupId = $('#GroupId').val();
 		
@@ -416,20 +456,14 @@
 		$('#interestAmount').html('Interest Amount: ');
 		//$('#part_two').hide();		
 
-		if($intRcptDate == ''){
-			$('#intRcptDate_error').html('Please Select Date');
-			return false;
-		}else if($groupAcNo == ''){
+		if($groupAcNo == ''){
 			$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
-			return false;
-		}else if($intAmount <= 0){
-			$('#intAmount_error').html('Please Enter Interest Amount');
 			return false;
 		}else{
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "saveInterestAmount", intRcptDate: $intRcptDate, groupAcNo: $GroupId, intAmount: $intAmount, StfId: $StfId }
+			  data: { fn: "saveInterestAmount", openingAmtCash: $openingAmtCash, openingAmtBank: $openingAmtBank, groupAcNo: $GroupId, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -437,7 +471,7 @@
 				if($res1.status == true){
 					$('#groupAcNo').val('');
 					$('#intAmount').val('');
-					alert('Interest Amount Saved');
+					alert('Opening Balance Saved');
 					//$('#interestAmount').html('Interest Amount: ' + $res1.interestAmt);
 					
 					$('#part_two').hide();

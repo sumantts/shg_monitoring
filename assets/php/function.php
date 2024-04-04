@@ -92,6 +92,56 @@
 		sleep(1);
 		echo json_encode($return_result);
 	}//end function getMember
+	
+	
+	//DeLink Member
+	if($fn == 'delinkMember'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$memberCode = $_POST["memberCode"];
+		
+		$MemNm = '';
+		$GurdNm = '';
+		$GrpNm = '';
+		$GrpCd = '';
+		$StfCd = '';
+
+		//Get Member
+		$query = "CALL usp_ReleaseMember('".$memberCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				/*while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$MemNm = $row['MemNm'];
+					$GurdNm = $row['GurdNm'];
+					$GrpNm = $row['GrpNm'];
+					$GrpCd = $row['GrpCd'];
+					$StfCd = $row['StfCd'];
+				}*/
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		/*$return_result['MemNm'] = $MemNm;
+		$return_result['GurdNm'] = $GurdNm;
+		$return_result['GrpNm'] = $GrpNm;
+		$return_result['GrpCd'] = $GrpCd;
+		$return_result['StfCd'] = $StfCd;*/
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end function getMember
+
+	
 	//Validate function
 	if($fn == 'usp_GetGroup'){
 		$return_result = array();
@@ -254,7 +304,7 @@
 		$return_result = array();
 		$status = true;
 		$error_msg = '';
-		$intRcptDate = $_POST["intRcptDate"];
+		//$intRcptDate = $_POST["intRcptDate"];
 		$groupAcNo = $_POST["groupAcNo"];
 		$StfId = $_POST["StfId"];	
 		$GrpId = '';
@@ -269,6 +319,8 @@
 					$GrpId = $row['GrpId'];
 					$GrpNm = $row['GrpNm'];
 					$GrpAdd = $row['GrpAdd'];
+					$COpen = $row['COpen'];
+					$BOpen = $row['BOpen'];
 				}
 			}
 			if (mysqli_more_results($con)) {
@@ -283,6 +335,8 @@
 		$return_result['GrpId'] = $GrpId;
 		$return_result['GrpNm'] = $GrpNm;
 		$return_result['GrpAdd'] = $GrpAdd;
+		$return_result['COpen'] = $COpen;
+		$return_result['BOpen'] = $BOpen;
 
 		sleep(1);
 		echo json_encode($return_result);
@@ -293,14 +347,15 @@
 		$return_result = array();
 		$status = true;
 		$error_msg = '';
-		$intRcptDate = $_POST["intRcptDate"];
+		$openingAmtCash = $_POST["openingAmtCash"];
+		$openingAmtBank = $_POST["openingAmtBank"];
 		$groupAcNo = $_POST["groupAcNo"];
-		$intAmount = $_POST["intAmount"];
+		//$intAmount = $_POST["intAmount"];
 		$StfId = $_POST["StfId"];
 		$VouPurpId = 2;
 
 		//Insert Voucher
-		$query = "CALL usp_InsertVoucher('".$groupAcNo."', '".$intRcptDate."', '".$VouPurpId."', '".$intAmount."')";
+		$query = "CALL usp_InsertGroupOpening('".$groupAcNo."', '".$openingAmtCash."', '".$openingAmtBank."')";
 		mysqli_multi_query($con, $query);
 		do {
 			if ($result = mysqli_store_result($con)) {

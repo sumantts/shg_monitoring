@@ -56,17 +56,6 @@ do {
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Collection Date*</label>
-                            <div class="col-sm-8">
-                              <input type="date" id="meetingDate" name="meetingDate" value="<?=date('Y-m-d')?>" class="form-control" />
-                              <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label  text-success" id="collectionDate_success" style="font-size: 12px;"></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6">
-                          <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">FO Name*</label>
                             <div class="col-sm-8">
                               <select id="fieldOffices" name="fieldOffices" class="form-control" >
@@ -83,6 +72,28 @@ do {
                               </select>
                               <span class="col-form-label text-danger" id="fieldOffices_error" style="font-size: 12px;"></span>
                               <span class="col-form-label text-success" id="fieldOffices_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">From Date*</label>
+                            <div class="col-sm-8">
+                              <input type="date" id="meetingDate" name="meetingDate" value="<?=date('Y-m-d')?>" class="form-control" />
+                              <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label  text-success" id="collectionDate_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">To Date*</label>
+                            <div class="col-sm-8">
+                              <input type="date" id="MeetingDtTo" name="MeetingDtTo" value="<?=date('Y-m-d')?>" class="form-control" />
+                              <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label  text-success" id="collectionDate_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
                         </div>

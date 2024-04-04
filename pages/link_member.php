@@ -41,9 +41,11 @@ include('common/header.php');?>
                         </div> -->
 
                         <div class="col-md-6">
-                          <div class=" mb-2">
-                          <button type="button" id="getMember" class="btn btn-inverse-success btn-fw">Show</button>
+                          <div class="mb-2">
+                            <button type="button" id="getMember" class="btn btn-inverse-success btn-fw">Show</button>
+                            <button type="button" id="delinkMember" class="btn btn-inverse-success btn-fw">Delink</button>
                           </div>
+                          
                         </div>
 
                         <div class="col-md-6">

@@ -53,9 +53,9 @@
 		break;
 
 		//		
-		case 'interest-receipt':
-		$title = "Interest Receipt";
-		include('pages/interest_receipt.php');		
+		case 'group-opening-data':
+		$title = "Group Opening Data";
+		include('pages/group_opening_data.php');		
 		break;	
 		case 'voucher-entry':
 		$title = "Voucher Entry";

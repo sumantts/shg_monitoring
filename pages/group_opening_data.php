@@ -26,7 +26,7 @@ include('common/header.php');
                       <!--<p class="card-description"> Personal info </p>-->
                       <div class="row">
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Interest Receipt Date*</label>
                             <div class="col-sm-8">
@@ -35,7 +35,7 @@ include('common/header.php');
                               <span class="col-form-label text-success" id="intRcptDate_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Group S/B A/c No*</label>
@@ -62,11 +62,22 @@ include('common/header.php');
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Interest Amount*</label>
+                            <label class="col-sm-4 col-form-label text-danger">Cash Opening Amount*</label>
                             <div class="col-sm-8">
-                              <input type="number" id="intAmount" name="intAmount" class="form-control" />
-                              <span class="col-form-label text-danger" id="intAmount_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label text-success" id="intAmount_success" style="font-size: 12px;"></span>
+                              <input type="number" id="openingAmtCash" name="openingAmtCash" class="form-control" />
+                              <span class="col-form-label text-danger" id="openingAmtCash_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="openingAmtCash_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-danger">Bank Opening Amount*</label>
+                            <div class="col-sm-8">
+                              <input type="number" id="openingAmtBank" name="openingAmtBank" class="form-control" />
+                              <span class="col-form-label text-danger" id="openingAmtBank_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="openingAmtBank_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
                         </div>

@@ -48,23 +48,24 @@
               </div>
             </li>
             <?php } ?>
+            <li class="nav-item <?php if($p == 'group-opening-data'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=group-opening-data">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title"> Group Opening Data</span>
+              </a>
+            </li>
             <li class="nav-item <?php if($p == 'opening-data'){?>active<?php } ?>">
               <a class="nav-link" href="?p=opening-data">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Opening Data</span>
+                <span class="menu-title">Member Opening Data</span>
               </a>
             </li>
+
+
             <li class="nav-item <?php if($p == 'meeting-data' || $p == 'meeting-data-report'){?>active<?php } ?>">
               <a class="nav-link" href="?p=meeting-data">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Meeting Data</span>
-              </a>
-            </li>
-
-            <li class="nav-item <?php if($p == 'interest-receipt'){?>active<?php } ?>">
-              <a class="nav-link" href="?p=interest-receipt">
-                <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Interest Receipt</span>
               </a>
             </li>
             <li class="nav-item <?php if($p == 'voucher-entry'){?>active<?php } ?>">

@@ -10,15 +10,16 @@
 	$csv_export .="Metting Date," ;
 	$csv_export .="Staff Code," ;
 	$csv_export .="Group Code,";
-	$csv_export .="Member Code,";
-	$csv_export .="Attendance,";
+	$csv_export .="Member Count,";
+	$csv_export .="Attendance Count,";
 	$csv_export .="Collection Amount,";
-	$csv_export .="Entered On,";
+	$csv_export .="S/B A/c No,";
 	
 	$csv_export .= "\n";
 	
 	if(isset($_POST['meetingDate'])){
 		$meetingDate = $_POST['meetingDate'];
+		$MeetingDtTo = $_POST['MeetingDtTo'];
 		$fieldOffices = $_POST['fieldOffices'];
 		$StfId = $_POST["StfId"];
 		$meeting_rows = array();
@@ -27,7 +28,7 @@
 		$csv_fileName = 'meeting_data_'.$fieldOffices.'_'.$meetingDate.'.csv';
 		
 		//Get Meeting Data
-		$query2 = "CALL usp_GetMeetingData('".$fieldOffices."', '".$meetingDate."')";
+		$query2 = "CALL usp_GetMeetingData('".$fieldOffices."', '".$meetingDate."', '".$MeetingDtTo."')";
 		mysqli_multi_query($con, $query2);
 		do {
 			/* store the result set in PHP */
@@ -37,10 +38,10 @@
 				$MettingDt = $row2['MettingDt'];
 				$StfCd = $row2['StfCd'];
 				$GrpCd = $row2['GrpCd'];
-				$MemCd = $row2['MemCd'];
-				$Attdance = $row2['Attdance'];
+				$MemCd = $row2['MemCnt'];
+				$Attdance = $row2['AttCnt'];
 				$CollAmt = $row2['CollAmt'];
-				$CollDt = $row2['CollDt'];
+				$CollDt = $row2['SBAcNo'];
 				
 				
 
