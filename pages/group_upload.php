@@ -29,7 +29,7 @@ if(isset($_POST["importSubmit"])){
 
             //Call SP to save data into DB
             if($data_saved > 0){
-              $query = "CALL usp_InsertGroup('".$GroupId."', '".$GroupNm."', '".$GroupAdd."', '".$SBAnNo."', '".$MemSav."', '".$StfId."')";
+              $query = "CALL usp_InsertGroup('".$GroupId."', '".$GroupNm."', '".$GroupAdd."', '".$SBAnNo."', '".$StfId."')";
               //echo $query;
               mysqli_multi_query($con, $query);
             }
@@ -50,7 +50,7 @@ if(isset($_POST["importSubmit"])){
   //header("location: ?p=group-upload&qstring=$qstring&data_saved=$data_saved");
   ?>
   <script>
-    window.location.href = '?p=group-upload&qstring=<?=$qstring?>&data_saved=<?=$data_saved?>';
+   window.location.href = '?p=group-upload&qstring=<?=$qstring?>&data_saved=<?=$data_saved?>';
   </script>
   <?php
   

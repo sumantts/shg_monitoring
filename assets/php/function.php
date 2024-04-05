@@ -670,5 +670,31 @@
 		echo json_encode($return_result);
 	}//end function 
 
+	//Dashboard more
+	if($fn == 'deleteCollectionRecord'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		//$intRcptDate = $_POST["intRcptDate"];
+		$meeting_date = $_POST["meeting_date"];
+		$sb_ac = $_POST["sb_ac"];	
+		
+
+		$query = "CALL usp_DeleteCollection('".$sb_ac."', '".$meeting_date."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+		$return_result['status'] = $status;
+		
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
 	
 ?>

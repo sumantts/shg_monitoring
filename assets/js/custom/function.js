@@ -779,6 +779,28 @@
 		}//end if
 	});
 
+
+	//Dashboard More part
+	function deleteCollectionRecord(meeting_date, sb_ac, dt){
+		console.log('meeting_date: '+ meeting_date + ', sb_ac:' +  sb_ac);
+
+		if(confirm('Are you sure?')){			
+			$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "deleteCollectionRecord", meeting_date: meeting_date, sb_ac: sb_ac}
+			  })
+				.done(function( res ) {
+				  //console.log(res);
+				  $res1 = JSON.parse(res);
+				  if($res1.status == true){
+					window.location.href = '?p=dashboard-more&dt='+dt;					
+				  }
+				  
+			  });
+		}//end if
+
+	}//end finction
 	
 	//Loading screen
 	$body = $("body");

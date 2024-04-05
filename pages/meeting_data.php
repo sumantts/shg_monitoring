@@ -157,5 +157,11 @@ if(isset($_GET['data_saved'])){
 		  </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
+
+          <script>
+            $('#insertMeetingData').on('click', function(){
+              $('#insertMeetingData').prop('disabled', true);
+            })
+          </script>
           
     <?php include('common/footer.php');?>

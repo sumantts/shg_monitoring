@@ -22,6 +22,8 @@
 					$GrpNm = $row2['GrpNm'];
 					$Attnd = $row2['Attnd'];
 					$Amt = $row2['Amt'];
+					$MDate = $row2['MDate'];
+					$SBAc = $row2['SBAc'];
 					
 					//$grantAmtColl = $grantAmtColl + $AmtColl;
 
@@ -31,6 +33,8 @@
 						$all_result->GrpNm = $GrpNm; 
 						$all_result->Attnd = $Attnd;
 						$all_result->Amt = $Amt;
+						$all_result->MDate = $MDate;
+						$all_result->SBAc = $SBAc;
 
 						array_push($all_results, $all_result);
 					}
@@ -71,6 +75,7 @@
 							<td scope="col" style="text-align: center;">Group Name</td>
 							<td scope="col" style="text-align: center;">Attendance</td>
 							<td scope="col" style="text-align: center;">Amount Collected</td>
+							<td scope="col" style="text-align: center;">Action</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -82,10 +87,11 @@
 							<td style="text-align: center;"><?=$all_results[$i]->GrpNm?></td>
 							<td style="text-align: center;"><?=$all_results[$i]->Attnd?></td>
 							<td style="text-align: right;"><?=number_format($all_results[$i]->Amt, 2)?></td>
+							<td style="text-align: center;"><a href="javascript:void(0);" onClick="deleteCollectionRecord('<?=$all_results[$i]->MDate?>', '<?=$all_results[$i]->SBAc?>', '<?=$_GET['dt']?>')">Delete</a></td>
 							</tr>
 							<?php } }else{ ?>
 							<tr>
-							<td style="text-align: center;" colspan="4">Sorry! No data Found</td>
+							<td style="text-align: center;" colspan="5">Sorry! No data Found</td>
 							</tr>
 							<?php } ?>
 
