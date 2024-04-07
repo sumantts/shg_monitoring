@@ -140,6 +140,35 @@
 		sleep(1);
 		echo json_encode($return_result);
 	}//end function getMember
+	
+	
+	//withdraw Member
+	if($fn == 'withdrawMember'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$memberCode = $_POST["memberCode"];
+
+		//Get Member
+		$query = "CALL usp_CloseMember('".$memberCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end function withdrawMember
 
 	
 	//Validate function
@@ -246,6 +275,7 @@
 					$Attnd = $row2['Attnd'];
 					$CAmt = $row2['CAmt'];
 					$OpnAmt = $row2['OpnAmt'];
+					$Opening_Dues = $row2['OpDues'];
 					$grantCAmt = $grantCAmt + $CAmt;
 
 					if($MemId != ''){
@@ -256,6 +286,7 @@
 						$group_member->Attnd = $Attnd;
 						$group_member->CAmt = $CAmt;
 						$group_member->OpnAmt = $OpnAmt;
+						$group_member->Opening_Dues = $Opening_Dues;
 
 						array_push($group_members, $group_member);
 					}

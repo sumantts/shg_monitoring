@@ -10,26 +10,28 @@ if(isset($_POST['insertMeetingData'])){
   $collectionDate = $_POST['collectionDate'];
   $GroupId = $_POST['GroupId'];
   $my_id = $_POST['my_id'];
+  $Opening_Dues = $_POST['Opening_Dues'];
   //$attendance = $_POST['attendance'];
   //$attendance_text = $_POST['attendance_text'];
   //echo 'my_id: '.$my_id[1];
   
   $data_saved = 0;
   for($i = 0; $i < sizeof($my_id); $i++){
-    if($CAmt[$i] > 0){
+    $Opening_Dues_Bal = 0;
+    //if($CAmt[$i] > 0){
       $MeetingDt = $collectionDate[$i];
       $StfId = $_SESSION["StfId"];
       $MemId = $my_id[$i];
       //echo 'MemId: '.$MemId[$i];
       $Attendance = 1;
       $CollAmt = $CAmt[$i];
+      $Opening_Dues_Bal = $Opening_Dues[$i];
 
       //Insert Meeting data
-      $query = "CALL usp_UpdtMemBalance('".$MemId."', '".$CollAmt."')";
-    
+      $query = "CALL usp_UpdtMemBalance('".$MemId."', '".$CollAmt."', '".$Opening_Dues_Bal."')";
       mysqli_multi_query($con, $query);
       $data_saved++;      
-    }//end if
+    //}//end if
   }//end for
 
   //header("location:?p=opening-data&save=ok&data_saved=$data_saved");
@@ -106,6 +108,7 @@ if(isset($_POST['insertMeetingData'])){
                                 <td scope="col" style="text-align: center;">Member Code</td>
                                 <td scope="col" style="text-align: center;">Member Name</td>
                                 <td scope="col" style="text-align: center;">Opening Balance</td>
+                                <td scope="col" style="text-align: center;">Opening Due</td>
                               </tr>
                             </thead>
                             <tbody id="group_members_list1">

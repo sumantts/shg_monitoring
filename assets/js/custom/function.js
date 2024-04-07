@@ -81,35 +81,62 @@
 			$('#memberCode_error').html('Please Enter Member Code');
 			return false;
 		}else{	
-			$('#memberCode_error').html('');
-			$.ajax({
-			  method: "POST",
-			  url: "assets/php/function.php",
-			  data: { fn: "delinkMember", memberCode: $memberCode }
-			})
-			  .done(function( res ) {
-				//console.log(res);
-				$res1 = JSON.parse(res);
-				if($res1.status == true){
-					if($res1.MemNm != ''){
-						alert('Member Delinked successfully');
-						/*$('#MemNm').html( $res1.MemNm);
-						$('#GurdNm').html( $res1.GurdNm);
-						$('#GrpCd').html( $res1.GrpCd);
-						$('#GrpNm').html( $res1.GrpNm);
-						$('#StfCd').html( $res1.StfCd);
-						$('#group_code').val($res1.GrpCd);*/
-						//$('#staff_code').val($res1.StfCd);
-						//$('#part_tow').show();
+			if(confirm('Are you sure to Delink?')){				
+				$('#memberCode_error').html('');
+				$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "delinkMember", memberCode: $memberCode }
+				})
+				.done(function( res ) {
+					//console.log(res);
+					$res1 = JSON.parse(res);
+					if($res1.status == true){
+						if($res1.MemNm != ''){
+							alert('Member Delinked successfully');
+						}
 					}else{
-						//$('#part_three').show();
+						$('#form_success').html('');
+						$('#form_error').html($res1.error_msg);
+						return false;
 					}
-				}else{
-					$('#form_success').html('');
-					$('#form_error').html($res1.error_msg);
-					return false;
-				}
-			});
+				});
+			}//confirm
+		}//end if
+	});
+	
+	
+	//Withdraw Member
+	$( "#withdrawMember" ).on( "click", function() {
+		$memberCode = $('#memberCode').val();
+		$('#part_tow').hide();
+		$('#part_three').hide();
+
+		if($memberCode == ''){
+			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else{	
+			if(confirm('Are you sure to Withdraw?')){				
+				$('#memberCode_error').html('');
+				$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "withdrawMember", memberCode: $memberCode }
+				})
+				.done(function( res ) {
+					//console.log(res);
+					$res1 = JSON.parse(res);
+					if($res1.status == true){
+						if($res1.MemNm != ''){
+							alert('Member Withdraw successfully');
+						}
+					}else{
+						$('#form_success').html('');
+						$('#form_error').html($res1.error_msg);
+						return false;
+					}
+				});
+			}//confirm
 		}//end if
 	});
 
@@ -221,10 +248,10 @@
 
 						if($group_members1.length > 0){
 							for(var i = 0; i < $group_members1.length; i++){
-								$html += '<tr> <td style="text-align: center;">'+$group_members1[i].MemId+'</td> <td style="text-align: center;">'+$group_members1[i].MemNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].OpnAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members1[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members1[i].MemId+'" value="'+$group_members1[i].MemId+'"> </td> </tr>';
+								$html += '<tr> <td style="text-align: center;">'+$group_members1[i].MemId+'</td> <td style="text-align: center;">'+$group_members1[i].MemNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].OpnAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members1[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members1[i].MemId+'" value="'+$group_members1[i].MemId+'"> </td><td style="text-align: right;width: 100px;"><input type="number" name="Opening_Dues[]" id="Opening_Dues_'+$group_members1[i].MemId+'" value="'+$group_members1[i].Opening_Dues+'" class="form-control"></td> </tr>';
 							}
 						}else{
-							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
+							$html += '<tr> <td style="text-align: center;" colspan="5">No data Available</td> </tr>';
 						}
 
 						$('#group_members_list1').html($html);
@@ -323,7 +350,11 @@
 		$sub_total = 0;
 		for($i = 0; $i < $myFormData.length; $i++){
 			if($myFormData[$i].name == 'CAmt[]'){
-				$sub_total = parseFloat($sub_total) + parseFloat($myFormData[$i].value);
+				$temp_amount = 0;
+				if($myFormData[$i].value != ''){
+					$temp_amount = $myFormData[$i].value;
+				}
+				$sub_total = parseFloat($sub_total) + parseFloat($temp_amount);
 			}
 		}//end for
 
@@ -633,7 +664,9 @@
 					}//end if
 
 					$('#cb_tbody').html($html);
-					$('#part_three').show();		
+					$('#part_three').show();	
+					$('#printDiv').show();	
+						
 				}else{
 					alert('No Data found');
 				}
@@ -801,6 +834,18 @@
 		}//end if
 
 	}//end finction
+
+	//Print preview
+	$('#printDiv').on('click', function(){		
+		var divContents = document.getElementById("part_three").innerHTML; 
+		var a = window.open('', '', 'height=500, width=500'); 
+		a.document.write('<html><link rel="stylesheet" href="assets/css/shared/style.css">'); 
+		//a.document.write('<body > <h1>Div contents are <br>'); 
+		a.document.write(divContents); 
+		a.document.write('</body></html>'); 
+		a.document.close(); 
+		a.print(); 
+   })
 	
 	//Loading screen
 	$body = $("body");
