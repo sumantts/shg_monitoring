@@ -102,6 +102,26 @@
               </a>
             </li>
             <?php } ?>
+
+            
+            <li class="nav-item <?php if($p == 'attendance-report' || $p == 'savings-ledger-report'){?>active<?php } ?>">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="menu-icon typcn typcn-coffee"></i>
+                <span class="menu-title">Reports</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div <?php if($p == 'attendance-report' || $p == 'savings-ledger-report'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="?p=attendance-report">Attendance Report</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="?p=savings-ledger-report">Savings Ledger Report</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
             <li class="nav-item <?php if($p == 'change-password'){?>active<?php } ?>">
               <a class="nav-link" href="?p=change-password">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>

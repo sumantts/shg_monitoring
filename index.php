@@ -80,6 +80,16 @@
 		$title = "Meeting Data Export";
 		include('pages/data_export.php');		
 		break;
+
+		//Reports		
+		case 'attendance-report':
+		$title = "Attendance Report";
+		include('pages/attendance_report.php');		
+		break;	
+		case 'savings-ledger-report':
+		$title = "Savings Ledger Report";
+		include('pages/savings_ledger_report.php');		
+		break;
 		
 		case 'change-password':
 		$title = "Change Password";

@@ -846,6 +846,65 @@
 		a.document.close(); 
 		a.print(); 
    })
+
+   //Reports
+   
+	//show Attendance Report	
+	$( "#showAttendanceReport" ).on( "click", function() {
+		$GrpSBAc = $('#GrpSBAc').val();
+		$FinYrFrmTo = $('#FinYrFrmTo').val();
+		$UptoDate = $('#UptoDate').val();
+		$html = '';
+		
+		$('#GrpSBAc_error').html('');
+		$('#FinYrFrmTo_error').html('');	
+		$('#uptoDate_error').html('');	
+		$('#part_three').hide();		
+
+		if($GrpSBAc == ''){
+			$('#GrpSBAc_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else if($FinYrFrmTo == '0'){
+			$('#FinYrFrmTo_error').html('Please Select Accounting Year');
+			return false;
+		}else if($UptoDate == ''){
+			$('#uptoDate_error').html('Please Select Upto Date');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showAttendanceReport", GrpSBAc: $GrpSBAc, FinYrFrmTo: $FinYrFrmTo, UptoDate: $UptoDate }
+			})
+			  .done(function( res ) {
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$attn_rows = $res1.attn_rows;
+
+					$('#gr_name').html('Group Name: '+ $attn_rows[0].GrpNm);
+					$('#sb_ac_no').html('S/B No.: '+ $GrpSBAc);
+					$('#fin_yr').html('Attendance Register '+ $res1.fin_yr+' FY');
+
+					$('#atten_repo_tbody').html($html);
+					if($attn_rows.length > 0){
+						for($i = 0; $i < $attn_rows.length; $i++){
+							$html += '<tr> <td>'+$attn_rows[$i].Sl+'</td> <td>'+$attn_rows[$i].MemberNm+'</td> <td class="text-right">'+$attn_rows[$i].MnthApr+'</td> <td class="text-right">'+$attn_rows[$i].MnthMay+'</td> <td class="text-right">'+$attn_rows[$i].MnthJun+'</td> <td class="text-right">'+$attn_rows[$i].MnthJly+'</td> <td class="text-right">'+$attn_rows[$i].MnthAug+'</td> <td class="text-right">'+$attn_rows[$i].MnthSep+'</td> <td class="text-right">'+$attn_rows[$i].MnthOct+'</td> <td class="text-right">'+$attn_rows[$i].MnthNov+'</td> <td class="text-right">'+$attn_rows[$i].MnthDec+'</td> <td class="text-right">'+$attn_rows[$i].MnthJan+'</td> <td class="text-right">'+$attn_rows[$i].MnthFeb+'</td> <td class="text-right">'+$attn_rows[$i].MnthMar+'</td> <td class="text-right">'+$attn_rows[$i].Percnt+'</td> </tr>';
+						}//end for
+
+					}else{
+						$html += '<tr> <td colspan="15">Sorry! No data Found</td> </tr>';
+					}//end if
+
+					$('#atten_repo_tbody').html($html);
+					$('#part_three').show();
+						
+				}else{
+					alert('No Data found');
+				}
+			});
+		}//end if
+	});
+
 	
 	//Loading screen
 	$body = $("body");

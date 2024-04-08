@@ -88,7 +88,7 @@ include('common/header.php');
                       <div id="part_three" style="display: none">  
                     <h4 class="card-title" id="cbTitle">Cash Book For The Period dd-mm-yyyy To dd-mm-yyyy</h4>
                     <p class="card-description" id="cbTitle2">Group Name: </p>
-                    <div class="table-responsive-sm">
+                    <div class="table-responsive">
                       <table class="table table-bordered">
                       <thead>
                         <tr>

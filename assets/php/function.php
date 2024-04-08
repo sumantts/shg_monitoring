@@ -727,5 +727,88 @@
 		sleep(1);
 		echo json_encode($return_result);
 	}//end fu
+
+	//Reports
+	
+	//show Attendance Report
+	if($fn == 'showAttendanceReport'){
+		$GrpSBAc = $_POST["GrpSBAc"];
+		$FinYrFrmTo = $_POST["FinYrFrmTo"];
+		$UptoDate = $_POST["UptoDate"];
+		$return_result = array();
+		$status = true;
+		$error_msg = '';		
+		$FinYrFrm = '';
+		$FinYrTo = '';
+		$FinYrFrmToStr = explode("_", $FinYrFrmTo);		
+		$FinYrFrm = $FinYrFrmToStr[0];
+		$FinYrTo = $FinYrFrmToStr[1];		
+		$attn_rows = array();	
+		$fin_yr = $FinYrFrm.' '.$FinYrTo;
+
+		//View Cash Book
+		$query = "CALL usp_RptAttendance('".$GrpSBAc."', '".$FinYrFrm."', '".$FinYrTo."', '".$UptoDate."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);
+																							
+						$Sl = $row['Sl'];
+						$GrpNm = $row['GrpNm'];
+						$FinYr = $row['FinYr'];
+						$MemId = $row['MemId'];
+						$MemberNm = $row['MemberNm'];
+						$MnthApr = $row['MnthApr'];
+						$MnthMay = $row['MnthMay'];
+						$MnthJun = $row['MnthJun'];
+						$MnthJly = $row['MnthJly'];
+						$MnthAug = $row['MnthAug'];
+						$MnthSep = $row['MnthSep'];
+						$MnthOct = $row['MnthOct'];
+						$MnthNov = $row['MnthNov'];
+						$MnthDec = $row['MnthDec'];
+						$MnthJan = $row['MnthJan'];
+						$MnthFeb = $row['MnthFeb'];
+						$MnthMar = $row['MnthMar'];
+						$Percnt = $row['Percnt'];
+
+						$attn_row = new stdClass();
+						$attn_row->Sl = $Sl;
+						$attn_row->GrpNm = $GrpNm;
+						$attn_row->FinYr = $FinYr;
+						$attn_row->MemId = $MemId;
+						$attn_row->MemberNm = $MemberNm;
+						$attn_row->MnthApr = $MnthApr;
+						$attn_row->MnthMay = $MnthMay;
+						$attn_row->MnthJun = $MnthJun;
+						$attn_row->MnthJly = $MnthJly;
+						$attn_row->MnthAug = $MnthAug;
+						$attn_row->MnthSep = $MnthSep;
+						$attn_row->MnthOct = $MnthOct;
+						$attn_row->MnthNov = $MnthNov;
+						$attn_row->MnthDec = $MnthDec;
+						$attn_row->MnthJan = $MnthJan;
+						$attn_row->MnthFeb = $MnthFeb;
+						$attn_row->MnthMar = $MnthMar;
+						$attn_row->Percnt = $Percnt;					
+						array_push($attn_rows, $attn_row);						
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['attn_rows'] = $attn_rows;	
+		$return_result['fin_yr'] = $fin_yr;			
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
 	
 ?>
