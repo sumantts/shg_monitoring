@@ -904,6 +904,65 @@
 			});
 		}//end if
 	});
+   
+	//Savings Ledger Report	
+	$( "#showSavingLedgerReport" ).on( "click", function() {
+		$GrpSBAc = $('#GrpSBAc').val();
+		$FinYrFrmTo = $('#FinYrFrmTo').val();
+		$UptoDate = $('#UptoDate').val();
+		$html = '';
+		
+		$('#GrpSBAc_error').html('');
+		$('#FinYrFrmTo_error').html('');	
+		$('#uptoDate_error').html('');	
+		$('#part_three').hide();		
+
+		if($GrpSBAc == ''){
+			$('#GrpSBAc_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else if($FinYrFrmTo == '0'){
+			$('#FinYrFrmTo_error').html('Please Select Accounting Year');
+			return false;
+		}else if($UptoDate == ''){
+			$('#uptoDate_error').html('Please Select Upto Date');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showSavingLedgerReport", GrpSBAc: $GrpSBAc, FinYrFrmTo: $FinYrFrmTo, UptoDate: $UptoDate }
+			})
+			  .done(function( res ) {
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$sl_rows = $res1.sl_rows;
+					$st_row = $res1.st_row;
+
+					$('#gr_name').html('Group Name: '+ $sl_rows[0].GrpNm);
+					$('#sb_ac_no').html('S/B No.: '+ $GrpSBAc);
+					$('#fin_yr').html('Group Savings Deposit Register '+ $res1.fin_yr+' FY');
+
+					$('#sl_repo_tbody').html($html);
+					if($sl_rows.length > 0){
+						for($i = 0; $i < $sl_rows.length; $i++){
+							$html += '<tr> <td>'+$sl_rows[$i].Sl+'</td> <td>'+$sl_rows[$i].MemberNm+'</td> <td class="text-right">'+$sl_rows[$i].SBOpnAmt+'</td>  <td class="text-right">'+$sl_rows[$i].MnthApr+'</td> <td class="text-right">'+$sl_rows[$i].MnthMay+'</td> <td class="text-right">'+$sl_rows[$i].MnthJun+'</td> <td class="text-right">'+$sl_rows[$i].MnthJly+'</td> <td class="text-right">'+$sl_rows[$i].MnthAug+'</td> <td class="text-right">'+$sl_rows[$i].MnthSep+'</td> <td class="text-right">'+$sl_rows[$i].MnthOct+'</td> <td class="text-right">'+$sl_rows[$i].MnthNov+'</td> <td class="text-right">'+$sl_rows[$i].MnthDec+'</td> <td class="text-right">'+$sl_rows[$i].MnthJan+'</td> <td class="text-right">'+$sl_rows[$i].MnthFeb+'</td> <td class="text-right">'+$sl_rows[$i].MnthMar+'</td> <td class="text-right">'+$sl_rows[$i].YrTotal+'</td> <td class="text-right">'+$sl_rows[$i].SBClsAmt+'</td> <td class="text-right">'+$sl_rows[$i].DueOpnAmt+'</td> <td class="text-right">'+$sl_rows[$i].DueThisYr+'</td> <td class="text-right">'+$sl_rows[$i].DueClsAmt+'</td> </tr>';
+						}//end for
+							
+						$html += '<tr> <td colspan="2" class="text-center">Subtotal</td> <td class="text-right">'+$st_row.st_SBOpnAmt+'</td>  <td class="text-right">'+$st_row.st_MnthApr+'</td> <td class="text-right">'+$st_row.st_MnthMay+'</td> <td class="text-right">'+$st_row.st_MnthJun+'</td> <td class="text-right">'+$st_row.st_MnthJly+'</td> <td class="text-right">'+$st_row.st_MnthAug+'</td> <td class="text-right">'+$st_row.st_MnthSep+'</td> <td class="text-right">'+$st_row.st_MnthOct+'</td> <td class="text-right">'+$st_row.st_MnthNov+'</td> <td class="text-right">'+$st_row.st_MnthDec+'</td> <td class="text-right">'+$st_row.st_MnthJan+'</td> <td class="text-right">'+$st_row.st_MnthFeb+'</td> <td class="text-right">'+$st_row.st_MnthMar+'</td> <td class="text-right">'+$st_row.st_YrTotal+'</td> <td class="text-right">'+$st_row.st_SBClsAmt+'</td> <td class="text-right">'+$st_row.st_DueOpnAmt+'</td> <td class="text-right">'+$st_row.st_DueThisYr+'</td> <td class="text-right">'+$st_row.st_DueClsAmt+'</td> </tr>';
+
+					}else{
+						$html += '<tr> <td colspan="15">Sorry! No data Found</td> </tr>';
+					}//end if
+
+					$('#sl_repo_tbody').html($html);
+					$('#part_three').show();
+						
+				}else{
+					alert('No Data found');
+				}
+			});
+		}//end if
+	});
 
 	
 	//Loading screen

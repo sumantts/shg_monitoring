@@ -811,4 +811,153 @@
 		echo json_encode($return_result);
 	}//end fu
 	
+	//Savings Ledger Report	
+	if($fn == 'showSavingLedgerReport'){
+		$GrpSBAc = $_POST["GrpSBAc"];
+		$FinYrFrmTo = $_POST["FinYrFrmTo"];
+		$UptoDate = $_POST["UptoDate"];
+		$return_result = array();
+		$status = true;
+		$error_msg = '';		
+		$FinYrFrm = '';
+		$FinYrTo = '';
+		$FinYrFrmToStr = explode("_", $FinYrFrmTo);		
+		$FinYrFrm = $FinYrFrmToStr[0];
+		$FinYrTo = $FinYrFrmToStr[1];		
+		$sl_rows = array();	
+		$fin_yr = $FinYrFrm.' '.$FinYrTo;
+
+		$st_SBOpnAmt = 0;
+		$st_MnthApr = 0;
+		$st_MnthMay = 0;
+		$st_MnthJun = 0;
+		$st_MnthJly = 0;
+		$st_MnthAug = 0;
+		$st_MnthSep = 0;
+		$st_MnthOct = 0;
+		$st_MnthNov = 0;
+		$st_MnthDec = 0;
+		$st_MnthJan = 0;
+		$st_MnthFeb = 0;
+		$st_MnthMar = 0;
+		$st_YrTotal = 0;
+		$st_SBClsAmt = 0;
+		$st_DueOpnAmt = 0;
+		$st_DueThisYr = 0;
+		$st_DueClsAmt = 0;
+
+		//View Cash Book
+		$query = "CALL usp_RptSavings('".$GrpSBAc."', '".$FinYrFrm."', '".$FinYrTo."', '".$UptoDate."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);																					
+						$Sl = $row['Sl'];
+						$GrpNm = $row['GrpNm'];
+						$FinYr = $row['FinYr'];
+						$MemId = $row['MemId'];
+						$MemberNm = $row['MemberNm'];
+						$SBOpnAmt = $row['SBOpnAmt'];
+						$MnthApr = $row['MnthApr'];
+						$MnthMay = $row['MnthMay'];
+						$MnthJun = $row['MnthJun'];
+						$MnthJly = $row['MnthJly'];
+						$MnthAug = $row['MnthAug'];
+						$MnthSep = $row['MnthSep'];
+						$MnthOct = $row['MnthOct'];
+						$MnthNov = $row['MnthNov'];
+						$MnthDec = $row['MnthDec'];
+						$MnthJan = $row['MnthJan'];
+						$MnthFeb = $row['MnthFeb'];
+						$MnthMar = $row['MnthMar'];
+						$YrTotal = $row['YrTotal'];
+						$SBClsAmt = $row['SBClsAmt'];
+						$DueOpnAmt = $row['DueOpnAmt'];
+						$DueThisYr = $row['DueThisYr'];
+						$DueClsAmt = $row['DueClsAmt'];
+
+						$sl_row = new stdClass();
+						$sl_row->Sl = $Sl;
+						$sl_row->GrpNm = $GrpNm;
+						$sl_row->FinYr = $FinYr;
+						$sl_row->MemId = $MemId;
+						$sl_row->MemberNm = $MemberNm;
+						$sl_row->SBOpnAmt = $SBOpnAmt;
+						$sl_row->MnthApr = $MnthApr;
+						$sl_row->MnthMay = $MnthMay;
+						$sl_row->MnthJun = $MnthJun;
+						$sl_row->MnthJly = $MnthJly;
+						$sl_row->MnthAug = $MnthAug;
+						$sl_row->MnthSep = $MnthSep;
+						$sl_row->MnthOct = $MnthOct;
+						$sl_row->MnthNov = $MnthNov;
+						$sl_row->MnthDec = $MnthDec;
+						$sl_row->MnthJan = $MnthJan;
+						$sl_row->MnthFeb = $MnthFeb;
+						$sl_row->MnthMar = $MnthMar;
+						$sl_row->YrTotal = $YrTotal;	
+						$sl_row->SBClsAmt = $SBClsAmt;
+						$sl_row->DueOpnAmt = $DueOpnAmt;
+						$sl_row->DueThisYr = $DueThisYr;
+						$sl_row->DueClsAmt = $DueClsAmt;				
+						array_push($sl_rows, $sl_row);
+
+						$st_SBOpnAmt = $st_SBOpnAmt + $SBOpnAmt;
+						$st_MnthApr = $st_MnthApr + $MnthApr;
+						$st_MnthMay = $st_MnthMay + $MnthMay;
+						$st_MnthJun = $st_MnthJun + $MnthJun;
+						$st_MnthJly = $st_MnthJly + $MnthJly;
+						$st_MnthAug = $st_MnthAug + $MnthAug;
+						$st_MnthSep = $st_MnthSep + $MnthSep;
+						$st_MnthOct = $st_MnthOct + $MnthOct;
+						$st_MnthNov = $st_MnthNov + $MnthNov;
+						$st_MnthDec = $st_MnthDec + $MnthDec;
+						$st_MnthJan = $st_MnthJan + $MnthJan;
+						$st_MnthFeb = $st_MnthFeb + $MnthFeb;
+						$st_MnthMar = $st_MnthMar + $MnthMar;
+						$st_YrTotal = $st_YrTotal + $YrTotal;
+						$st_SBClsAmt = $st_SBClsAmt + $SBClsAmt;
+						$st_DueOpnAmt = $st_DueOpnAmt +$DueOpnAmt;
+						$st_DueThisYr = $st_DueThisYr + $DueThisYr;
+						$st_DueClsAmt = $st_DueClsAmt + $DueClsAmt;
+					}//end while
+
+						$st_row = new stdClass();
+						$st_row->st_SBOpnAmt = number_format($st_SBOpnAmt, 2);
+						$st_row->st_MnthApr = number_format($st_MnthApr, 2);
+						$st_row->st_MnthMay = number_format($st_MnthMay, 2);
+						$st_row->st_MnthJun = number_format($st_MnthJun, 2);
+						$st_row->st_MnthJly = number_format($st_MnthJly, 2);
+						$st_row->st_MnthAug = number_format($st_MnthAug, 2);
+						$st_row->st_MnthSep = number_format($st_MnthSep, 2);
+						$st_row->st_MnthOct = number_format($st_MnthOct, 2);
+						$st_row->st_MnthNov = number_format($st_MnthNov, 2);
+						$st_row->st_MnthDec = number_format($st_MnthDec, 2);
+						$st_row->st_MnthJan = number_format($st_MnthJan, 2);
+						$st_row->st_MnthFeb = number_format($st_MnthFeb, 2);
+						$st_row->st_MnthMar = number_format($st_MnthMar, 2);
+						$st_row->st_YrTotal = number_format($st_YrTotal, 2);	
+						$st_row->st_SBClsAmt = number_format($st_SBClsAmt, 2);
+						$st_row->st_DueOpnAmt = number_format($st_DueOpnAmt, 2);
+						$st_row->st_DueThisYr = number_format($st_DueThisYr, 2);
+						$st_row->st_DueClsAmt = number_format($st_DueClsAmt, 2);
+				}//end if
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['sl_rows'] = $sl_rows;	
+		$return_result['st_row'] = $st_row;	
+		$return_result['fin_yr'] = $fin_yr;			
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+	
 ?>

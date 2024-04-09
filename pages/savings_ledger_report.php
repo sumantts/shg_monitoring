@@ -29,9 +29,9 @@ include('common/header.php');
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Group S/B A/c No*</label>
                             <div class="col-sm-8">
-                              <input type="tel" id="groupAcNo" name="groupAcNo" class="form-control" />
-                              <span class="col-form-label text-danger" id="groupAcNo_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label text-success" id="groupAcNo_success" style="font-size: 12px;"></span>
+                              <input type="tel" id="GrpSBAc" name="GrpSBAc" class="form-control" />
+                              <span class="col-form-label text-danger" id="GrpSBAc_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="GrpSBAc_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
                         </div>
@@ -40,20 +40,21 @@ include('common/header.php');
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Financial Year*</label>
                             <div class="col-sm-8">
-                              <select id="fromDate" name="fromDate" class="form-control">
+                              <select id="FinYrFrmTo" name="FinYrFrmTo" class="form-control">
                                 <option value="0">Select</option>
                                 <option value="2024_2025">2024-2025</option>
                               </select>
-                              <span class="col-form-label text-danger" id="fromDate_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label text-success" id="fromDate_success" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-danger" id="FinYrFrmTo_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="FinYrFrmTo_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
                         </div>
+
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Upto Date*</label>
                             <div class="col-sm-8">
-                              <input type="date" id="uptoDate" name="uptoDate" value="<?=date('Y-m-d')?>" class="form-control" />
+                              <input type="date" id="UptoDate" name="UptoDate" value="<?=date('Y-m-d')?>" class="form-control" />
                               <span class="col-form-label text-danger" id="uptoDate_error" style="font-size: 12px;"></span>
                               <span class="col-form-label text-success" id="uptoDate_success" style="font-size: 12px;"></span>
                             </div>
@@ -62,15 +63,13 @@ include('common/header.php');
 
                         <div class="col-md-6">
                           <div class=" mb-2">
-                            <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
-                            <input type="hidden" name="GroupId" id="GroupId" value="">
-                          <button type="button" id="showCashBook" class="btn btn-inverse-success btn-fw">Show</button>
+                          <button type="button" id="showSavingLedgerReport" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
                       </div> 
                     </form>
 
-                    <div id="part_two" style="display: none;">
+                    <!-- <div id="part_two" style="display: none;">
                       <p class="card-description" id="cb_GroupName">Group Name: </p>
                       <p class="card-description" id="cb_GroupAddress">Group Address: </p>
                       
@@ -84,22 +83,22 @@ include('common/header.php');
                           </div>
                         </form>
                       </div>
-                    </div>
+                    </div> -->
 
 
                       <!-- Table Start -->
-                      <div id="part_three" style="display: block">  
+                      <div id="part_three" style="display: none">  
                     <!-- <h4 class="card-title" id="cbTitle">Cash Book For The Period dd-mm-yyyy To dd-mm-yyyy</h4>
                     <p class="card-description" id="cbTitle2">Group Name: </p> -->
                     <div class="table-responsive">
                       <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <td colspan="10" class="text-center">Group Name :</td>
-                            <td colspan="10" class="text-center">S/B No. </td>
+                            <td colspan="10" class="text-center" id="gr_name">Group Name:</td>
+                            <td colspan="10" class="text-center" id="sb_ac_no">S/B No. </td>
                           </tr>
                           <tr>
-                            <td colspan="20" class="text-center">Group Savings Deposit Register 24-24 FY</td>
+                            <td colspan="20" class="text-center" id="fin_yr">Group Savings Deposit Register 24-24 FY</td>
                           </tr>
                           <tr>
                             <td scope="col" class="text-center">Sl No</td>
@@ -119,90 +118,18 @@ include('common/header.php');
                             <td scope="col" class="text-center">March</td>
                             <td scope="col" class="text-center">Total</td>
                             <td scope="col" class="text-center">Closing</td>
-                            <td scope="col" class="text-center">Last year Due</td>
-                            <td scope="col" class="text-center">This year Due</td>
-                            <td scope="col" class="text-center">Total Due</td>
+                            <td scope="col" class="text-center">Last year<br> Due</td>
+                            <td scope="col" class="text-center">This year<br> Due</td>
+                            <td scope="col" class="text-center">Total<br> Due</td>
                           </tr>
                         </thead>
-                        <tbody id="cb_tbody">
-                          <tr>
-                            <td>0</td>
-                            <td>0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                          </tr>
-                          <!-- <tr>
-                            <td scope="col" class="text-left">Sub Total</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">100</td>
-                            <td scope="col" class="text-right">260</td>
-                            <td scope="col" class="text-left">Sub Total</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">30</td>
-                            <td scope="col" class="text-right">150</td>
-                          </tr>
-                          <tr>
-                            <td scope="col" class="text-left">Opening</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">100</td>
-                            <td scope="col" class="text-right">260</td>
-                            <td scope="col" class="text-left">Closing</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">30</td>
-                            <td scope="col" class="text-right">150</td>
-                          </tr> -->
-                          <tr>
-                            <td scope="col" class="text-center" colspan="2">Subtotal</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">100</td>
-                            <td scope="col" class="text-right">260</td>
-                            <td scope="col" class="text-left">Total</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">30</td>
-                            <td scope="col" class="text-right">150</td>
-                            <td scope="col" class="text-left">Total</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">100</td>
-                            <td scope="col" class="text-right">260</td>
-                            <td scope="col" class="text-left">Total</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">30</td>
-                            <td scope="col" class="text-right">150</td>
-                            <td scope="col" class="text-left">Total</td>
-                            <td scope="col" class="text-center"></td>
-                            <td scope="col" class="text-right">30</td>
-                          </tr>
-
-                          <!-- <tr>
-                            <td colspan="8">Sorry! No data Found</td>
-                          </tr> -->
-
+                        <tbody id="sl_repo_tbody">
+                          
                         </tbody>
                       </table>
                     </div>
                     </div>
                     <!-- Table end -->
-
-                    
-
-                    
-
                   </div>
                 </div>
               </div> 		  

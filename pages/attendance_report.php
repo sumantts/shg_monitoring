@@ -119,23 +119,7 @@ include('common/header.php');
                           </tr>
                         </thead>
                         <tbody id="atten_repo_tbody">
-                          <!-- <tr>
-                            <td>#</td>
-                            <td>-</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                          </tr> -->
+                          
                         </tbody>
                       </table>
                     </div>
