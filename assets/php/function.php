@@ -228,6 +228,23 @@
 		$return_result['status'] = $status;
 		echo json_encode($return_result);
 	}//end function getMember
+
+	//update Mem Profile
+	if($fn == 'updtMemProfile'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$memberCode = $_POST["memberCode"];
+		$memberName = $_POST["memberName"];
+		$gurdianName = $_POST["gurdianName"];
+		
+		$query = "CALL usp_UpdtMemProfile('".$memberCode."', '".$memberName."', '".$gurdianName."')";
+		mysqli_multi_query($con, $query);
+		
+		sleep(1);
+		$return_result['status'] = $status;
+		echo json_encode($return_result);
+	}//end function 
 	
 	//Meeting Data
 	if($fn == 'getGroupMembers'){

@@ -94,6 +94,13 @@
               </a>
             </li>
 
+            <li class="nav-item <?php if($p == 'member-update'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=member-update">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title"> Member Update</span>
+              </a>
+            </li>
+
             <?php if($_SESSION["StfId"] == 99){?>
             <li class="nav-item <?php if($p == 'data-export'){?>active<?php } ?>">
               <a class="nav-link" href="?p=data-export">

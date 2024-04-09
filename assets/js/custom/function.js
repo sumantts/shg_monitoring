@@ -56,6 +56,9 @@
 						$('#GrpNm').html( $res1.GrpNm);
 						$('#StfCd').html( $res1.StfCd);
 						$('#group_code').val($res1.GrpCd);
+						
+						$('#memberName').val( $res1.MemNm);
+						$('#gurdianName').val( $res1.GurdNm);
 						//$('#staff_code').val($res1.StfCd);
 						$('#part_tow').show();
 					}else{
@@ -208,6 +211,43 @@
 		}//end if
 	});
 	//Update Linked Member End
+
+	//updtMemProfile
+	$( "#updtMemProfile" ).on( "click", function() {
+		$memberCode = $('#memberCode').val();
+		$memberName = $('#memberName').val();
+		$gurdianName = $('#gurdianName').val();
+		//$GrpId = $('#GrpId').val();
+
+		if($memberCode == ''){
+			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else if($memberName == ''){
+			$('#memberName_error').html('Please enter Member Name');
+			return false;
+		}else if($gurdianName == ''){
+			$('#gurdianName_error').html('Please enter Gurdian Name');
+			return false;
+		}else{	
+			$('#memberCode_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "updtMemProfile", memberCode: $memberCode, memberName: $memberName, gurdianName: $gurdianName }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					alert('Member Profile Updated Successfully');
+				}else{
+					$('#form_success').html('');
+					$('#form_error').html($res1.error_msg);
+					return false;
+				}
+			});
+		}//end if
+	});
 
 	//Opening Data
 	$( "#getGroupMembers1" ).on( "click", function() {

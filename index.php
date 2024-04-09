@@ -76,6 +76,11 @@
 		include('pages/link_member.php');		
 		break;
 		
+		case 'member-update':
+		$title = "Member Update";
+		include('pages/member_update.php');		
+		break;
+		
 		case 'data-export':
 		$title = "Meeting Data Export";
 		include('pages/data_export.php');		
