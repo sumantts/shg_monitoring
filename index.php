@@ -87,6 +87,10 @@
 		break;
 
 		//Reports		
+		case 'member-list':
+		$title = "Member List";
+		include('pages/member_list.php');		
+		break;		
 		case 'attendance-report':
 		$title = "Attendance Report";
 		include('pages/attendance_report.php');		

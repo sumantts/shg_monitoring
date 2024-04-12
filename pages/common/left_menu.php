@@ -93,7 +93,8 @@
                 <span class="menu-title"> Link Member</span>
               </a>
             </li>
-
+            
+            <?php if($_SESSION["StfId"] == 99){?>
             <li class="nav-item <?php if($p == 'member-update'){?>active<?php } ?>">
               <a class="nav-link" href="?p=member-update">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
@@ -101,7 +102,7 @@
               </a>
             </li>
 
-            <?php if($_SESSION["StfId"] == 99){?>
+            
             <li class="nav-item <?php if($p == 'data-export'){?>active<?php } ?>">
               <a class="nav-link" href="?p=data-export">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
@@ -111,14 +112,17 @@
             <?php } ?>
 
             
-            <li class="nav-item <?php if($p == 'attendance-report' || $p == 'savings-ledger-report'){?>active<?php } ?>">
+            <li class="nav-item <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
                 <span class="menu-title">Reports</span>
                 <i class="menu-arrow"></i>
               </a>
-              <div <?php if($p == 'attendance-report' || $p == 'savings-ledger-report'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
+              <div <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
                 <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="?p=member-list">Member List</a>
+                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?p=attendance-report">Attendance Report</a>
                   </li>

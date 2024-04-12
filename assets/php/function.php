@@ -747,6 +747,73 @@
 
 	//Reports
 	
+	//show Mem List Report
+	if($fn == 'showMemListReport'){
+		$GrpSBAc = $_POST["GrpSBAc"];
+		$StfId = $_POST["StfId"];
+
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+			
+		$memlist_rows = array();
+		
+
+		//View Cash Book
+		$query = "CALL usp_GetMembersList('".$GrpSBAc."', '".$StfId."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					$status = true;
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);
+																													
+						$Sl = $row['Sl'];
+						$MemId = $row['MemId'];
+						$MemNm = $row['MemNm'];
+						$GurdNm = $row['GurdNm'];
+						$Village = $row['Village'];
+						$Aadhar = $row['Aadhar'];
+						$PAN = $row['PAN'];
+						$Voter = $row['Voter'];
+
+						if($Sl != ''){
+							$memlist_row = new stdClass();
+							$memlist_row->Sl = $Sl;
+							$memlist_row->MemId = $MemId;
+							$memlist_row->MemNm = $MemNm;
+							$memlist_row->GurdNm = $GurdNm;
+							$memlist_row->Village = $Village;
+							$memlist_row->Aadhar = $Aadhar;
+							$memlist_row->PAN = $PAN;
+							$memlist_row->Voter = $Voter;
+											
+							array_push($memlist_rows, $memlist_row);
+						}						
+					}
+				}else{
+					$status = false;
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+		if(sizeof($memlist_rows) > 0){
+			$status = true;
+		}else{
+			$status = false;
+		}
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['memlist_rows'] = $memlist_rows;	
+		
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+	
 	//show Attendance Report
 	if($fn == 'showAttendanceReport'){
 		$GrpSBAc = $_POST["GrpSBAc"];
@@ -769,6 +836,7 @@
 		do {
 			if ($result = mysqli_store_result($con)) {				
 				if(mysqli_num_rows($result) > 0){
+					$status = true;
 					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 						//printf("%s\n", $row[0]);
 																							
@@ -812,6 +880,8 @@
 						$attn_row->Percnt = $Percnt;					
 						array_push($attn_rows, $attn_row);						
 					}
+				}else{
+					$status = false;
 				}
 			}
 			if (mysqli_more_results($con)) {
@@ -842,6 +912,7 @@
 		$FinYrFrm = $FinYrFrmToStr[0];
 		$FinYrTo = $FinYrFrmToStr[1];		
 		$sl_rows = array();	
+		$st_row = array();	
 		$fin_yr = $FinYrFrm.' '.$FinYrTo;
 
 		$st_SBOpnAmt = 0;
@@ -869,6 +940,7 @@
 		do {
 			if ($result = mysqli_store_result($con)) {				
 				if(mysqli_num_rows($result) > 0){
+					$status = true;
 					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 						//printf("%s\n", $row[0]);																					
 						$Sl = $row['Sl'];
@@ -960,6 +1032,8 @@
 						$st_row->st_DueOpnAmt = number_format($st_DueOpnAmt, 2);
 						$st_row->st_DueThisYr = number_format($st_DueThisYr, 2);
 						$st_row->st_DueClsAmt = number_format($st_DueClsAmt, 2);
+				}else{
+					$status = false;
 				}//end if
 			}
 			if (mysqli_more_results($con)) {

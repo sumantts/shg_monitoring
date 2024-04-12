@@ -25,12 +25,16 @@ if(isset($_POST["importSubmit"])){
             $MemberNm = $line[2];
             $GuardianNm = $line[3];
             $MemAdd = $line[4];
-            $OpenBal = $line[5];
-            $StaffId = $line[6];
+            $Aadhar = $line[5];
+            $PAN = $line[6];
+            $UID = $line[7];
+            $OpenBal = $line[8];
+            $OPDue = $line[9];
+            $StaffId = $line[10];
 
             //Call SP to save data into DB
             if($data_saved > 0){
-              $query = "CALL usp_InsertMember('".$MemId."', '".$GrpId."', '".$MemberNm."', '".$GuardianNm."', '".$MemAdd."', '".$OpenBal."', '".$StaffId."')";
+              $query = "CALL usp_InsertMember('".$MemId."', '".$GrpId."', '".$MemberNm."', '".$GuardianNm."', '".$MemAdd."', '".$Aadhar."', '".$PAN."', '".$UID."', '".$OpenBal."', '".$OPDue."', '".$StaffId."')";
               //echo $query;
               mysqli_multi_query($con, $query);
             }

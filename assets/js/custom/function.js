@@ -944,6 +944,51 @@
 			});
 		}//end if
 	});
+
+	//showMemListReport	
+	$( "#showMemListReport" ).on( "click", function() {
+		$GrpSBAc = $('#GrpSBAc').val();
+		$StfId = $('#StfId').val();
+		$html = '';
+		
+		$('#GrpSBAc_error').html('');
+		$('#FinYrFrmTo_error').html('');	
+		$('#uptoDate_error').html('');	
+		$('#part_three').hide();		
+
+		if($GrpSBAc == ''){
+			$('#GrpSBAc_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showMemListReport", GrpSBAc: $GrpSBAc, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$memlist_rows = $res1.memlist_rows;
+
+					$('#memlist_repo_tbody').html($html);
+					if($memlist_rows.length > 0){
+						for($i = 0; $i < $memlist_rows.length; $i++){
+							$html += '<tr> <td>'+$memlist_rows[$i].Sl+'</td> <td>'+$memlist_rows[$i].MemId+'</td> <td class="text-left">'+$memlist_rows[$i].MemNm+'</td> <td class="text-left">'+$memlist_rows[$i].GurdNm+'</td> <td class="text-left">'+$memlist_rows[$i].Village+'</td> <td class="text-left">'+$memlist_rows[$i].Aadhar+'</td> <td class="text-left">'+$memlist_rows[$i].PAN+'</td> <td class="text-left">'+$memlist_rows[$i].Voter+'</td> </tr>';
+						}//end for
+
+					}else{
+						$html += '<tr> <td colspan="8">Sorry! No data Found</td> </tr>';
+					}//end if
+
+					$('#memlist_repo_tbody').html($html);
+					$('#part_three').show();
+						
+				}else{
+					alert('No Data found');
+				}
+			});
+		}//end if
+	});
    
 	//Savings Ledger Report	
 	$( "#showSavingLedgerReport" ).on( "click", function() {
