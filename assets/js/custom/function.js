@@ -876,17 +876,21 @@
 	}//end finction
 
 	//Print preview
-	$('#printDiv').on('click', function(){		
-		var divContents = document.getElementById("part_three").innerHTML; 
-		var a = window.open('', '', 'height=500, width=500'); 
-		a.document.write('<html><link rel="stylesheet" href="assets/css/shared/style.css">'); 
-		//a.document.write('<body > <h1>Div contents are <br>'); 
-		a.document.write(divContents); 
-		a.document.write('</body></html>'); 
-		a.document.close(); 
-		a.print(); 
-   })
+	$('#printDiv').on('click', function(){	
+		$fromDate = $('#fromDate').val();
+		$uptoDate = $('#uptoDate').val();
+		$GroupId = $('#GroupId').val();
+		$groupAcNo = $('#groupAcNo').val();
+		$cbTitle2 = $('#cbTitle2').html();
+		$StfId = $('#StfId').val();
 
+		var w = 800;
+		var h = 500;
+		var left = Number((screen.width/2)-(w/2));
+		var tops = Number((screen.height/2)-(h/2));
+		var open_link = 'fpdf186/cash_book.php?fromDate='+$fromDate+'&uptoDate='+$uptoDate+'&groupAcNo='+$groupAcNo+'&GroupId='+$GroupId+'&StfId='+$StfId+'&cbTitle2='+$cbTitle2;
+		var rpaypalCls = window.open(open_link, '_blank', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+   	})
    //Reports
    
 	//show Attendance Report	

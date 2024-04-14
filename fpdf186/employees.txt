@@ -1,0 +1,15 @@
+Aman;Varanasi;33;80750
+Beena;Bombay;30;10100
+Derek;Calcutta;43;52950
+Fanny;Hubli;30;51000
+Tom;Pondicherry;23;58000
+Gleny;Bombay;32;82000
+George;Atlanta;32;10500
+Ishita;Dubai;34;36940
+Iman;Rome;30;57560
+Lily;Ranikhet;25;42400
+Nihita;Agra;41;15600
+Polima;Jaipur;45;99500
+Seela;Madras;50;39300
+Swati;Spain;41;88390
+Janu;London;24;58860
