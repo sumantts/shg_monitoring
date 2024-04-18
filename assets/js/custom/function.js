@@ -603,6 +603,59 @@
 			});
 		}//end if
 	});
+	
+	//Delete Voucher 	
+	$( "#deleteVoucher" ).on( "click", function() {
+		$entryDate = $('#entryDate').val();
+		$groupAcNo = $('#groupAcNo').val();
+		$voucherType = $('#voucherType').val();
+		$voucherAmount = $('#voucherAmount').val();
+		$particulars = $('#particulars').val();
+		$StfId = $('#StfId').val();
+		$GroupId = $('#GroupId').val();
+		
+		$('#entryDate_error').html('');
+		$('#voucherType_error').html('');	
+		$('#voucherAmount_error').html('');	
+		$('#particulars_error').html('');
+
+		if($entryDate == ''){
+			$('#entryDate_error').html('Please Select Date');
+			return false;
+		}else if($voucherType == '0'){
+			$('#voucherType_error').html('Please Select Voucher Type');
+			return false;
+		}else if($particulars == '0'){
+			$('#particulars_error').html('Please Select Particulars');
+			return false;
+		}else if($voucherAmount <= 0){
+			$('#voucherAmount_error').html('Please Enter Voucher Amount');
+			return false;
+		}else{
+			if(confirm('Are you sure to delete it?')){
+				$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "deleteVoucher", entryDate: $entryDate, groupAcNo: $GroupId, voucherType: $voucherType, voucherAmount: $voucherAmount, particulars: $particulars, StfId: $StfId }
+				})
+				.done(function( res ) {
+					//console.log(res);
+					$res1 = JSON.parse(res);
+					if($res1.status == true){
+						//$('#entryDate').val('');
+						$('#groupAcNo').val('');
+						$('#voucherType').val('0').trigger('change');
+						$('#voucherAmount').val('');
+						$('#particulars').val('0').trigger('change');
+						$('#part_two').hide();
+						alert('Voucher Deleted successfully');
+					}else{
+						//alert('No Interest amount');
+					}
+				});
+			}//end if
+		}//end if
+	});
 
 	
 

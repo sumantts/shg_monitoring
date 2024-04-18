@@ -460,6 +460,42 @@
 		echo json_encode($return_result);
 	}//end fu
 
+	//delete Voucher
+	if($fn == 'deleteVoucher'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$entryDate = $_POST["entryDate"];
+		$groupAcNo = $_POST["groupAcNo"];
+		$voucherType = $_POST["voucherType"];
+		$voucherAmount = $_POST["voucherAmount"];
+		$particulars = $_POST["particulars"];
+		$StfId = $_POST["StfId"];
+		
+		//usp_DeleteVoucher
+		$VouPurpId = $particulars;
+		$query = "CALL usp_DeleteVoucher('".$groupAcNo."', '".$entryDate."', '".$VouPurpId."', '".$voucherAmount."', '".$StfId."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					//$GrpNm = $row['GrpNm'];
+					//$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+
 	
 	
 	//Show cashbook report

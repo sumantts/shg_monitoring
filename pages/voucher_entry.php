@@ -106,6 +106,9 @@ include('common/header.php');
                             <input type="hidden" name="GroupId" id="GroupId" value="">
                             <button type="button" id="saveVoucher" class="btn btn-inverse-success btn-fw">Save</button>
                           </div>
+                          <div class=" mb-2">
+                            <button type="button" id="deleteVoucher" class="btn btn-inverse-success btn-fw">Delete</button>
+                          </div>
                         </div>
                       </div> 
                      
