@@ -138,7 +138,8 @@ $html .= '<tr>
 
 $pdf->WriteHTML($html);
 //$pdf->Output();
-$pdf->Output('I', $dnld_f_name);
+//$pdf->Output('I', $dnld_f_name); //I: Show only
+$pdf->Output('D', $dnld_f_name); //D: Force download
 
 
 ?>

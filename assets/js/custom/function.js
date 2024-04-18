@@ -942,7 +942,8 @@
 		var left = Number((screen.width/2)-(w/2));
 		var tops = Number((screen.height/2)-(h/2));
 		var open_link = 'fpdf186/cash_book.php?fromDate='+$fromDate+'&uptoDate='+$uptoDate+'&groupAcNo='+$groupAcNo+'&GroupId='+$GroupId+'&StfId='+$StfId+'&cbTitle2='+$cbTitle2;
-		var rpaypalCls = window.open(open_link, '_blank', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+		//var rpaypalCls = window.open(open_link, '_blank', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+		window.location.href = open_link;
    	})
    //Reports
    
