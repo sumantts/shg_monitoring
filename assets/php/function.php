@@ -434,6 +434,7 @@
 		$voucherAmount = $_POST["voucherAmount"];
 		$particulars = $_POST["particulars"];
 		$StfId = $_POST["StfId"];	
+		$VId = '';
 		
 
 		//usp_InsertVoucher
@@ -444,7 +445,7 @@
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 					//printf("%s\n", $row[0]);
-					//$GrpNm = $row['GrpNm'];
+					$VId = $row['Id'];
 					//$GrpAdd = $row['GrpAdd'];
 				}
 			}
@@ -454,6 +455,7 @@
 		
 
 		$return_result['status'] = $status;
+		$return_result['VId'] = $VId;
 		$return_result['error_msg'] = $error_msg;
 		
 		sleep(1);

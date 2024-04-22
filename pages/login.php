@@ -18,8 +18,18 @@
     <link rel="stylesheet" href="assets/css/shared/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <style>
+      .hero-image {
+        background-image: url("assets/images/Scope-Of-Financial-Accounting.webp");
+        background-color: #cccccc;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+      }
+    </style>
   </head>
-  <body>
+  <body class="hero-image">
   <?php
   if(isset($_SESSION["StfId"])){header('location:?p=dashboard');}
   if(isset($_GET["out"]) == "ok"){

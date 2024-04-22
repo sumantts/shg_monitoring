@@ -590,13 +590,19 @@
 				//console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
-					//$('#entryDate').val('');
-					$('#groupAcNo').val('');
-					$('#voucherType').val('0').trigger('change');
-					$('#voucherAmount').val('');
-					$('#particulars').val('0').trigger('change');
-					$('#part_two').hide();
-					alert('Particular saved successfully');
+
+					if($res1.VId == '-1'){
+						alert('Voucher Exists');
+					}else if($res1.VId == '-2'){
+						alert('Cash Shortage');
+					}else{
+						$('#groupAcNo').val('');
+						$('#voucherType').val('0').trigger('change');
+						$('#voucherAmount').val('');
+						$('#particulars').val('0').trigger('change');
+						$('#part_two').hide();
+						alert('Particular saved successfully');
+					}
 				}else{
 					//alert('No Interest amount');
 				}

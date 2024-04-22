@@ -76,7 +76,7 @@ include('common/header.php');
                           <div class="form-group row">
                             <div class="col-md-12 mt-2">
                               <button type="button" name="showCashBookReport" id="showCashBookReport" class="btn btn-inverse-success btn-fw">View Report</button>
-                              <button type="button" name="printDiv" id="printDiv" class="btn btn-inverse-success btn-fw"  style="display: none">Print Report</button>
+                              <button type="button" name="printDiv" id="printDiv" class="btn btn-inverse-success btn-fw"  style="display: none"> Download</button>
                             </div>
                           </div>
                         </form>

@@ -109,7 +109,7 @@ $html = '';
 $html .= '<table border="1">
 <tr><td colspan="2" width="1000" align="CENTER">Cash Book For The Period '.$fromDateN.' To '.$uptoDateN.'</td></tr>
 <tr><td colspan="2" width="1000" align="CENTER">'.$cbTitle2.'</td></tr>
-<tr><td colspan="2" width="1000" align="CENTER">Group S/B A/c No.:'.$groupAcNo.'</td></tr>
+<tr><td colspan="2" width="1000" align="CENTER">Group S/B A/c No.: '.$groupAcNo.'</td></tr>
 <tr><td colspan="2" width="500" align="CENTER">Receipt</td><td colspan="2" width="500" align="CENTER">Payment</td></tr>
 <tr>
 <td width="100" height="30" align="CENTER">Date</td><td width="200" height="30" align="CENTER">Particulars</td><td width="100" height="30" align="CENTER">Cash</td><td width="100" height="30" align="CENTER">Bank</td>

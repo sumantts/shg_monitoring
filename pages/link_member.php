@@ -44,7 +44,9 @@ include('common/header.php');?>
                           <div class="mb-2">
                             <button type="button" id="getMember" class="btn btn-inverse-success btn-fw mb-2">Show</button>
                             <button type="button" id="delinkMember" class="btn btn-inverse-success btn-fw mb-2">Delink</button>
-                            <button type="button" id="withdrawMember" class="btn btn-inverse-success btn-fw mb-2" >Withdraw</button>
+                            <?php if($_SESSION["StfId"] == 99){?>
+                              <button type="button" id="withdrawMember" class="btn btn-inverse-success btn-fw mb-2" >Withdraw</button>
+                            <?php } ?>
                           </div>
                           
                         </div>
