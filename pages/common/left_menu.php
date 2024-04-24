@@ -30,19 +30,22 @@
               </a>
             </li>
             <?php if($_SESSION["StfId"] == 99){?>
-            <li class="nav-item <?php if($p == 'group-upload' || $p == 'member-upload'){?>active<?php } ?>">
+            <li class="nav-item <?php if($p == 'group-upload' || $p == 'member-upload' || $p == 'loan-upload'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
                 <span class="menu-title">Upload</span>
                 <i class="menu-arrow"></i>
               </a>
-              <div <?php if($p == 'group-upload' || $p == 'member-upload'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
+              <div <?php if($p == 'group-upload' || $p == 'member-upload' || $p == 'loan-upload'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="?p=group-upload">Group Upload</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?p=member-upload">Member Upload</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="?p=loan-upload">Loan Upload</a>
                   </li>
                 </ul>
               </div>
@@ -112,13 +115,13 @@
             <?php } ?>
 
             
-            <li class="nav-item <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report'){?>active<?php } ?>">
+            <li class="nav-item <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report' || $p == 'loan-register-report'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
                 <span class="menu-title">Reports</span>
                 <i class="menu-arrow"></i>
               </a>
-              <div <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
+              <div <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report' || $p == 'loan-register-report'){?>class="collapse show"<?php }else{?>class="collapse"<?php } ?> id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="?p=member-list">Member List</a>
@@ -128,6 +131,9 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="?p=savings-ledger-report">Savings Ledger Report</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="?p=loan-register-report">Loan Register Report</a>
                   </li>
                 </ul>
               </div>

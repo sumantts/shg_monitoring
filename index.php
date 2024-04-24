@@ -30,13 +30,16 @@
 		case 'group-upload':
 		$title = "Group Upload";
 		include('pages/group_upload.php');		
-		break;
-		
+		break;		
 		case 'member-upload':
 		$title = "Member Upload";
 		include('pages/member_upload.php');		
+		break;		
+		case 'loan-upload':
+		$title = "Loan Upload";
+		include('pages/loan_upload.php');		
 		break;
-		
+
 		case 'meeting-data':
 		$title = "Meeting Data";
 		include('pages/meeting_data.php');		
@@ -98,6 +101,10 @@
 		case 'savings-ledger-report':
 		$title = "Savings Ledger Report";
 		include('pages/savings_ledger_report.php');		
+		break;
+		case 'loan-register-report':
+		$title = "Loan Register Report";
+		include('pages/loan_register_report.php');		
 		break;
 		
 		case 'change-password':
