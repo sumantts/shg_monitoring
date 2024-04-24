@@ -1089,4 +1089,101 @@
 		echo json_encode($return_result);
 	}//end fu
 	
+	//Savings Ledger Report	
+	if($fn == 'showLoanRegisterReport'){
+		$GrpSBAc = $_POST["GrpSBAc"];
+		$StfId = $_SESSION["StfId"];
+
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$group_name = '';
+		$month_year = '';
+		$recovery_rate = 0;
+				
+		$sl_rows = array();	
+		$st_row = array();	
+		
+
+		$st_LnAmt = 0;
+		$st_Outs = 0;
+		$st_Exptd = 0;
+		$st_Repaid = 0;
+		$st_ODue = 0;
+
+		//View Cash Book
+		$query = "CALL usp_GenLoanRegister('".$GrpSBAc."', '".$StfId."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					$status = true;
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);																					
+						$Sl = $row['Sl'];
+						$MemNm = $row['MemNm'];
+						$AcNo = $row['AcNo'];
+						$LnAmt = $row['LnAmt'];
+						$LnDt = $row['LnDt'];
+						$Outs = $row['Outs'];
+						$Exptd = $row['Exptd'];
+						$Repaid = $row['Repaid'];
+						$ODue = $row['ODue'];
+						$GrpNm = $row['GrpNm'];
+						$AsOn = $row['AsOn'];
+
+						$sl_row = new stdClass();
+						$sl_row->Sl = $Sl;
+						$sl_row->MemNm = $MemNm;
+						$sl_row->AcNo = $AcNo;
+						$sl_row->LnAmt = $LnAmt;
+						$sl_row->LnDt = $LnDt;
+						$sl_row->Outs = $Outs;
+						$sl_row->Exptd = $Exptd;
+						$sl_row->Repaid = $Repaid;
+						$sl_row->ODue = $ODue;
+						$sl_row->GrpNm = $GrpNm;
+						$sl_row->AsOn = $AsOn;			
+						array_push($sl_rows, $sl_row);
+
+						$st_LnAmt = $st_LnAmt + $LnAmt;
+						$st_Outs = $st_Outs + $Outs;
+						$st_Exptd = $st_Exptd + $Exptd;
+						$st_Repaid = $st_Repaid + $Repaid;
+						$st_ODue = $st_ODue + $ODue;
+						
+						$group_name = $GrpNm;
+						$month_year = $AsOn;
+					}//end while
+
+						$st_row = new stdClass();
+						$st_row->st_LnAmt = number_format($st_LnAmt, 2);
+						$st_row->st_Outs = number_format($st_Outs, 2);
+						$st_row->st_Exptd = number_format($st_Exptd, 2);
+						$st_row->st_Repaid = number_format($st_Repaid, 2);
+						$st_row->st_ODue = number_format($st_ODue, 2);
+
+						$recovery_rate1 = (($st_Exptd - $st_ODue) / $st_Exptd) * 100;
+						$recovery_rate = number_format($recovery_rate1, 2);
+				}else{
+					$status = false;
+				}//end if
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['sl_rows'] = $sl_rows;	
+		$return_result['st_row'] = $st_row;	
+		$return_result['group_name'] = $group_name;	
+		$return_result['month_year'] = date('F, Y', strtotime($month_year));
+		$return_result['recovery_rate'] = $recovery_rate;		
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+	
 ?>

@@ -36,7 +36,7 @@ include('common/header.php');
                           </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Financial Year*</label>
                             <div class="col-sm-8">
@@ -59,11 +59,11 @@ include('common/header.php');
                               <span class="col-form-label text-success" id="uptoDate_success" style="font-size: 12px;"></span>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-md-6">
                           <div class=" mb-2">
-                          <button type="button" id="showSavingLedgerReport" class="btn btn-inverse-success btn-fw">Show</button>
+                          <button type="button" id="showLoanRegisterReport" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
                       </div> 
@@ -88,39 +88,29 @@ include('common/header.php');
 
                       <!-- Table Start -->
                       <div id="part_three" style="display: none">  
+                        <div class="col-md-6">
+                          <div class=" mb-2">
+                            <button type="button" id="downloadLoanRegisterReport" class="btn btn-inverse-success btn-fw">Download</button>
+                          </div>
+                        </div>
                     <!-- <h4 class="card-title" id="cbTitle">Cash Book For The Period dd-mm-yyyy To dd-mm-yyyy</h4>
                     <p class="card-description" id="cbTitle2">Group Name: </p> -->
                     <div class="table-responsive">
                       <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <td colspan="10" class="text-center" id="gr_name">Group Name:</td>
-                            <td colspan="10" class="text-center" id="sb_ac_no">S/B No. </td>
-                          </tr>
-                          <tr>
-                            <td colspan="20" class="text-center" id="fin_yr">Group Savings Deposit Register 24-24 FY</td>
+                            <td colspan="20" class="text-center font-weight-bold" id="table_heading">Loan Register for Group Name as on Month, Year</td>
                           </tr>
                           <tr>
                             <td scope="col" class="text-center">Sl No</td>
                             <td scope="col" class="text-center">Member Name</td>
-                            <td scope="col" class="text-center">Opening</td>
-                            <td scope="col" class="text-center">April</td>
-                            <td scope="col" class="text-center">May</td>
-                            <td scope="col" class="text-center">June</td>
-                            <td scope="col" class="text-center">July</td>
-                            <td scope="col" class="text-center">Aug</td>
-                            <td scope="col" class="text-center">Sept</td>
-                            <td scope="col" class="text-center">Oct </td>
-                            <td scope="col" class="text-center">Nov</td>
-                            <td scope="col" class="text-center">Dec </td>
-                            <td scope="col" class="text-center">Jan</td>
-                            <td scope="col" class="text-center">Feb</td>
-                            <td scope="col" class="text-center">March</td>
-                            <td scope="col" class="text-center">Total</td>
-                            <td scope="col" class="text-center">Closing</td>
-                            <td scope="col" class="text-center">Last year<br> Due</td>
-                            <td scope="col" class="text-center">This year<br> Due</td>
-                            <td scope="col" class="text-center">Total<br> Due</td>
+                            <td scope="col" class="text-center">A/c No.</td>
+                            <td scope="col" class="text-center">Loan Amount</td>
+                            <td scope="col" class="text-center">Loan Date</td>
+                            <td scope="col" class="text-center">Loan Outstanding</td>
+                            <td scope="col" class="text-center">Expected</td>
+                            <td scope="col" class="text-center">Repaid</td>
+                            <td scope="col" class="text-center">Overdue</td>
                           </tr>
                         </thead>
                         <tbody id="sl_repo_tbody">

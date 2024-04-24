@@ -1112,6 +1112,55 @@
 			});
 		}//end if
 	});
+   
+	//Savings Ledger Report	
+	$( "#showLoanRegisterReport" ).on( "click", function() {
+		$GrpSBAc = $('#GrpSBAc').val();
+		$html = '';
+		
+		$('#GrpSBAc_error').html('');
+		$('#part_three').hide();		
+
+		if($GrpSBAc == ''){
+			$('#GrpSBAc_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showLoanRegisterReport", GrpSBAc: $GrpSBAc }
+			})
+			  .done(function( res ) {
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$sl_rows = $res1.sl_rows;
+					$st_row = $res1.st_row;
+
+					$('#table_heading').html('Loan Register for '+$res1.group_name+' as on '+$res1.month_year+'');
+
+					$('#sl_repo_tbody').html($html);
+					if($sl_rows.length > 0){
+						for($i = 0; $i < $sl_rows.length; $i++){
+							$html += '<tr> <td>'+$sl_rows[$i].Sl+'</td> <td>'+$sl_rows[$i].MemNm+'</td> <td class="text-right">'+$sl_rows[$i].AcNo+'</td>  <td class="text-right">'+$sl_rows[$i].LnAmt+'</td> <td class="text-right">'+$sl_rows[$i].LnDt+'</td> <td class="text-right">'+$sl_rows[$i].Outs+'</td> <td class="text-right">'+$sl_rows[$i].Exptd+'</td> <td class="text-right">'+$sl_rows[$i].Repaid+'</td> <td class="text-right">'+$sl_rows[$i].ODue+'</td> </tr>';
+						}//end for
+							
+						$html += '<tr> <td colspan="3" class="text-center">Subtotal</td> <td class="text-right">'+$st_row.st_LnAmt+'</td>  <td class="text-right"> </td> <td class="text-right">'+$st_row.st_Outs+'</td> <td class="text-right">'+$st_row.st_Exptd+'</td> <td class="text-right">'+$st_row.st_Repaid+'</td> <td class="text-right">'+$st_row.st_ODue+'</td></tr>';
+							
+						$html += '<tr> <td colspan="8" class="text-right font-weight-bold">Recovery Rate (in %)</td> <td class="text-right">'+$res1.recovery_rate+'</td></tr>';
+
+					}else{
+						$html += '<tr> <td colspan="9">Sorry! No data Found</td> </tr>';
+					}//end if
+
+					$('#sl_repo_tbody').html($html);
+					$('#part_three').show();
+						
+				}else{
+					alert('No Data found');
+				}
+			});
+		}//end if
+	});
 
 	
 	//Loading screen
