@@ -71,6 +71,14 @@
                 <span class="menu-title">Meeting Data</span>
               </a>
             </li>
+            <?php if($_SESSION["StfId"] == 99){?>
+            <li class="nav-item <?php if($p == 'update-data'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=update-data">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Update Data</span>
+              </a>
+            </li>
+            <?php } ?>
             <li class="nav-item <?php if($p == 'voucher-entry'){?>active<?php } ?>">
               <a class="nav-link" href="?p=voucher-entry">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>

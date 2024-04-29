@@ -26,7 +26,7 @@ if(isset($_POST['insertMeetingData'])){
       $CollAmt = $CAmt[$i];
 
       //Insert Meeting data
-      $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
+     echo $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
       mysqli_multi_query($con, $query);
       $data_saved++;     
   }//end for
@@ -35,19 +35,19 @@ if(isset($_POST['insertMeetingData'])){
   //Insert Voucher VouPurpId=1
   if($sub_total > 0){
     $VouPurpId = 1;
-    $query_2 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
+    echo $query_2 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
     mysqli_multi_query($con, $query_2);     
 
     //Insert Voucher VouPurpId=6
-    $VouPurpId = 6;
-    $query_3= "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
-    mysqli_multi_query($con, $query_3);
+    /*$VouPurpId = 6;
+    echo $query_3 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
+    mysqli_multi_query($con, $query_3);*/
   }//end if
 
   //header("location:?p=meeting-data&save=ok&data_saved=$data_saved");
   ?>
   <script>
-    window.location.href = '?p=meeting-data&save=ok&data_saved=<?=$data_saved?>&MeetingDt=<?=$MeetingDt?>&GrpSBAc=<?=$GrpSBAc?>';
+   window.location.href = '?p=meeting-data&save=ok&data_saved=<?=$data_saved?>&MeetingDt=<?=$MeetingDt?>&GrpSBAc=<?=$GrpSBAc?>';
   </script>
   <?php
 
@@ -85,7 +85,7 @@ if(isset($_GET['data_saved'])){
                     <?php } }?>
                     
                     <h4 class="card-title"><?=$title?></h4>
-                    <form class="form-sample">
+                    <form class="form-sample" >
                       <!--<p class="card-description"> Personal info </p>-->
                       <div class="row">
 
@@ -123,7 +123,7 @@ if(isset($_GET['data_saved'])){
                       <p class="card-description" id="GrpNm">Group Name: </p>
                       <p class="card-description" id="GrpAdd">Group Address: </p>
                       <div class="table-responsive-sm">
-                        <form name="form1" id="form1" method="POST" action="">
+                        <form name="form1" id="form1" method="POST" action=""  onsubmit="return validateForm()">
                           <table class="table table-bordered" id="myTable">
                             <thead>
                               <tr>
@@ -159,9 +159,15 @@ if(isset($_GET['data_saved'])){
           <!-- partial:partials/_footer.html -->
 
           <script>
-            $('#insertMeetingData').on('click', function(){
-              $('#insertMeetingData').prop('disabled', true);
-            })
+            function validateForm(){
+              $GroupId = $('#GroupId').val();              
+              if ($GroupId == "") {
+                alert("GroupId Missing");
+                return false;
+              }else{            
+                return true;
+              }  
+            }
           </script>
           
     <?php include('common/footer.php');?>
