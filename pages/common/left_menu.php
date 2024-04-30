@@ -147,7 +147,7 @@
               </div>
             </li>
 
-            <li class="nav-item <?php if($p == 'change-password'){?>active<?php } ?>">
+            <!-- <li class="nav-item <?php if($p == 'change-password'){?>active<?php } ?>">
               <a class="nav-link" href="?p=change-password">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Change Password</span>
@@ -159,6 +159,6 @@
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Sign Out</span>
               </a>
-            </li>
+            </li> -->
           </ul>
         </nav>

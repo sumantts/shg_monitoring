@@ -138,8 +138,8 @@
                 </div>
                 <!--<a class="dropdown-item">My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
                 <a class="dropdown-item">Messages<i class="dropdown-item-icon ti-comment-alt"></i></a>
-                <a class="dropdown-item">Activity<i class="dropdown-item-icon ti-location-arrow"></i></a>
-                <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>-->
+                <a class="dropdown-item">Activity<i class="dropdown-item-icon ti-location-arrow"></i></a>-->
+                <a class="dropdown-item" href="?p=change-password">Change Password<i class="dropdown-item-icon ti-help-alt"></i></a>
                 <a class="dropdown-item" href="?p=login&out=ok">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
               </div>
             </li>
