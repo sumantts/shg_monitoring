@@ -30,7 +30,7 @@
               </a>
             </li>
             <?php if($_SESSION["StfId"] == 99){?>
-            <li class="nav-item <?php if($p == 'group-upload' || $p == 'member-upload' || $p == 'loan-upload'){?>active<?php } ?>">
+            <!-- <li class="nav-item <?php if($p == 'group-upload' || $p == 'member-upload' || $p == 'loan-upload'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
                 <span class="menu-title">Upload</span>
@@ -49,6 +49,24 @@
                   </li>
                 </ul>
               </div>
+            </li> -->
+            <li class="nav-item <?php if($p == 'group-upload'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=group-upload">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Group Upload</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'member-upload'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=member-upload">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Member Upload</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'loan-upload'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=loan-upload">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Loan Upload</span>
+              </a>
             </li>
             <?php } ?>
             <li class="nav-item <?php if($p == 'group-opening-data'){?>active<?php } ?>">
@@ -123,7 +141,7 @@
             <?php } ?>
 
             
-            <li class="nav-item <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report' || $p == 'loan-register-report'){?>active<?php } ?>">
+            <!-- <li class="nav-item <?php if($p == 'member-list' || $p == 'attendance-report' || $p == 'savings-ledger-report' || $p == 'loan-register-report'){?>active<?php } ?>">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="menu-icon typcn typcn-coffee"></i>
                 <span class="menu-title">Reports</span>
@@ -145,6 +163,30 @@
                   </li>
                 </ul>
               </div>
+            </li> -->
+            <li class="nav-item <?php if($p == 'member-list'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=member-list">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Member List</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'attendance-report'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=attendance-report">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Attendance Report</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'savings-ledger-report'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=savings-ledger-report">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Savings Ledger Report</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'loan-register-report'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=loan-register-report">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Loan Register Report</span>
+              </a>
             </li>
 
             <!-- <li class="nav-item <?php if($p == 'change-password'){?>active<?php } ?>">
