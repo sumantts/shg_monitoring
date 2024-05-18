@@ -1125,6 +1125,7 @@
 						$AcNo = $row['AcNo'];
 						$LnAmt = $row['LnAmt'];
 						$LnDt = $row['LnDt'];
+						$Purpose = $row['Purpose'];
 						$Outs = $row['Outs'];
 						$Exptd = $row['Exptd'];
 						$Repaid = $row['Repaid'];
@@ -1138,6 +1139,7 @@
 						$sl_row->AcNo = $AcNo;
 						$sl_row->LnAmt = $LnAmt;
 						$sl_row->LnDt = $LnDt;
+						$sl_row->Purpose = $Purpose;
 						$sl_row->Outs = $Outs;
 						$sl_row->Exptd = $Exptd;
 						$sl_row->Repaid = $Repaid;

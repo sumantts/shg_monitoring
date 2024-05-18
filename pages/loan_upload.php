@@ -12,7 +12,10 @@ if(isset($_POST["importSubmit"])){
   if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){      
       // If the file is uploaded
       if(is_uploaded_file($_FILES['file']['tmp_name'])){
-          //echo 'inside 1.1';
+          //Remove old data
+          $delete_query = "TRUNCATE TABLE  member_loanstatus";
+          mysqli_multi_query($con, $delete_query);
+
           // Open uploaded CSV file with read-only mode
           $csvFile = fopen($_FILES['file']['tmp_name'], 'r');          
           $data_saved = 0;
@@ -23,16 +26,18 @@ if(isset($_POST["importSubmit"])){
             $MemId = $line[0];
             $AcNo = $line[1];
             $LnDate = $line[2];
-            $LnAmt = $line[3];
-            $LnOuts = $line[4];
-            $PrnExp = $line[5];
-            $PrnPay = $line[6];
-            $PrnODue = $line[7];
-            $AsOn = date('Y-m-d', strtotime($line[8]));
+            $Purpose = $line[3]; //Purpose
+            $LnAmt = $line[4];
+            $LnOuts = $line[5];
+            $PrnExp = $line[6];
+            $PrnPay = $line[7];
+            $PrnODue = $line[8];
+            $AsOnDate = $line[9];
+            $AsOn = date('Y-m-d', strtotime($AsOnDate));
 
             //Call SP to save data into DB
             if($data_saved > 0){
-              $query = "CALL usp_InsertLoanStatus('".$MemId."', '".$AcNo."', '".$LnDate."', '".$LnAmt."', '".$LnOuts."', '".$PrnExp."', '".$PrnPay."', '".$PrnODue."', '".$AsOn."')";
+              $query = "CALL usp_InsertLoanStatus('".$MemId."', '".$AcNo."', '".$LnDate."', '".$Purpose."', '".$LnAmt."', '".$LnOuts."', '".$PrnExp."', '".$PrnPay."', '".$PrnODue."', '".$AsOn."')";
               //echo $query;
               mysqli_multi_query($con, $query);
             }
@@ -53,7 +58,7 @@ if(isset($_POST["importSubmit"])){
   //header("location: ?p=member-upload&qstring=$qstring&data_saved=$data_saved");
   ?>
   <script>
-    window.location.href = '?p=loan-upload&qstring=<?=$qstring?>&data_saved=<?=$data_saved?>';
+    window.location.href = '?p=loan-upload&qstring=<?=$qstring?>&data_saved=<?=($data_saved-1)?>';
   </script>
   <?php
   exit();

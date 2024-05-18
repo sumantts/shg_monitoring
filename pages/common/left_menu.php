@@ -1,22 +1,26 @@
-
+<style>
+  .nav-link{
+    height: 45px !important;
+  }
+</style>
 
 <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
-            <li class="nav-item nav-profile">
+             <!-- <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
                   <img class="img-xs rounded-circle" src="assets/images/mohila-bikash-small.png" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name"><?=$_SESSION["StfNm"]?></p>
-                  <!--<p class="designation">Premium user</p>-->
+                  <p class="profile-name"><?=$_SESSION["StfNm"]?></p>                  
                 </div>
               </a>
-            </li>
-            <!--<li class="nav-item nav-category">Main Menu</li>-->
+            </li>  -->
+            <li class="nav-item nav-category" style="font-size: 16px;font-weight: bold;color: #fff;"><?=$_SESSION["StfNm"]?></li>
+            
             <li class="nav-item <?php if($p == 'dashboard' || $p == 'dashboard-more'){?>active<?php } ?>">
               <a class="nav-link" href="?p=dashboard">
                 <i class="menu-icon typcn typcn-document-text"></i>
@@ -194,13 +198,13 @@
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Change Password</span>
               </a>
-            </li>
+            </li> -->
 
             <li class="nav-item">
               <a class="nav-link" href="?p=login&out=ok">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Sign Out</span>
               </a>
-            </li> -->
+            </li>
           </ul>
         </nav>

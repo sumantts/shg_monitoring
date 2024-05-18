@@ -107,6 +107,7 @@ include('common/header.php');
                             <td scope="col" class="text-center">A/c No.</td>
                             <td scope="col" class="text-center">Loan Amount</td>
                             <td scope="col" class="text-center">Loan Date</td>
+                            <td scope="col" class="text-center">Loan Purpose</td>
                             <td scope="col" class="text-center">Loan Outstanding</td>
                             <td scope="col" class="text-center">Expected</td>
                             <td scope="col" class="text-center">Repaid</td>

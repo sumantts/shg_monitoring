@@ -1141,15 +1141,15 @@
 					$('#sl_repo_tbody').html($html);
 					if($sl_rows.length > 0){
 						for($i = 0; $i < $sl_rows.length; $i++){
-							$html += '<tr> <td>'+$sl_rows[$i].Sl+'</td> <td>'+$sl_rows[$i].MemNm+'</td> <td class="text-right">'+$sl_rows[$i].AcNo+'</td>  <td class="text-right">'+$sl_rows[$i].LnAmt+'</td> <td class="text-right">'+$sl_rows[$i].LnDt+'</td> <td class="text-right">'+$sl_rows[$i].Outs+'</td> <td class="text-right">'+$sl_rows[$i].Exptd+'</td> <td class="text-right">'+$sl_rows[$i].Repaid+'</td> <td class="text-right">'+$sl_rows[$i].ODue+'</td> </tr>';
+							$html += '<tr> <td>'+$sl_rows[$i].Sl+'</td> <td>'+$sl_rows[$i].MemNm+'</td> <td class="text-right">'+$sl_rows[$i].AcNo+'</td>  <td class="text-right">'+$sl_rows[$i].LnAmt+'</td> <td class="text-right">'+$sl_rows[$i].LnDt+'</td> <td class="text-right">'+$sl_rows[$i].Purpose+'</td>  <td class="text-right">'+$sl_rows[$i].Outs+'</td> <td class="text-right">'+$sl_rows[$i].Exptd+'</td> <td class="text-right">'+$sl_rows[$i].Repaid+'</td> <td class="text-right">'+$sl_rows[$i].ODue+'</td> </tr>';
 						}//end for
 							
-						$html += '<tr> <td colspan="3" class="text-center">Subtotal</td> <td class="text-right">'+$st_row.st_LnAmt+'</td>  <td class="text-right"> </td> <td class="text-right">'+$st_row.st_Outs+'</td> <td class="text-right">'+$st_row.st_Exptd+'</td> <td class="text-right">'+$st_row.st_Repaid+'</td> <td class="text-right">'+$st_row.st_ODue+'</td></tr>';
+						$html += '<tr> <td colspan="3" class="text-center">Subtotal</td> <td class="text-right">'+$st_row.st_LnAmt+'</td>  <td class="text-right"> </td><td class="text-right"> </td> <td class="text-right">'+$st_row.st_Outs+'</td> <td class="text-right">'+$st_row.st_Exptd+'</td> <td class="text-right">'+$st_row.st_Repaid+'</td> <td class="text-right">'+$st_row.st_ODue+'</td></tr>';
 							
-						$html += '<tr> <td colspan="8" class="text-right font-weight-bold">Recovery Rate (in %)</td> <td class="text-right">'+$res1.recovery_rate+'</td></tr>';
+						$html += '<tr> <td colspan="9" class="text-right font-weight-bold">Recovery Rate (in %)</td> <td class="text-right">'+$res1.recovery_rate+'</td></tr>';
 
 					}else{
-						$html += '<tr> <td colspan="9">Sorry! No data Found</td> </tr>';
+						$html += '<tr> <td colspan="10">Sorry! No data Found</td> </tr>';
 					}//end if
 
 					$('#sl_repo_tbody').html($html);
