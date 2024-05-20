@@ -292,7 +292,7 @@
 					$Attnd = $row2['Attnd'];
 					$CAmt = $row2['CAmt'];
 					$OpnAmt = $row2['OpnAmt'];
-					$Opening_Dues = $row2['OpDues'];
+					$Opening_Dues = $row2['OpnDue'];
 					$grantCAmt = $grantCAmt + $CAmt;
 
 					if($MemId != ''){
@@ -324,6 +324,82 @@
 		sleep(1);
 		echo json_encode($return_result);
 	}//end function checkAccountNumber
+	
+	//Meeting Data
+	if($fn == 'getMeetingReport'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$collectionDate = $_POST["collectionDate"];
+		$groupCode = $_POST["groupCode"];
+		$StfId = $_POST["StfId"];	
+		
+		$GrpId = ''; 
+		$GrpNm = '';
+		$GrpAdd = '';
+		$group_reports = array();
+		$grantCAmt = 0;
+		$OpnAmt = 0;
+		$MettingDt_heading = '';
+		$GrpNm_heading = '';
+
+		//GetGroup
+		/*$query = "CALL usp_GetGroup('".$groupCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$GrpId = $row['GrpId'];
+					$GrpNm = $row['GrpNm'];
+					$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));*/
+
+		//Get Group Members
+		$query2 = "CALL usp_GetMeetingReport('".$StfId."', '".$groupCode."', '".$collectionDate."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) {
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					$MettingDt = $row2['MettingDt'];
+					$GrpNm = $row2['GrpNm'];
+					$MemNm = $row2['MemNm'];
+					$Attnd = $row2['Attnd'];
+					$ColAmt = $row2['ColAmt'];
+
+					$MettingDt_heading = $MettingDt;
+					$GrpNm_heading = $GrpNm;
+
+					if($MettingDt != ''){
+						$group_report = new stdClass();
+						
+						$group_report->MettingDt = $MettingDt; 
+						$group_report->GrpNm = $GrpNm;
+						$group_report->Attnd = $Attnd;
+						$group_report->MemNm = $MemNm;
+						$group_report->ColAmt = $ColAmt;
+
+						array_push($group_reports, $group_report);
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['GrpNm_heading'] = $GrpNm_heading;
+		$return_result['group_reports'] = $group_reports;
+		$return_result['MettingDt_heading'] = $MettingDt_heading;
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end
 	
 	
 	//Update Passowrd

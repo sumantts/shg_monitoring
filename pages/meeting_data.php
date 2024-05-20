@@ -122,13 +122,22 @@ if(isset($_GET['data_saved'])){
                           <button type="button" id="getGroupMembers" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
+
+                        <div class="col-md-6">
+                          <div class=" mb-2">
+                            <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
+                          <button type="button" id="getMeetingReport" class="btn btn-inverse-success btn-fw">Report</button>
+                          </div>
+                        </div>
+
                       </div> 
                     </form>
 
                     <div id="part_two" style="display: none;">
                       <p class="card-description" id="GrpNm">Group Name: </p>
                       <p class="card-description" id="GrpAdd">Group Address: </p>
-                      <div class="table-responsive-sm">
+                      
+                      <div class="table-responsive-sm" id="table_1" style="display: none;">
                         <form name="form1" id="form1" method="POST" action=""  onsubmit="return validateForm()">
                           <table class="table table-bordered" id="myTable">
                             <thead>
@@ -153,6 +162,22 @@ if(isset($_GET['data_saved'])){
                           </div>
                         </form>
                       </div>
+
+                      <div class="table-responsive-sm" id="table_2" style="display: none;">
+                          <table class="table table-bordered" id="myTable_1">
+                            <thead>
+                              <tr>
+                                <td scope="col" style="text-align: center;">SL#</td>
+                                <td scope="col" style="text-align: center;">Member Name</td>
+                                <td scope="col" style="text-align: center;">Attendance </td>
+                                <td scope="col" style="text-align: center;">Collection Amount </td>
+                              </tr>
+                            </thead>
+                            <tbody id="group_members_list_1">
+                            </tbody>
+                          </table>                          
+                      </div>
+
                     </div>
 
                     <div id="part_three" style="display: none"> <h4>Sorry! No Record found</h4></div>

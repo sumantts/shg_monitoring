@@ -264,6 +264,7 @@
 		$html = '';
 		$('#group_members_list1').html($html);
 		$('#part_two').hide();
+		$('#table_1').hide();
 		$('#part_three').hide();
 
 		if($groupCode == ''){
@@ -297,6 +298,7 @@
 						$('#group_members_list1').html($html);
 						$('#GroupId').val($res1.GrpId);
 						$('#part_two').show();
+						$('#table_1').show();
 					}else{					
 						$('#part_three').show();
 					}
@@ -380,6 +382,83 @@
 					$('#GroupId').val($res1.GrpId);
 				}
 			});
+		}//end if
+	});
+
+	//Meeting Report
+	$( "#getMeetingReport" ).on( "click", function() {
+		$collectionDate = $('#collectionDate').val();
+		$groupCode = $('#groupCode').val();
+		$StfId = $('#StfId').val();
+		
+		$('#collectionDate_success').html('');
+		$('#collectionDate_error').html('');
+		$('#groupCode_success').html('');
+		$('#groupCode_error').html('');
+		$('#GrpNm').html('Group Name: ');
+		$('#GrpAdd').html('Group Address: ');
+		$html = '';
+		$('#group_members_list').html($html);
+		$('#group_members_list_1').html($html);
+		$('#part_two').hide();
+		$('#table_2').hide();
+		$('#part_three').hide();
+
+		if($collectionDate == ''){
+			$('#collectionDate_error').html('Please Enter Collection Date');
+			return false;
+		}else if($groupCode == ''){
+			$('#groupCode_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{	
+			$('#collectionDate_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "getMeetingReport", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					if($res1.GrpNm != ''){
+						$('#GrpNm').html('Group Name: ' + $res1.GrpNm_heading);
+						$('#GrpAdd').html('Meeting Date: ' + $res1.MettingDt_heading);					
+						
+						$group_reports = $res1.group_reports;					
+
+						if($group_reports.length > 0){
+							$sl = 1;
+							for(var i = 0; i < $group_reports.length; i++){
+								$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$group_reports[i].MemNm+'</td> <td style="text-align: center;">'+$group_reports[i].Attnd+'</td> <td style="text-align: right;width: 100px;">'+$group_reports[i].ColAmt+'</td> </tr>';
+								$sl++;
+							}
+						}else{
+							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
+						}
+
+						$('#group_members_list_1').html($html);
+						$('#part_two').show();
+						$('#table_2').show();
+					}else{					
+						$('#part_three').show();
+					}
+				}
+			});
+
+			//Check group id
+			/*$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "usp_GetGroup", savings_ac_no: $groupCode }
+			  })
+			.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#GroupId').val($res1.GrpId);
+				}
+			});*/
 		}//end if
 	});
 	//End Loan Page Function  
