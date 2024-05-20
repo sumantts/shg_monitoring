@@ -292,7 +292,7 @@
 					$Attnd = $row2['Attnd'];
 					$CAmt = $row2['CAmt'];
 					$OpnAmt = $row2['OpnAmt'];
-					$Opening_Dues = $row2['OpnDue'];
+					$Opening_Dues = $row2['OpDues'];
 					$grantCAmt = $grantCAmt + $CAmt;
 
 					if($MemId != ''){
@@ -342,22 +342,7 @@
 		$OpnAmt = 0;
 		$MettingDt_heading = '';
 		$GrpNm_heading = '';
-
-		//GetGroup
-		/*$query = "CALL usp_GetGroup('".$groupCode."')";
-		mysqli_multi_query($con, $query);
-		do {
-			if ($result = mysqli_store_result($con)) {
-				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-					//printf("%s\n", $row[0]);
-					$GrpId = $row['GrpId'];
-					$GrpNm = $row['GrpNm'];
-					$GrpAdd = $row['GrpAdd'];
-				}
-			}
-			if (mysqli_more_results($con)) {
-			}
-		} while (mysqli_next_result($con));*/
+		$ColAmt_st = 0;
 
 		//Get Group Members
 		$query2 = "CALL usp_GetMeetingReport('".$StfId."', '".$groupCode."', '".$collectionDate."')";
@@ -382,6 +367,7 @@
 						$group_report->Attnd = $Attnd;
 						$group_report->MemNm = $MemNm;
 						$group_report->ColAmt = $ColAmt;
+						$ColAmt_st = $ColAmt_st + $ColAmt;
 
 						array_push($group_reports, $group_report);
 					}
@@ -396,6 +382,7 @@
 		$return_result['GrpNm_heading'] = $GrpNm_heading;
 		$return_result['group_reports'] = $group_reports;
 		$return_result['MettingDt_heading'] = $MettingDt_heading;
+		$return_result['ColAmt_st'] = $ColAmt_st;
 
 		sleep(1);
 		echo json_encode($return_result);

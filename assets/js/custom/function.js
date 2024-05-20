@@ -264,7 +264,6 @@
 		$html = '';
 		$('#group_members_list1').html($html);
 		$('#part_two').hide();
-		$('#table_1').hide();
 		$('#part_three').hide();
 
 		if($groupCode == ''){
@@ -298,7 +297,6 @@
 						$('#group_members_list1').html($html);
 						$('#GroupId').val($res1.GrpId);
 						$('#part_two').show();
-						$('#table_1').show();
 					}else{					
 						$('#part_three').show();
 					}
@@ -324,6 +322,8 @@
 		$('#group_members_list').html($html);
 		$('#part_two').hide();
 		$('#part_three').hide();
+		$('#table_1').hide();
+		$('#table_2').hide();
 
 		if($collectionDate == ''){
 			$('#collectionDate_error').html('Please Enter Collection Date');
@@ -363,6 +363,7 @@
 						$('#GrpSBAc').val($groupCode);
 						calculateSubtotal();
 						$('#part_two').show();
+						$('#table_1').show();
 					}else{					
 						$('#part_three').show();
 					}
@@ -401,6 +402,7 @@
 		$('#group_members_list').html($html);
 		$('#group_members_list_1').html($html);
 		$('#part_two').hide();
+		$('#table_1').hide();
 		$('#table_2').hide();
 		$('#part_three').hide();
 
@@ -433,8 +435,9 @@
 								$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$group_reports[i].MemNm+'</td> <td style="text-align: center;">'+$group_reports[i].Attnd+'</td> <td style="text-align: right;width: 100px;">'+$group_reports[i].ColAmt+'</td> </tr>';
 								$sl++;
 							}
+							$html += '<tr> <td style="text-align: center; font-weight: bold" colspan="3">Subtotal</td><td style="text-align: right;width: 100px;">'+$res1.ColAmt_st+'</td> </tr>';
 						}else{
-							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td> </tr>';
+							$html += '<tr> <td style="text-align: center;" colspan="4">No data Available</td>$res1.ColAmt_st </tr>';
 						}
 
 						$('#group_members_list_1').html($html);
