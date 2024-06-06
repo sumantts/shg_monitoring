@@ -26,7 +26,7 @@ if(isset($_POST["importSubmit"])){
             $MemId = $line[0];
             $AcNo = $line[1];
             $LnDate = $line[2];
-            $Purpose = $line[3]; //Purpose
+            $Purpose = trim($line[3]); //Purpose
             $LnAmt = $line[4];
             $LnOuts = $line[5];
             $PrnExp = $line[6];
@@ -37,9 +37,11 @@ if(isset($_POST["importSubmit"])){
 
             //Call SP to save data into DB
             if($data_saved > 0){
-              $query = "CALL usp_InsertLoanStatus('".$MemId."', '".$AcNo."', '".$LnDate."', '".$Purpose."', '".$LnAmt."', '".$LnOuts."', '".$PrnExp."', '".$PrnPay."', '".$PrnODue."', '".$AsOn."')";
-              //echo $query;
-              mysqli_multi_query($con, $query);
+              if($MemId != ''){
+                $query = "CALL usp_InsertLoanStatus('".$MemId."', '".$AcNo."', '".$LnDate."', '".$Purpose."', '".$LnAmt."', '".$LnOuts."', '".$PrnExp."', '".$PrnPay."', '".$PrnODue."', '".$AsOn."')";
+                //echo $query;
+                mysqli_multi_query($con, $query);
+              }
             }
             $data_saved++;
           }//end while
