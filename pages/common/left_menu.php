@@ -192,6 +192,15 @@
                 <span class="menu-title">Loan Register Report</span>
               </a>
             </li>
+            
+            <?php if($_SESSION["StfId"] == 99){?>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="?p=backup">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Backup</span>
+              </a>
+            </li>
+            <?php } ?>
 
             <!-- <li class="nav-item <?php if($p == 'change-password'){?>active<?php } ?>">
               <a class="nav-link" href="?p=change-password">

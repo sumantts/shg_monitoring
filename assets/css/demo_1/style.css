@@ -753,3 +753,7 @@
   background: #0f25d5;
   padding-left: 65px;
 }
+
+.card {
+  margin-top: 55px !important;
+}

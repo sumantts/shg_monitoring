@@ -117,6 +117,11 @@
 		include('pages/change_password.php');		
 		break;
 		
+		case 'backup':
+		$title = "backup";
+		include('pages/backup.php');		
+		break;
+		
 		default:
 		include('pages/login.php');
 	}
