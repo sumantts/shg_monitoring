@@ -11,9 +11,8 @@ if(isset($_POST['insertMeetingData'])){
   $GroupId = $_POST['GroupId'];
   $my_id = $_POST['my_id'];
   $Opening_Dues = $_POST['Opening_Dues'];
-  //$attendance = $_POST['attendance'];
-  //$attendance_text = $_POST['attendance_text'];
-  //echo 'my_id: '.$my_id[1];
+  $caste = $_POST['caste'];
+  //$attendance_text = $_POST['attendance_text']; 
   
   $data_saved = 0;
   for($i = 0; $i < sizeof($my_id); $i++){
@@ -26,9 +25,10 @@ if(isset($_POST['insertMeetingData'])){
       $Attendance = 1;
       $CollAmt = $CAmt[$i];
       $Opening_Dues_Bal = $Opening_Dues[$i];
+      $caste_temp = $caste[$i];
 
       //Insert Meeting data
-      $query = "CALL usp_UpdtMemBalance('".$MemId."', '".$CollAmt."', '".$Opening_Dues_Bal."')";
+      $query = "CALL usp_UpdtMemBalance('".$MemId."', '".$CollAmt."', '".$Opening_Dues_Bal."', '".$caste_temp."')";
       mysqli_multi_query($con, $query);
       $data_saved++;      
     //}//end if
@@ -100,8 +100,27 @@ if(isset($_POST['insertMeetingData'])){
                     <div id="part_two" style="display: none;">
                       <p class="card-description" id="GrpNm">Group Name: </p>
                       <p class="card-description" id="GrpAdd">Group Address: </p>
+
                       <div class="table-responsive-sm">
                         <form name="form1" id="form1" method="POST" action="">
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="col-sm-4 col-form-label text-danger">Caste*</label>
+                                <div class="col-sm-6">
+                                  <select id="caste" name="caste" class="form-control" >
+                                    <option value="0">Select</option>
+                                    <option value="1">GENERAL</option>
+                                    <option value="2">SC</option>
+                                    <option value="3">ST</option>
+                                    <option value="4">OBC</option>
+                                    <option value="5">MINORITY</option>
+                                  </select>
+                                  <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
+                                  <span class="col-form-label  text-success" id="collectionDate_success" style="font-size: 12px;"></span>
+                                </div>
+                              </div>
+                            </div>
+                            
                           <table class="table table-bordered" id="myTable">
                             <thead>
                               <tr>
@@ -109,6 +128,7 @@ if(isset($_POST['insertMeetingData'])){
                                 <td scope="col" style="text-align: center;">Member Name</td>
                                 <td scope="col" style="text-align: center;">Opening Balance</td>
                                 <td scope="col" style="text-align: center;">Opening Due</td>
+                                <td scope="col" style="text-align: center;">Caste</td>
                               </tr>
                             </thead>
                             <tbody id="group_members_list1">

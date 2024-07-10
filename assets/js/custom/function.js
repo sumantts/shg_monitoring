@@ -284,14 +284,47 @@
 						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
 						$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
 						
-						$group_members1 = $res1.group_members;				
+						$group_members1 = $res1.group_members;	 
 
 						if($group_members1.length > 0){
 							for(var i = 0; i < $group_members1.length; i++){
-								$html += '<tr> <td style="text-align: center;">'+$group_members1[i].MemId+'</td> <td style="text-align: center;">'+$group_members1[i].MemNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].OpnAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members1[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members1[i].MemId+'" value="'+$group_members1[i].MemId+'"> </td><td style="text-align: right;width: 100px;"><input type="number" name="Opening_Dues[]" id="Opening_Dues_'+$group_members1[i].MemId+'" value="'+$group_members1[i].Opening_Dues+'" class="form-control"></td> </tr>';
+								$MemCstTemp = '';
+								if($group_members1[i].MemCst != ''){
+									$MemCstTemp = $group_members1[i].MemCst;
+								}
+
+								$html += '<tr> <td style="text-align: center;">'+$group_members1[i].MemId+'</td> <td style="text-align: center;">'+$group_members1[i].MemNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].OpnAmt+'" class="form-control"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members1[i].MemId+'" value="'+$group_members1[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members1[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members1[i].MemId+'" value="'+$group_members1[i].MemId+'"> </td><td style="text-align: right;width: 100px;"><input type="number" name="Opening_Dues[]" id="Opening_Dues_'+$group_members1[i].MemId+'" value="'+$group_members1[i].Opening_Dues+'" class="form-control"></td> <td><select id="caste_'+$group_members1[i].MemId+'" name="caste[]" class="form-control"> <option value="">Select</option>';
+								
+								if($MemCstTemp == 'GENERAL'){
+									$html += '<option value="GENERAL" selected>GENERAL</option>';
+								}else{
+									$html += '<option value="GENERAL">GENERAL</option>';
+								}
+								if($MemCstTemp == 'SC'){
+									$html += '<option value="SC" selected>SC</option>';
+								}else{
+									$html += '<option value="SC">SC</option>';
+								}
+								if($MemCstTemp == 'ST'){
+									$html += '<option value="ST" selected>ST</option>';
+								}else{
+									$html += '<option value="ST">ST</option>';
+								}
+								if($MemCstTemp == 'OBC'){
+									$html += '<option value="OBC" selected>OBC</option>';
+								}else{
+									$html += '<option value="OBC">OBC</option>';
+								}
+								if($MemCstTemp == 'MINORITY'){
+									$html += '<option value="MINORITY" selected>MINORITY</option>';
+								}else{
+									$html += '<option value="MINORITY">MINORITY</option>';
+								}
+
+								$html += '</select></td> </tr>';
 							}
 						}else{
-							$html += '<tr> <td style="text-align: center;" colspan="5">No data Available</td> </tr>';
+							$html += '<tr> <td style="text-align: center;" colspan="6">No data Available</td> </tr>';
 						}
 
 						$('#group_members_list1').html($html);
@@ -1119,7 +1152,7 @@
 					$('#memlist_repo_tbody').html($html);
 					if($memlist_rows.length > 0){
 						for($i = 0; $i < $memlist_rows.length; $i++){
-							$html += '<tr> <td>'+$memlist_rows[$i].Sl+'</td> <td>'+$memlist_rows[$i].MemId+'</td> <td class="text-left">'+$memlist_rows[$i].MemNm+'</td> <td class="text-left">'+$memlist_rows[$i].GurdNm+'</td> <td class="text-left">'+$memlist_rows[$i].Village+'</td> <td class="text-left">'+$memlist_rows[$i].Aadhar+'</td> <td class="text-left">'+$memlist_rows[$i].PAN+'</td> <td class="text-left">'+$memlist_rows[$i].Voter+'</td> </tr>';
+							$html += '<tr> <td>'+$memlist_rows[$i].Sl+'</td> <td>'+$memlist_rows[$i].MemId+'</td> <td class="text-left">'+$memlist_rows[$i].MemNm+'</td> <td class="text-left">'+$memlist_rows[$i].GurdNm+'</td> <td class="text-left">'+$memlist_rows[$i].Village+'</td> <td class="text-left">'+$memlist_rows[$i].Aadhar+'</td> <td class="text-left">'+$memlist_rows[$i].PAN+'</td> <td class="text-left">'+$memlist_rows[$i].Voter+'</td><td class="text-left">'+$memlist_rows[$i].Caste+'</td> </tr>';
 						}//end for
 
 					}else{

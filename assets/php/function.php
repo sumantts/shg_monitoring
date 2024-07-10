@@ -293,6 +293,7 @@
 					$CAmt = $row2['CAmt'];
 					$OpnAmt = $row2['OpnAmt'];
 					$Opening_Dues = $row2['OpDues'];
+					$MemCst = $row2['MemCst'];
 					$grantCAmt = $grantCAmt + $CAmt;
 
 					if($MemId != ''){
@@ -304,6 +305,8 @@
 						$group_member->CAmt = $CAmt;
 						$group_member->OpnAmt = $OpnAmt;
 						$group_member->Opening_Dues = $Opening_Dues;
+						$group_member->grantCAmt = $grantCAmt;
+						$group_member->MemCst = $MemCst;
 
 						array_push($group_members, $group_member);
 					}
@@ -878,6 +881,7 @@
 						$Aadhar = $row['Aadhar'];
 						$PAN = $row['PAN'];
 						$Voter = $row['Voter'];
+						$Caste = $row['Caste'];
 
 						if($Sl != ''){
 							$memlist_row = new stdClass();
@@ -889,6 +893,7 @@
 							$memlist_row->Aadhar = $Aadhar;
 							$memlist_row->PAN = $PAN;
 							$memlist_row->Voter = $Voter;
+							$memlist_row->Caste = $Caste;
 											
 							array_push($memlist_rows, $memlist_row);
 						}						

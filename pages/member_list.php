@@ -63,6 +63,7 @@ include('common/header.php');
                             <td scope="col" class="text-left">Aadhar No.</td>
                             <td scope="col" class="text-left">PAN No.</td>
                             <td scope="col" class="text-left">Voter ID</td>
+                            <td scope="col" class="text-left">Caste</td>
                           </tr>
                         </thead>
                         <tbody id="memlist_repo_tbody">
