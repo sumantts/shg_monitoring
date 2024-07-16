@@ -58,6 +58,7 @@
 		$GrpNm = '';
 		$GrpCd = '';
 		$StfCd = '';
+		$Caste = '';
 
 		//Get Member
 		$query = "CALL usp_GetMember('".$memberCode."')";
@@ -72,6 +73,7 @@
 					$GrpNm = $row['GrpNm'];
 					$GrpCd = $row['GrpCd'];
 					$StfCd = $row['StfCd'];
+					$Caste = $row['Caste'];
 				}
 			}
 			/* print divider */
@@ -88,6 +90,55 @@
 		$return_result['GrpNm'] = $GrpNm;
 		$return_result['GrpCd'] = $GrpCd;
 		$return_result['StfCd'] = $StfCd;
+		$return_result['Caste'] = $Caste;
+
+		sleep(1);
+		echo json_encode($return_result);
+	}//end function getMember
+	
+	//Update Caste
+	if($fn == 'updateCaste'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$memberCode = $_POST["memberCode"];
+		$memCst = $_POST["memCst"];
+		
+		$MemNm = '';
+		$GurdNm = '';
+		$GrpNm = '';
+		$GrpCd = '';
+		$StfCd = '';
+
+		//Get Member
+		$query = "CALL usp_UpdtMemInfo('".$memberCode."','".$memCst."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					/*$MemNm = $row['MemNm'];
+					$GurdNm = $row['GurdNm'];
+					$GrpNm = $row['GrpNm'];
+					$GrpCd = $row['GrpCd'];
+					$StfCd = $row['StfCd'];*/
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		/*$return_result['MemNm'] = $MemNm;
+		$return_result['GurdNm'] = $GurdNm;
+		$return_result['GrpNm'] = $GrpNm;
+		$return_result['GrpCd'] = $GrpCd;
+		$return_result['StfCd'] = $StfCd;*/
 
 		sleep(1);
 		echo json_encode($return_result);

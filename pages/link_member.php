@@ -17,7 +17,6 @@ include('common/header.php');?>
                     <form class="form-sample">
                       <!--<p class="card-description"> Personal info </p>-->
                       <div class="row">
-
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Member Code*</label>
@@ -25,24 +24,17 @@ include('common/header.php');?>
                               <input type="tel" id="memberCode" class="form-control" />
                               <span class="col-form-label text-danger" id="memberCode_error" style="font-size: 12px;"></span>
                               <span class="col-form-label text-success" id="memberCode_success" style="font-size: 12px;"></span>
+                              
+                              <span class="col-form-label text-danger" id="form_error" style="font-size: 12px;"> </span>
+                              <span class="col-form-label text-success" id="form_success" style="font-size: 12px;"> </span>
                             </div>
                           </div>
                         </div>
 
-                        <!-- <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Group Code*</label>
-                            <div class="col-sm-8">
-                              <input type="text" id="groupCode" class="form-control" />
-                              <span class="col-form-label text-danger" id="groupCode_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label text-success" id="groupCode_success" style="font-size: 12px;"></span>
-                            </div>
-                          </div>
-                        </div> -->
-
                         <div class="col-md-6">
                           <div class="mb-2">
                             <button type="button" id="getMember" class="btn btn-inverse-success btn-fw mb-2">Show</button>
+                            <!-- <button type="button" id="updateCaste" class="btn btn-inverse-success btn-fw mb-2">Update</button> -->
                             <button type="button" id="delinkMember" class="btn btn-inverse-success btn-fw mb-2">Delink</button>
                             <?php if($_SESSION["StfId"] == 99){?>
                               <button type="button" id="withdrawMember" class="btn btn-inverse-success btn-fw mb-2" >Withdraw</button>
@@ -51,14 +43,43 @@ include('common/header.php');?>
                           
                         </div>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                           <div class="form-group row">
                           <span class="col-form-label text-danger" id="form_error" style="font-size: 12px;"> </span>
                           <span class="col-form-label text-success" id="form_success" style="font-size: 12px;"> </span>
                           </div>
-                        </div>
+                        </div> -->
 
                       </div> 
+                      
+                      <div class="row">
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Caste</label>
+                            <div class="col-sm-8">
+                              <select id="memCst" class="form-control" >
+                                <option value="">Select</option>
+                                <option value="GENERAL">GENERAL</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                                <option value="OBC">OBC</option>
+                                <option value="MINORITY">MINORITY</option>
+                              </select>
+                              <span class="col-form-label text-danger" id="memCst_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="memCst_success" style="font-size: 12px;"></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="mb-2"> 
+                            <button type="button" id="updateCaste" class="btn btn-inverse-success btn-fw mb-2">Update</button> 
+                          </div>
+                          
+                        </div> 
+                      </div>
+
                     </form>
 
                     <div id="part_tow" style="display: none">

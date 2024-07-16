@@ -25,7 +25,7 @@
     <script src="assets/js/shared/jquery.cookie.js" type="text/javascript"></script>
     <!-- End custom js for this page-->
 	
-	<script type="text/javascript" src="assets/js/custom/function.js"></script>
+	<script type="text/javascript" src="assets/js/custom/function.js?date=<?=date('YmdHis')?>"></script>
 	
 	<div class="modal"><!-- Place at bottom of page Loading.. --></div>
   </body>

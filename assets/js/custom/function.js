@@ -56,6 +56,7 @@
 						$('#GrpNm').html( $res1.GrpNm);
 						$('#StfCd').html( $res1.StfCd);
 						$('#group_code').val($res1.GrpCd);
+						$('#memCst').val($res1.Caste).trigger('change');
 						
 						$('#memberName').val( $res1.MemNm);
 						$('#gurdianName').val( $res1.GurdNm);
@@ -69,6 +70,35 @@
 					$('#form_error').html($res1.error_msg);
 					return false;
 				}
+			});
+		}//end if
+	});
+	
+	
+	//Link Member
+	$( "#updateCaste" ).on( "click", function() {
+		$memberCode = $('#memberCode').val();
+		$memCst = $('#memCst').val();
+		$('#part_tow').hide();
+		$('#part_three').hide();
+
+		if($memberCode == ''){
+			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else{	
+			$('#memberCode_error').html('');
+			$('#memCst_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "updateCaste", memberCode: $memberCode, memCst: $memCst }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){ 
+					alert('Caste Updated successfully');
+				}//end if 
 			});
 		}//end if
 	});
