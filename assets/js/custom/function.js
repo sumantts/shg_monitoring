@@ -527,6 +527,39 @@
 			});*/
 		}//end if
 	});
+
+	//Delete Meeting data
+	$( "#deleteMeetingData" ).on( "click", function() {						
+		$meetingDt = $('#collectionDate').val();				
+		$grpSBAc = $('#groupCode').val();
+
+		if($meetingDt == ''){
+			alert('Please select meeting date');
+		}else if($grpSBAc == ''){
+			alert('Please enter Savings A/c. No.');
+		}else{
+			if(confirm('Are you sure to delete it?')){
+				$.ajax({
+					method: "POST",
+					url: "assets/php/function.php",
+					data: { fn: "deleteMeetingData", meeting_date: $meetingDt, sb_ac: $grpSBAc}
+				})
+					.done(function( res ) {
+					//console.log(res);
+					$res1 = JSON.parse(res);
+					if($res1.status == true){
+						alert('Data deleted successfully');					
+					}					
+				});
+			}//end if
+		}//end if
+	});//end finction
+
+	$('#meetingType').on('change', function(){
+		$meetingTypeText = $('#meetingType option:selected').text();
+		$('#meetingTypeName').val($meetingTypeText);
+		console.log('meetingTypeText: ' + $meetingTypeText);
+	});
 	//End Loan Page Function  
 
 	function calculateSubtotal(){
@@ -1055,7 +1088,6 @@
 			});
 		}//end if
 	});
-
 
 	//Dashboard More part
 	function deleteCollectionRecord(meeting_date, sb_ac, dt){

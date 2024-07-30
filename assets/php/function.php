@@ -344,7 +344,11 @@
 					$CAmt = $row2['CAmt'];
 					$OpnAmt = $row2['OpnAmt'];
 					$Opening_Dues = $row2['OpDues'];
-					$MemCst = $row2['MemCst'];
+					if(isset($row2['MemCst'])){
+						$MemCst = $row2['MemCst'];
+					}else{
+						$MemCst = '';
+					}
 					$grantCAmt = $grantCAmt + $CAmt;
 
 					if($MemId != ''){
@@ -442,6 +446,32 @@
 		echo json_encode($return_result);
 	}//end
 	
+	//Delete Meeting Data
+	if($fn == 'deleteMeetingData'){
+		$return_result = array();
+		$status = true;
+		$error_msg = ''; 
+		$meeting_date = $_POST["meeting_date"];
+		$sb_ac = $_POST["sb_ac"];	
+		
+
+		$query = "CALL usp_DeleteCollection('".$sb_ac."', '".$meeting_date."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+		$return_result['status'] = $status;
+		
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+
 	
 	//Update Passowrd
 	

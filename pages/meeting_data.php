@@ -11,6 +11,8 @@ if(isset($_POST['insertMeetingData'])){
   $attendance_text = $_POST['attendance_text'];
   $GrpSBAc = $_POST['GrpSBAc'];
   $sub_total = $_POST['sub_total'];
+  $MeetType = $_POST['meetingTypeName'];
+
   $StfId = $_SESSION["StfId"];
   
   if($StfId > 0 && $GroupId > 0){
@@ -28,7 +30,7 @@ if(isset($_POST['insertMeetingData'])){
       $CollAmt = $CAmt[$i];
 
       //Insert Meeting data
-     $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."')";
+     $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."', '".$MeetType."')";
       mysqli_multi_query($con, $query);
       $data_saved++;     
   }//end for
@@ -94,41 +96,59 @@ if(isset($_GET['data_saved'])){
                     <form class="form-sample" >
                       <!--<p class="card-description"> Personal info </p>-->
                       <div class="row">
-
-                        <div class="col-md-6">
+                        <div class="col-md-3 mr-2">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Collection Date*</label>
-                            <div class="col-sm-8">
+                            <label class="text-danger">Collection Date*</label> 
                               <input type="date" id="collectionDate" value="<?=date('Y-m-d')?>" class="form-control" />
                               <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
                               <span class="col-form-label  text-success" id="collectionDate_success" style="font-size: 12px;"></span>
-                            </div>
+                             
                           </div>
                         </div>
-                        <div class="col-md-6">
+
+                        <div class="col-md-3 mr-2">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label text-danger">Savings A/c. No.*</label>
-                            <div class="col-sm-8">
+                            <label class="text-danger">Savings A/c. No.*</label>                             
                               <input type="tel" id="groupCode" class="form-control" />
                               <span class="col-form-label  text-danger" id="groupCode_error" style="font-size: 12px;"></span>
-                              <span class="col-form-label  text-success" id="groupCode_success" style="font-size: 12px;"></span>
-                            </div>
+                              <span class="col-form-label  text-success" id="groupCode_success" style="font-size: 12px;"></span>                             
                           </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-3 mr-2">
+                          <div class="form-group row">
+                            <label class="text-danger">Meeting Type*</label>                             
+                              <select id="meetingType" class="form-control">
+                                <option value="Normal">Normal</option>
+                                <option value="Special">Special</option>
+                              </select>
+                              <span class="col-form-label  text-danger" id="meetingType_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label  text-success" id="meetingType_success" style="font-size: 12px;"></span>                             
+                          </div>
+                        </div>
+                      </div>
+
+                        <div class="row">                          
+                        <div class="col-md-2">
                           <div class=" mb-2">
                             <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
-                          <button type="button" id="getGroupMembers" class="btn btn-inverse-success btn-fw">Show</button>
+                            <button type="button" id="getGroupMembers" class="btn btn-inverse-success btn-fw">Show</button>
                           </div>
                         </div>
 
-                        <div class="col-md-6">
-                          <div class=" mb-2">
-                            <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
-                          <button type="button" id="getMeetingReport" class="btn btn-inverse-success btn-fw">Report</button>
+                        <div class="col-md-2">
+                          <div class=" mb-2"> 
+                            <button type="button" id="getMeetingReport" class="btn btn-inverse-success btn-fw">Report</button>
                           </div>
                         </div>
+
+                        <?php if($_SESSION["StfId"] == 99){?>
+                        <div class="col-md-2">
+                          <div class=" mb-2"> 
+                            <button type="button" id="deleteMeetingData" class="btn btn-inverse-success btn-fw">Delete</button>
+                          </div>
+                        </div>
+                        <?php } ?>
 
                       </div> 
                     </form>
@@ -157,6 +177,7 @@ if(isset($_GET['data_saved'])){
                             <div class="col-md-12 mt-2">
                             <input type="hidden" name="GroupId" id="GroupId" value="">
                             <input type="hidden" name="GrpSBAc" id="GrpSBAc" value="">
+                            <input type="hidden" name="meetingTypeName" id="meetingTypeName" value="Normal">
                               <input type="submit" name="insertMeetingData" id="insertMeetingData" class="btn btn-inverse-success btn-fw" value="Save">
                             </div>
                           </div>
