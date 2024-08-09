@@ -126,6 +126,7 @@ if(isset($_GET['data_saved'])){
                               <span class="col-form-label  text-success" id="meetingType_success" style="font-size: 12px;"></span>                             
                           </div>
                         </div>
+                        
                       </div>
 
                         <div class="row">                          

@@ -1451,6 +1451,71 @@
 			});
 		}//end if
 	});
+
+
+	//Get Samsad
+	$( "#gpName" ).on( "change", function() {
+		$gpName = $('#gpName').val();
+		
+		$html = '<option value="0">Select</option>';
+
+		if($gpName != '0'){				
+			$.ajax({
+			method: "POST",
+			url: "assets/php/function.php",
+			data: { fn: "GetSansadList", gpName: $gpName }
+			})
+			.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$all_samsad = $res1.all_samsad;
+					for($i = 0; $i < $all_samsad.length; $i++){
+						$html += "<option value='"+$all_samsad[$i].SsdId+"'>"+$all_samsad[$i].SsdName+"</option>"; 
+					}//end for
+					$('#samsadName').html($html);
+				}
+			});
+		}else{
+			$('#samsadName').html($html);
+		}//end if
+	});
+	//Get Samsad
+
+	//Updt Group Sansad
+	$( "#UpdtGroupSansad" ).on( "click", function() {
+		$gpName = $('#gpName').val();
+		$samsadName = $('#samsadName').val(); 
+		$StfId = $('#StfId').val();
+		
+		$('#gpName_success').html('');
+		$('#gpName_error').html('');
+		$('#samsadName_success').html('');
+		$('#samsadName_error').html(''); 		
+
+		if($gpName == '0'){
+			$('#gpName_error').html('Please Select GP Name');
+			return false;
+		}else if($samsadName == '0'){
+			$('#samsadName_error').html('Please Select Sansad Name');
+			return false;
+		}else{	 
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "UpdtGroupSansad", gpName: $gpName, samsadName: $samsadName, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){ 
+					alert('Updated successfully')
+				}else{
+					alert('Data save error');
+				}
+			});
+		}//end if
+	}); 
 	
 	//Loading screen
 	$body = $("body");

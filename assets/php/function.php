@@ -1428,4 +1428,72 @@
 		echo json_encode($return_result);
 	}//end function 
 	
+	//Get Samsad
+	if($fn == 'GetSansadList'){
+		$return_result = array();
+		$all_samsad = array();
+		$status = true;
+		$error_msg = '';
+		$gpName = $_POST["gpName"];
+
+		$query2 = "CALL usp_GetSansadList('".$gpName."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) {
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$SsdId = $row2['SsdId'];
+					$SsdName = $row2['SsdName'];
+
+					if($SsdId != ''){
+						$samsad_obj = new stdClass();						
+						$samsad_obj->SsdId = $SsdId; 
+						$samsad_obj->SsdName = $SsdName;
+						array_push($all_samsad, $samsad_obj);
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+		//sleep(1);
+		$return_result['status'] = $status;
+		$return_result['all_samsad'] = $all_samsad;
+		echo json_encode($return_result);
+	}//end function 
+	
+	//Sansad Meeting
+	if($fn == 'UpdtGroupSansad'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+
+		$gpName = $_POST["gpName"];
+		$samsadName = $_POST["samsadName"]; 
+		$StfId = $_POST["StfId"]; 
+		$MemNo = '';
+
+		//GetGroup
+		$query = "CALL usp_UpdtGroupSansad('".$gpName."', '".$samsadName."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);					
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con)); 
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg; 
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end function 
+	
 ?>
