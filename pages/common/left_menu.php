@@ -93,6 +93,12 @@
                 <span class="menu-title">Meeting Data</span>
               </a>
             </li>
+            <li class="nav-item <?php if($p == 'sansad-meeting'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=sansad-meeting">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Sansad Meeting</span>
+              </a>
+            </li>
             <?php if($_SESSION["StfId"] == 99){?>
             <li class="nav-item <?php if($p == 'update-data'){?>active<?php } ?>">
               <a class="nav-link" href="?p=update-data">
@@ -105,6 +111,12 @@
               <a class="nav-link" href="?p=voucher-entry">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Voucher Entry</span>
+              </a>
+            </li>
+            <li class="nav-item <?php if($p == 'social-activity'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=social-activity">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Social Activity</span>
               </a>
             </li>
             <li class="nav-item <?php if($p == 'cash-book'){?>active<?php } ?>">

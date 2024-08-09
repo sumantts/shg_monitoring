@@ -45,6 +45,11 @@
 		include('pages/meeting_data.php');		
 		break;
 
+		case 'sansad-meeting':
+		$title = "Sansad Meeting";
+		include('pages/sansad_meeting.php');		
+		break;
+
 		case 'update-data':
 		$title = "Update Data";
 		include('pages/update_data.php');		
@@ -65,10 +70,17 @@
 		$title = "Group Opening Data";
 		include('pages/group_opening_data.php');		
 		break;	
+
 		case 'voucher-entry':
 		$title = "Voucher Entry";
 		include('pages/voucher_entry.php');		
 		break;	
+
+		case 'social-activity':
+		$title = "Social Activity";
+		include('pages/social_activity.php');		
+		break;
+
 		case 'cash-book':
 		$title = "Cash Book";
 		include('pages/cash_book.php');		

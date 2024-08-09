@@ -92,7 +92,7 @@
 		$return_result['StfCd'] = $StfCd;
 		$return_result['Caste'] = $Caste;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end function getMember
 	
@@ -140,7 +140,7 @@
 		$return_result['GrpCd'] = $GrpCd;
 		$return_result['StfCd'] = $StfCd;*/
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end function getMember
 	
@@ -188,7 +188,7 @@
 		$return_result['GrpCd'] = $GrpCd;
 		$return_result['StfCd'] = $StfCd;*/
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end function getMember
 	
@@ -217,7 +217,7 @@
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end function withdrawMember
 
@@ -254,7 +254,7 @@
 		}else{
 			$status = false;
 		}
-		sleep(1);
+		//sleep(1);
 		$return_result['status'] = $status;
 		$return_result['GrpId'] = $GrpId;
 		$return_result['GrpNm'] = $GrpNm;
@@ -275,7 +275,7 @@
 		$query = "CALL usp_UpdtMemStaff('".$memberCode."', '".$GrpId."', '".$staff_code."')";
 		mysqli_multi_query($con, $query);
 		
-		sleep(1);
+		//sleep(1);
 		$return_result['status'] = $status;
 		echo json_encode($return_result);
 	}//end function getMember
@@ -292,7 +292,7 @@
 		$query = "CALL usp_UpdtMemProfile('".$memberCode."', '".$memberName."', '".$gurdianName."')";
 		mysqli_multi_query($con, $query);
 		
-		sleep(1);
+		//sleep(1);
 		$return_result['status'] = $status;
 		echo json_encode($return_result);
 	}//end function 
@@ -442,7 +442,7 @@
 		$return_result['MettingDt_heading'] = $MettingDt_heading;
 		$return_result['ColAmt_st'] = $ColAmt_st;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end
 	
@@ -468,7 +468,7 @@
 		$return_result['status'] = $status;
 		
 
-		//sleep(1);
+		////sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -487,7 +487,7 @@
 		$query = "CALL usp_UpdtStaffPwd('".$StfId."', '".$new_password."')";
 		mysqli_multi_query($con, $query);
 		
-		sleep(1);
+		//sleep(1);
 		$return_result['status'] = $status;
 		echo json_encode($return_result);
 	}//end function getMember
@@ -533,7 +533,7 @@
 		$return_result['COpen'] = $COpen;
 		$return_result['BOpen'] = $BOpen;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -566,7 +566,7 @@
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -605,7 +605,7 @@
 		$return_result['VId'] = $VId;
 		$return_result['error_msg'] = $error_msg;
 		
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -641,7 +641,7 @@
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 		
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -679,7 +679,7 @@
 		$return_result['error_msg'] = $error_msg;
 		$return_result['interestAmt'] = $interestAmt;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 	//save Cashbook Report
@@ -796,7 +796,7 @@
 		$return_result['fromDateN'] = date('d-m-Y', strtotime($fromDate));
 		$return_result['uptoDateN'] = date('d-m-Y', strtotime($uptoDate));
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -832,7 +832,7 @@
 		$return_result['error_msg'] = $error_msg;
 		$return_result['interestAmt'] = $interestAmt;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 	//Link Group 2nd part	
@@ -864,7 +864,7 @@
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 	
@@ -897,7 +897,7 @@
 			}
 		} while (mysqli_next_result($con));
 		
-		sleep(1);
+		//sleep(1);
 		$return_result['status'] = $status;
 		$return_result['purposes'] = $purposes;
 		echo json_encode($return_result);
@@ -926,7 +926,7 @@
 		$return_result['status'] = $status;
 		
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 
@@ -997,7 +997,7 @@
 		$return_result['memlist_rows'] = $memlist_rows;	
 		
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 	
@@ -1081,7 +1081,7 @@
 		$return_result['attn_rows'] = $attn_rows;	
 		$return_result['fin_yr'] = $fin_yr;			
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 	
@@ -1234,7 +1234,7 @@
 		$return_result['st_row'] = $st_row;	
 		$return_result['fin_yr'] = $fin_yr;			
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
 	
@@ -1333,8 +1333,43 @@
 		$return_result['month_year'] = date('F, Y', strtotime($month_year));
 		$return_result['recovery_rate'] = $recovery_rate;		
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end fu
+	
+	//Sansad Meeting
+	if($fn == 'saveSamsadMeeting'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+
+		$meetingDate = $_POST["meetingDate"];
+		$noOfGroupAttend = $_POST["noOfGroupAttend"];
+		$totalAttendant = $_POST["totalAttendant"];
+		$remarks = $_POST["remarks"];
+		$StfId = $_POST["StfId"]; 
+		$MemNo = '';
+
+		//GetGroup
+		$query = "CALL usp_InsertSamsadMeeting('".$meetingDate."', '".$StfId."', '".$noOfGroupAttend."', '".$MemNo."', '".$remarks."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					printf("%s\n", $row[0]);					
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con)); 
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg; 
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end function 
 	
 ?>

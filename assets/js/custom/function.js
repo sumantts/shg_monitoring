@@ -1339,6 +1339,55 @@
 		}//end if
 	});
 
+	//save Samsad Meeting
+	$( "#saveSamsadMeeting" ).on( "click", function() {
+		$meetingDate = $('#meetingDate').val();
+		$noOfGroupAttend = $('#noOfGroupAttend').val();
+		$totalAttendant = $('#totalAttendant').val();
+		$remarks = $('#remarks').val();
+		$StfId = $('#StfId').val();
+		
+		$('#meetingDate_success').html('');
+		$('#meetingDate_error').html('');
+		$('#noOfGroupAttend_success').html('');
+		$('#noOfGroupAttend_error').html('');		
+		$('#totalAttendant_success').html('');
+		$('#totalAttendant_error').html('');
+		$('#remarks_success').html('');
+		$('#remarks_error').html('');
+		
+
+		if($meetingDate == ''){
+			$('#meetingDate_error').html('Please Enter Meeting Date');
+			return false;
+		}else if($noOfGroupAttend == ''){
+			$('#noOfGroupAttend_error').html('Please Enter No. of Group Attend');
+			return false;
+		}else if($totalAttendant == ''){
+			$('#totalAttendant_error').html('Please Enter Total Attendant');
+			return false;
+		}else if($remarks == ''){
+			$('#remarks_error').html('Please Enter your Remarks');
+			return false;
+		}else{	 
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "saveSamsadMeeting", meetingDate: $meetingDate, noOfGroupAttend: $noOfGroupAttend, totalAttendant: $totalAttendant, remarks: $remarks, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){ 
+
+				}else{
+					alert('Data save error');
+				}
+			});
+		}//end if
+	});
+
+
 	
 	//Loading screen
 	$body = $("body");
