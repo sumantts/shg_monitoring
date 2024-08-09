@@ -1385,9 +1385,72 @@
 				}
 			});
 		}//end if
+	}); 
+
+
+
+	//Social Activity
+	$( "#getActivityData" ).on( "click", function() {
+		$activityDate = $('#activityDate').val();
+		$StfId = $('#StfId').val();
+		
+		$('#activityDate_success').html('');
+		$('#activityDate_error').html('');
+		
+		$('#part_two').hide();
+		$('#part_three').hide();
+		$('#table_1').hide();
+		$('#activity_list').html('');
+
+		if($activityDate == ''){
+			$('#activityDate_error').html('Please Select Date');
+			return false;
+		} else{	 
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "getActivityData", activityDate: $activityDate, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){			
+					$html = '';	
+					$activities = $res1.activities;					
+
+					if($activities.length > 0){
+						$sl = 1;
+						for(var i = 0; i < $activities.length; i++){
+							$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$activities[i].ActNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="noOfActivity[]" id="noOfActivity_'+$activities[i].Activity_Id+'" value="" class="form-control"> <input type="hidden" name="Activity_Id[]" id="Activity_Id_'+$activities[i].Activity_Id+'" value="'+$activities[i].Activity_Id+'"><input type="hidden" name="EntSl[]" id="EntSl_'+$activities[i].Activity_Id+'" value="'+$activities[i].EntSl+'"><input type="hidden" name="ActivityDt[]" id="ActivityDt_'+$activities[i].Activity_Id+'" value="'+$activities[i].ActivityDt+'"> </td> </tr>';
+							$sl++;
+						}
+					}else{
+						$html += '<tr> <td style="text-align: center;" colspan="3">No data Available</td> </tr>';
+					}
+					//$html += '<tr> <td style="text-align: right;" colspan="4">Subtotal</td><td style="text-align: right;"><input type="number" name="sub_total" id="sub_total" value="0.00" class="form-control" readonly></td> </tr>';
+
+					$('#activity_list').html($html); 
+					$('#part_two').show();
+					$('#table_1').show();
+						
+				}
+			});
+
+			//Check group id
+			$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "usp_GetGroup", savings_ac_no: $groupCode }
+			  })
+			.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#GroupId').val($res1.GrpId);
+				}
+			});
+		}//end if
 	});
-
-
 	
 	//Loading screen
 	$body = $("body");

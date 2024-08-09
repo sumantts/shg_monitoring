@@ -379,7 +379,7 @@
 		$return_result['group_members'] = $group_members;
 		$return_result['grantCAmt'] = $grantCAmt;
 
-		sleep(1);
+		//sleep(1);
 		echo json_encode($return_result);
 	}//end function checkAccountNumber
 	
@@ -1367,6 +1367,62 @@
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg; 
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end function 
+
+	
+	
+	//Social Activity
+	if($fn == 'getActivityData'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$activityDate = $_POST["activityDate"]; 
+		$StfId = $_POST["StfId"];	
+		
+		$GrpId = ''; 
+		$GrpNm = '';
+		$GrpAdd = '';
+		$activities = array();
+		$grantCAmt = 0;
+		$OpnAmt = 0; 
+
+		//Get Group Members
+		$query2 = "CALL usp_GetActivityData('".$StfId."', '".$activityDate."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) {
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$ActNm = $row2['ActNm'];
+					$ActNo = $row2['ActNo'];
+					$Activity_Id = $row2['Activity_Id'];
+					$EntSl = $row2['EntSl'];
+					
+					$slno = 1;
+					if($ActNm != ''){
+						$activitiy = new stdClass();
+						
+						$activitiy->slno = $slno; 
+						$activitiy->ActNm = $ActNm; 
+						$activitiy->ActNo = $ActNo;
+						$activitiy->Activity_Id = $Activity_Id;
+						$activitiy->EntSl = $EntSl;
+						$activitiy->ActivityDt = $activityDate;
+
+						array_push($activities, $activitiy);
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['activities'] = $activities;
 
 		//sleep(1);
 		echo json_encode($return_result);
