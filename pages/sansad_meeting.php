@@ -54,7 +54,7 @@ include('common/header.php');
 
                         <div class="col-md-3 mr-2">
                           <div class="form-group row">
-                            <label class="text-danger">Remarks*</label>                             
+                            <label>Remarks</label>                             
                               <input type="text" id="remarks" class="form-control" />
                               <span class="col-form-label  text-danger" id="remarks_error" style="font-size: 12px;"></span>
                               <span class="col-form-label  text-success" id="remarks_success" style="font-size: 12px;"></span>                             
@@ -68,7 +68,7 @@ include('common/header.php');
                         <div class="col-md-2">
                           <div class=" mb-2">
                             <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
-                            <button type="button" id="saveSamsadMeeting" class="btn btn-inverse-success btn-fw">Show</button>
+                            <button type="button" id="saveSamsadMeeting" class="btn btn-inverse-success btn-fw">Save</button>
                           </div>
                         </div>
                       </div> 

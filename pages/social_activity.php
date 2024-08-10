@@ -61,7 +61,7 @@ if(isset($_POST['saveSocialActivity'])){
                         <div class="row">
                           <div class="col-md-4 mr-2">
                             <div class="form-group row">
-                              <label class="text-danger">For the month(choose last Date)*</label> 
+                              <label class="text-danger">For the month*</label> 
                                 <input type="date" id="activityDate" value="<?=date('Y-m-d')?>" class="form-control" />
                                 <span class="col-form-label  text-danger" id="activityDate_error" style="font-size: 12px;"></span>
                                 <span class="col-form-label  text-success" id="activityDate_success" style="font-size: 12px;"></span>

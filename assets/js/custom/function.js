@@ -673,7 +673,7 @@
 			  data: { fn: "showInterestAmount", groupAcNo: $groupAcNo, StfId: $StfId }
 			})
 			  .done(function( res ) {
-				//console.log(res);
+				console.log(res);
 				$res1 = JSON.parse(res);
 				if($res1.status == true){
 					$('#GroupId').val($res1.GrpId);
@@ -979,6 +979,15 @@
 					$('#lg_GroupName').html('Group Name: '+$res1.GrpNm);
 					$('#lg_GroupAddress').html('Group Address: '+$res1.GrpAdd);
 					$('#GroupId').val($res1.GrpId);
+
+					$Sansad_Id = $res1.Sansad_Id;
+					console.log('  Sansad_Id: ' + $Sansad_Id);
+					$('#gpName').val($res1.GP_Id).trigger('change');
+					setTimeout(function(){
+						console.log(' 2 Sansad_Id: ' + $Sansad_Id);
+						$('#samsadName').val($Sansad_Id).trigger('change');
+					},500);
+
 					$('#part_two').show();
 				}else{
 					alert('No Data Available');
@@ -1366,9 +1375,6 @@
 		}else if($totalAttendant == ''){
 			$('#totalAttendant_error').html('Please Enter Total Attendant');
 			return false;
-		}else if($remarks == ''){
-			$('#remarks_error').html('Please Enter your Remarks');
-			return false;
 		}else{	 
 			$.ajax({
 			  method: "POST",
@@ -1378,8 +1384,11 @@
 			  .done(function( res ) {
 				//console.log(res);
 				$res1 = JSON.parse(res);
-				if($res1.status == true){ 
-
+				if($res1.status == true){ 					
+					$('#noOfGroupAttend').val('');
+					$('#totalAttendant').val('');
+					$('#remarks').val('');
+					alert('Data saved successfully');
 				}else{
 					alert('Data save error');
 				}
@@ -1421,7 +1430,7 @@
 					if($activities.length > 0){
 						$sl = 1;
 						for(var i = 0; i < $activities.length; i++){
-							$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$activities[i].ActNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="noOfActivity[]" id="noOfActivity_'+$activities[i].Activity_Id+'" value="" class="form-control"> <input type="hidden" name="Activity_Id[]" id="Activity_Id_'+$activities[i].Activity_Id+'" value="'+$activities[i].Activity_Id+'"><input type="hidden" name="EntSl[]" id="EntSl_'+$activities[i].Activity_Id+'" value="'+$activities[i].EntSl+'"><input type="hidden" name="ActivityDt[]" id="ActivityDt_'+$activities[i].Activity_Id+'" value="'+$activities[i].ActivityDt+'"> </td> </tr>';
+							$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: left;">'+$activities[i].ActNm+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="noOfActivity[]" id="noOfActivity_'+$activities[i].Activity_Id+'" value="'+$activities[i].ActNo+'" class="form-control"> <input type="hidden" name="Activity_Id[]" id="Activity_Id_'+$activities[i].Activity_Id+'" value="'+$activities[i].Activity_Id+'"><input type="hidden" name="EntSl[]" id="EntSl_'+$activities[i].Activity_Id+'" value="'+$activities[i].EntSl+'"><input type="hidden" name="ActivityDt[]" id="ActivityDt_'+$activities[i].Activity_Id+'" value="'+$activities[i].ActivityDt+'"> </td> </tr>';
 							$sl++;
 						}
 					}else{
@@ -1484,6 +1493,7 @@
 
 	//Updt Group Sansad
 	$( "#UpdtGroupSansad" ).on( "click", function() {
+		$GroupId = $('#GroupId').val();
 		$gpName = $('#gpName').val();
 		$samsadName = $('#samsadName').val(); 
 		$StfId = $('#StfId').val();
@@ -1503,7 +1513,7 @@
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "UpdtGroupSansad", gpName: $gpName, samsadName: $samsadName, StfId: $StfId }
+			  data: { fn: "UpdtGroupSansad", GroupId: $GroupId, samsadName: $samsadName, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);

@@ -505,6 +505,8 @@
 		$GrpId = '';
 		$GrpNm = '';
 		$GrpAdd = '';
+		$GP_Id = '';
+		$Sansad_Id = '';
 
 		$query = "CALL usp_GetGroup('".$groupAcNo."')";
 		mysqli_multi_query($con, $query);
@@ -521,6 +523,21 @@
 			if (mysqli_more_results($con)) {
 			}
 		} while (mysqli_next_result($con));
+
+		
+
+		$query1 = "CALL usp_GetArea('".$GrpId."')";
+		mysqli_multi_query($con, $query1);
+		do {
+			if ($result1 = mysqli_store_result($con)) {
+				while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+					$GP_Id = $row1['GP_Id'];
+					$Sansad_Id = $row1['Sansad_Id'];  
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
 		
 		if($GrpNm == ''){
 			$status = false;
@@ -532,6 +549,8 @@
 		$return_result['GrpAdd'] = $GrpAdd;
 		$return_result['COpen'] = $COpen;
 		$return_result['BOpen'] = $BOpen;
+		$return_result['GP_Id'] = $GP_Id;
+		$return_result['Sansad_Id'] = $Sansad_Id;
 
 		//sleep(1);
 		echo json_encode($return_result);
@@ -1348,7 +1367,7 @@
 		$totalAttendant = $_POST["totalAttendant"];
 		$remarks = $_POST["remarks"];
 		$StfId = $_POST["StfId"]; 
-		$MemNo = '';
+		$MemNo = $_POST["totalAttendant"];
 
 		//GetGroup
 		$query = "CALL usp_InsertSamsadMeeting('".$meetingDate."', '".$StfId."', '".$noOfGroupAttend."', '".$MemNo."', '".$remarks."')";
@@ -1357,7 +1376,7 @@
 			/* store the result set in PHP */
 			if ($result = mysqli_store_result($con)) {
 				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-					printf("%s\n", $row[0]);					
+					//printf("%s\n", $row[0]);					
 				}
 			}
 			/* print divider */
@@ -1469,13 +1488,13 @@
 		$status = true;
 		$error_msg = '';
 
-		$gpName = $_POST["gpName"];
+		$GroupId = $_POST["GroupId"]; 
 		$samsadName = $_POST["samsadName"]; 
 		$StfId = $_POST["StfId"]; 
 		$MemNo = '';
 
 		//GetGroup
-		$query = "CALL usp_UpdtGroupSansad('".$gpName."', '".$samsadName."')";
+		$query = "CALL usp_UpdtGroupSansad('".$GroupId."', '".$samsadName."')";
 		mysqli_multi_query($con, $query);
 		do {
 			/* store the result set in PHP */

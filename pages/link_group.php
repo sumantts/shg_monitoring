@@ -93,7 +93,7 @@ do {
                       </div>
 
                       <!-- Start GP & Samsad -->
-                      <div class="row">
+                      <div class="row mt-4">
 
                         <div class="col-md-3 mr-2">
                           <div class="form-group row">
@@ -124,7 +124,7 @@ do {
                         </div>  
 
                         <div class="col-md-3">
-                          <div class=" mb-2"> 
+                          <div class="mt-4"> 
                           <button type="button" id="UpdtGroupSansad" class="btn btn-inverse-success btn-fw">Update</button>
                           </div>
                         </div>
