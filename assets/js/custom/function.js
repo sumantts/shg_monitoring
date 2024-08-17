@@ -1026,6 +1026,33 @@
 			});
 		}//end if
 	});
+	$( "#unLinkGroupSave" ).on( "click", function() {
+		if(confirm('Are you sure to unlink?')){
+			$groupAcNo = $('#GroupId').val();
+			$StfId = $('#StfId').val();	 	
+
+			if($groupAcNo == ''){
+				$('#groupAcNo_error').html('Please Enter Savings A/c. No.');
+				return false;
+			}else{
+				$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "unLinkGroupSave", groupAcNo: $groupAcNo, StfId: $StfId }
+				})
+				.done(function( res ) { 
+					$res1 = JSON.parse(res);
+					if($res1.status == true){
+						$('#groupAcNo').val('');
+						$('#part_two').hide();
+						alert('Group Un-Linkup Done');
+					}else{
+						alert('API Error');
+					}
+				});
+			}//end if
+		}
+	});
 
 
 	//Get Particulars

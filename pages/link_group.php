@@ -86,7 +86,8 @@ do {
                             <div class="col-md-12 mt-2">
                             <input type="hidden" name="GroupId" id="GroupId" value="">
                             <input type="hidden" name="GrpSBAc" id="GrpSBAc" value="">
-                              <button type="button" name="linkGroupSave" id="linkGroupSave" class="btn btn-inverse-success btn-fw">Link Up</button>
+                            <button type="button" name="linkGroupSave" id="linkGroupSave" class="btn btn-inverse-success btn-fw">Link Up</button>
+                            <button type="button" name="unLinkGroupSave" id="unLinkGroupSave" class="btn btn-inverse-success btn-fw">Un-Link</button>
                             </div>
                           </div>
                         </form>

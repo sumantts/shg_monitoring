@@ -885,6 +885,36 @@
 
 		//sleep(1);
 		echo json_encode($return_result);
+	}//end fu	
+	//Un-link
+	if($fn == 'unLinkGroupSave'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$groupAcNo = $_POST["groupAcNo"];
+		$StfId = 0;// $_POST["StfId"];	 
+
+		//GetGroup
+		$query = "CALL usp_UpdtGroupStaff('".$groupAcNo."', '".$StfId."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					//$GrpNm = $row['GrpNm'];
+					//$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+
+		//sleep(1);
+		echo json_encode($return_result);
 	}//end fu
 	
 	//Get Particulars
