@@ -138,6 +138,13 @@
                 <span class="menu-title"> Link Member</span>
               </a>
             </li>
+
+            <li class="nav-item <?php if($p == 'member-transfer'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=member-transfer">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Member Transfer</span>
+              </a>
+            </li>
             
             <?php if($_SESSION["StfId"] == 99){?>
             <li class="nav-item <?php if($p == 'member-update'){?>active<?php } ?>">

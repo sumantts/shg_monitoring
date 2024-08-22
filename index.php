@@ -96,6 +96,11 @@
 		include('pages/link_member.php');		
 		break;
 		
+		case 'member-transfer':
+		$title = "Member Transfer";
+		include('pages/member_transfer.php');		
+		break;
+		
 		case 'member-update':
 		$title = "Member Update";
 		include('pages/member_update.php');		

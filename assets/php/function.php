@@ -193,6 +193,51 @@
 	}//end function getMember
 	
 	
+	//Transfer Member
+	if($fn == 'transferMember'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$sp_Status = '';
+
+		$transferDate = $_POST["transferDate"]; 
+		$memberCode = $_POST["memberCode"]; 
+		$fromGroupSB = $_POST["fromGroupSB"]; 
+		$toGroupSB = $_POST["toGroupSB"]; 
+		$transferAmount = $_POST["transferAmount"]; 
+		$StfId = $_POST["StfId"]; 
+
+		//Get Member
+		$query = "CALL usp_MemberTransfer('".$transferDate."', '".$memberCode."', '".$fromGroupSB."', '".$toGroupSB."', '".$transferAmount."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$sp_Status = $row['Status']; 
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */		
+
+		if($sp_Status == 0){
+			$status = true;
+		}else{
+			$status = false;
+		}
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['sp_Status'] = $sp_Status;
+		
+		echo json_encode($return_result);
+	}//end function
+	
+	
 	//withdraw Member
 	if($fn == 'withdrawMember'){
 		$return_result = array();

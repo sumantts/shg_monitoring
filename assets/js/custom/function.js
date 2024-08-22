@@ -1554,6 +1554,56 @@
 		}//end if
 	}); 
 	
+	
+	//Transfer Member
+	$( "#transferMember" ).on( "click", function() {
+		$transferDate = $('#transferDate').val();
+		$memberCode = $('#memberCode').val();
+		$fromGroupSB = $('#fromGroupSB').val();
+		$toGroupSB = $('#toGroupSB').val();
+		$transferAmount = $('#transferAmount').val();
+		$StfId = $('#StfId').val();
+		
+		$('#transferDate_error').html('');
+		$('#memberCode_error').html('');
+		$('#fromGroupSB_error').html('');
+		$('#toGroupSB_error').html('');
+		$('#transferAmount_error').html('');
+
+		if($transferDate == ''){
+			$('#transferDate_error').html('Please Enter Date');
+			return false;
+		}else if($memberCode == ''){
+			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else if($fromGroupSB == ''){
+			$('#fromGroupSB_error').html('Please Enter From Group S/B');
+			return false;
+		}else if($toGroupSB == ''){
+			$('#toGroupSB_error').html('Please Enter To Group S/B');
+			return false;
+		}else if($transferAmount == ''){
+			$('#transferAmount_error').html('Please Enter Transfer Amount');
+			return false;
+		}else{	
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "transferMember", transferDate: $transferDate, memberCode: $memberCode, fromGroupSB: $fromGroupSB, toGroupSB: $toGroupSB, transferAmount: $transferAmount, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					alert('Member Transferred Successfully');					
+				}else{
+					alert($res1.error_msg);
+					return false;
+				}
+			});
+		}//end if
+	});
+	
 	//Loading screen
 	$body = $("body");
 	$(document).on({
