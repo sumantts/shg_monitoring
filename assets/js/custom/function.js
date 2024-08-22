@@ -1594,10 +1594,14 @@
 			  .done(function( res ) {
 				//console.log(res);
 				$res1 = JSON.parse(res);
-				if($res1.status == true){
-					alert('Member Transferred Successfully');					
+				alert($res1.error_msg);
+				if($res1.status == true){	
+					$('#transferDate').val('');
+					$('#memberCode').val('');
+					$('#fromGroupSB').val('');
+					$('#toGroupSB').val('');
+					$('#transferAmount').val('');				
 				}else{
-					alert($res1.error_msg);
 					return false;
 				}
 			});

@@ -199,6 +199,8 @@
 		$status = true;
 		$error_msg = '';
 		$sp_Status = '';
+		$ToGrpNm = '';
+		$MemNm = '';
 
 		$transferDate = $_POST["transferDate"]; 
 		$memberCode = $_POST["memberCode"]; 
@@ -213,9 +215,12 @@
 		do {
 			/* store the result set in PHP */
 			if ($result = mysqli_store_result($con)) {
-				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-					//printf("%s\n", $row[0]);
-					$sp_Status = $row['Status']; 
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+				//printf("%s\n", $row[0]);
+				if(isset($row['spStatus'])){
+					$sp_Status = $row['spStatus']; 
+					$ToGrpNm = $row['ToGrpNm']; 
+					$MemNm = $row['MemNm']; 
 				}
 			}
 			/* print divider */
@@ -226,13 +231,17 @@
 		/* execute multi query */		
 
 		if($sp_Status == 0){
-			$status = true;
-		}else{
 			$status = false;
+			$error_msg = 'Invalid information';
+		}else{
+			$status = true;
+			$error_msg = $MemNm.' transferred to the group: '.$ToGrpNm;
 		}
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 		$return_result['sp_Status'] = $sp_Status;
+		$return_result['ToGrpNm'] = $ToGrpNm;
+		$return_result['MemNm'] = $MemNm;
 		
 		echo json_encode($return_result);
 	}//end function

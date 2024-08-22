@@ -22,7 +22,7 @@ include('common/header.php');?>
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label text-danger">Date*</label>
                             <div class="col-sm-8">
-                              <input type="date" id="transferDate" class="form-control" />
+                              <input type="date" id="transferDate" class="form-control" value="<?=date('Y-m-d')?>" />
                               <span class="col-form-label text-danger" id="transferDate_error" style="font-size: 12px;"></span>
                               <span class="col-form-label text-success" id="transferDate_success" style="font-size: 12px;"></span>
                             </div>
