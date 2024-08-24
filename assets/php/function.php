@@ -271,8 +271,8 @@
 			if ($result = mysqli_store_result($con)) {
 				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 				//printf("%s\n", $row[0]);
-				if(isset($row['spStatus'])){
-					$sp_Status = $row['spStatus']; 
+				if(isset($row['Status'])){
+					$sp_Status = $row['Status']; 
 					$ToGrpNm = $row['ToGrpNm']; 
 					$MemNm = $row['MemNm']; 
 				}
