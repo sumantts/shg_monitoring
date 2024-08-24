@@ -193,6 +193,60 @@
 	}//end function getMember
 	
 	
+	//Validate Transfer Member
+	if($fn == 'validateTransferMember'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$FrmGrpNm = '';
+		$ToGrpNm = '';
+		$MemNm = '';
+		$MemBal = '';
+		 
+		$memberCode = $_POST["memberCode"]; 
+		$fromGroupSB = $_POST["fromGroupSB"]; 
+		$toGroupSB = $_POST["toGroupSB"]; 
+		
+		//Get Member
+		$query = "CALL usp_GetTransferData('".$memberCode."', '".$fromGroupSB."', '".$toGroupSB."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+				//printf("%s\n", $row[0]);
+				if(isset($row['FrmGrpNm'])){
+					$FrmGrpNm = $row['FrmGrpNm']; 
+					$ToGrpNm = $row['ToGrpNm']; 
+					$MemNm = $row['MemNm']; 
+					$MemBal = $row['MemBal']; 
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+				//printf("-----------------\n");
+			}
+		} while (mysqli_next_result($con));
+		/* execute multi query */		
+
+		if($FrmGrpNm == ''){
+			$status = false;
+			$error_msg = 'Invalid information';
+		}else{
+			$status = true;
+			$error_msg = '';
+		}
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['FrmGrpNm'] = $FrmGrpNm;
+		$return_result['ToGrpNm'] = $ToGrpNm;
+		$return_result['MemNm'] = $MemNm;
+		$return_result['MemBal'] = $MemBal;
+		
+		echo json_encode($return_result);
+	}//end function
+	
+	
 	//Transfer Member
 	if($fn == 'transferMember'){
 		$return_result = array();
@@ -230,7 +284,7 @@
 		} while (mysqli_next_result($con));
 		/* execute multi query */		
 
-		if($sp_Status == 0){
+		if($sp_Status == '0' || $sp_Status == ''){
 			$status = false;
 			$error_msg = 'Invalid information';
 		}else{

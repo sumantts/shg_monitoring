@@ -1555,6 +1555,58 @@
 	}); 
 	
 	
+	//Validate Transfer Member
+	$( "#validateTransferMember" ).on( "click", function() {
+		$transferDate = $('#transferDate').val();
+		$memberCode = $('#memberCode').val();
+		$fromGroupSB = $('#fromGroupSB').val();
+		$toGroupSB = $('#toGroupSB').val();
+		$transferAmount = $('#transferAmount').val();
+		$StfId = $('#StfId').val();
+		
+		$('#transferDate_error').html('');
+		$('#memberCode_error').html('');
+		$('#fromGroupSB_error').html('');
+		$('#toGroupSB_error').html('');
+		$('#transferAmount_error').html('');
+
+		if($memberCode == ''){
+			$('#memberCode_error').html('Please Enter Member Code');
+			return false;
+		}else if($fromGroupSB == ''){
+			$('#fromGroupSB_error').html('Please Enter From Group S/B');
+			return false;
+		}else if($toGroupSB == ''){
+			$('#toGroupSB_error').html('Please Enter To Group S/B');
+			return false;
+		}else{	
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "validateTransferMember", memberCode: $memberCode, fromGroupSB: $fromGroupSB, toGroupSB: $toGroupSB }
+			})
+			  .done(function( res ) { 
+				$res1 = JSON.parse(res);
+				if($res1.status == true){	
+					$('#transferMember').show();
+					$('#FrmGrpNm').val($res1.FrmGrpNm);
+					$('#ToGrpNm').val($res1.ToGrpNm);
+					$('#MemNm').val($res1.MemNm);
+					$('#MemBal').val($res1.MemBal); 				
+				}else{	
+					$('#transferMember').hide();
+					$('#FrmGrpNm').val('');
+					$('#ToGrpNm').val('');
+					$('#MemNm').val('');
+					$('#MemBal').val('');
+					alert($res1.error_msg);
+					return false;
+				}
+			});
+		}//end if
+	});
+	
+	
 	//Transfer Member
 	$( "#transferMember" ).on( "click", function() {
 		$transferDate = $('#transferDate').val();
@@ -1586,6 +1638,7 @@
 			$('#transferAmount_error').html('Please Enter Transfer Amount');
 			return false;
 		}else{	
+			if(confirm('Are you sure to Transfer this member?')){
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
@@ -1596,15 +1649,22 @@
 				$res1 = JSON.parse(res);
 				alert($res1.error_msg);
 				if($res1.status == true){	
+					$('#transferMember').hide();
 					$('#transferDate').val('');
 					$('#memberCode').val('');
 					$('#fromGroupSB').val('');
 					$('#toGroupSB').val('');
-					$('#transferAmount').val('');				
+					$('#transferAmount').val('');	
+					
+					$('#FrmGrpNm').val('');
+					$('#ToGrpNm').val('');
+					$('#MemNm').val('');
+					$('#MemBal').val('');			
 				}else{
 					return false;
 				}
 			});
+		}//end if
 		}//end if
 	});
 	

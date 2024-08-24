@@ -74,9 +74,47 @@ include('common/header.php');?>
                         </div>
 
                         <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Member Name</label>
+                            <div class="col-sm-8">
+                              <input type="text" id="MemNm" class="form-control" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">From Group Name</label>
+                            <div class="col-sm-8">
+                              <input type="text" id="FrmGrpNm" class="form-control" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">To Group Name</label>
+                            <div class="col-sm-8">
+                              <input type="text" id="ToGrpNm" class="form-control" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Member Balance</label>
+                            <div class="col-sm-8">
+                              <input type="text" id="MemBal" class="form-control" readonly />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
                           <div class="mb-2">
+                            <button type="button" id="validateTransferMember" class="btn btn-inverse-success btn-fw mb-2">Validate</button> 
+                            
                             <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
-                            <button type="button" id="transferMember" class="btn btn-inverse-success btn-fw mb-2">Transfer</button> 
+                            <button type="button" id="transferMember" class="btn btn-inverse-success btn-fw mb-2" style="display: none;">Transfer</button> 
                           </div>                          
                         </div>
                       </div> 
