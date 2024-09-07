@@ -1588,12 +1588,24 @@
 	//Get Samsad
 	if($fn == 'GetSansadList'){
 		$return_result = array();
-		$all_samsad = array();
+		$all_samsad_temp = array();
 		$status = true;
 		$error_msg = '';
 		$gpName = $_POST["gpName"];
 
-		$query2 = "CALL usp_GetSansadList('".$gpName."')";
+		if(sizeof($all_samsad) > 0){
+			for($i = 0; $i < sizeof($all_samsad); $i++){
+				if($all_samsad[$i]->GPId == $gpName){
+					$samsad_obj = new stdClass();						
+					$samsad_obj->SsdId = $all_samsad[$i]->SsdId; 
+					$samsad_obj->SsdName = $all_samsad[$i]->SsdName;
+					$samsad_obj->GPId = $all_samsad[$i]->GPId;
+					array_push($all_samsad_temp, $samsad_obj);
+				}//end if
+			}
+		}//end if
+
+		/*$query2 = "CALL usp_GetSansadList('".$gpName."')";
 		mysqli_multi_query($con, $query2);
 		do {
 			if ($result2 = mysqli_store_result($con)) {
@@ -1601,22 +1613,24 @@
 					//printf("%s\n", $row[0]);
 					$SsdId = $row2['SsdId'];
 					$SsdName = $row2['SsdName'];
+					$GPId = $row2['GPId'];
 
 					if($SsdId != ''){
 						$samsad_obj = new stdClass();						
 						$samsad_obj->SsdId = $SsdId; 
 						$samsad_obj->SsdName = $SsdName;
+						$samsad_obj->GPId = $GPId;
 						array_push($all_samsad, $samsad_obj);
 					}
 				}
 			}
 			if (mysqli_more_results($con)) {
 			}
-		} while (mysqli_next_result($con));
+		} while (mysqli_next_result($con));*/
 		
 		//sleep(1);
 		$return_result['status'] = $status;
-		$return_result['all_samsad'] = $all_samsad;
+		$return_result['all_samsad'] = $all_samsad_temp;
 		echo json_encode($return_result);
 	}//end function 
 	

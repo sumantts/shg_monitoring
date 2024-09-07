@@ -30,7 +30,8 @@ do {
   }
 } while (mysqli_next_result($con));
 /* execute multi query */  
-//echo json_encode($allGP);
+//print_r($allGP);
+//exit();
 
 ?>
   <body>
@@ -101,9 +102,9 @@ do {
                             <label class="text-danger">GP Name*</label>                             
                               <select id="gpName" class="form-control">
                                 <option value="0">Select</option> 
-                                <?php if(sizeof($allGP) > 0){
-                                  for($i = 0; $i < sizeof($allGP); $i++){?>
-                                  <option value="<?=$allGP[$i]->GpId?>"><?=$allGP[$i]->GpNm?></option> 
+                                <?php if(sizeof($gp) > 0){
+                                  for($i = 0; $i < sizeof($gp); $i++){?>
+                                  <option value="<?=$gp[$i]->GpId?>"><?=$gp[$i]->GpNm?></option> 
                                 <?php
                                 }}
                                 ?>
