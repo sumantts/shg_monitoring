@@ -1380,6 +1380,8 @@
 		$meetingDate = $('#meetingDate').val();
 		$noOfGroupAttend = $('#noOfGroupAttend').val();
 		$totalAttendant = $('#totalAttendant').val();
+		$gpName = $('#gpName').val();
+		$samsadName = $('#samsadName').val();
 		$remarks = $('#remarks').val();
 		$StfId = $('#StfId').val();
 		
@@ -1388,7 +1390,11 @@
 		$('#noOfGroupAttend_success').html('');
 		$('#noOfGroupAttend_error').html('');		
 		$('#totalAttendant_success').html('');
-		$('#totalAttendant_error').html('');
+		$('#totalAttendant_error').html('');				
+		$('#gpName_success').html('');
+		$('#gpName_error').html('');				
+		$('#samsadName_success').html('');
+		$('#samsadName_error').html('');
 		$('#remarks_success').html('');
 		$('#remarks_error').html('');
 		
@@ -1401,12 +1407,18 @@
 			return false;
 		}else if($totalAttendant == ''){
 			$('#totalAttendant_error').html('Please Enter Total Attendant');
+			return gpName;
+		}else if($gpName == '0'){
+			$('#gpName_error').html('Please Select GP Name');
+			return false;
+		}else if($samsadName == '0'){
+			$('#samsadName_error').html('Please Select Sansad Name');
 			return false;
 		}else{	 
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "saveSamsadMeeting", meetingDate: $meetingDate, noOfGroupAttend: $noOfGroupAttend, totalAttendant: $totalAttendant, remarks: $remarks, StfId: $StfId }
+			  data: { fn: "saveSamsadMeeting", meetingDate: $meetingDate, noOfGroupAttend: $noOfGroupAttend, totalAttendant: $totalAttendant, remarks: $remarks, StfId: $StfId, gpName: $gpName, samsadName: $samsadName }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -1415,6 +1427,8 @@
 					$('#noOfGroupAttend').val('');
 					$('#totalAttendant').val('');
 					$('#remarks').val('');
+					$('#gpName').val('0').trigger('change');
+					$('#samsadName').val('0').trigger('change');
 					alert('Data saved successfully');
 				}else{
 					alert('Data save error');
@@ -1665,6 +1679,88 @@
 				}
 			});
 		}//end if
+		}//end if
+	});
+
+	//Livelihood Activity
+	$( "#getLivelihoodActivity" ).on( "click", function() {
+		$collectionDate = $('#collectionDate').val();
+		$groupCode = $('#groupCode').val();
+		$StfId = $('#StfId').val();
+		
+		$('#collectionDate_success').html('');
+		$('#collectionDate_error').html('');
+		$('#groupCode_success').html('');
+		$('#groupCode_error').html('');
+		$('#GrpNm').html('Group Name: ');
+		$('#GrpAdd').html('Group Address: ');
+		$html = '';
+		$('#group_members_list').html($html);
+		$('#part_two').hide();
+		$('#part_three').hide();
+		$('#table_1').hide();
+		$('#table_2').hide();
+
+		if($collectionDate == ''){
+			$('#collectionDate_error').html('Please Enter Collection Date');
+			return false;
+		}else if($groupCode == ''){
+			$('#groupCode_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{	
+			$('#collectionDate_error').html('');
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "getGroupMembers", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					if($res1.GrpNm != ''){
+						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
+						$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
+						
+						$group_members = $res1.group_members;					
+
+						if($group_members.length > 0){
+							$sl = 1;
+							for(var i = 0; i < $group_members.length; i++){
+								$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /><input type="hidden" name="attendance_text[]" id="attendance_text_'+$group_members[i].MemId+'" value="1" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control" onblur="calculateSubtotal()"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+								$sl++;
+							}
+						}else{
+							$html += '<tr> <td style="text-align: center;" colspan="7">No data Available</td> </tr>';
+						}
+						if($group_members.length > 0){
+							$html += '<tr> <td style="text-align: right;" colspan="4">Subtotal</td><td style="text-align: right;"><input type="number" name="sub_total" id="sub_total" value="0.00" class="form-control" readonly></td><td>&nbsp;</td><td style="text-align: right;"><input type="number" name="sub_total" id="sub_total" value="0.00" class="form-control" readonly></td> </tr>';
+						}
+
+						$('#group_members_list').html($html);
+						$('#GrpSBAc').val($groupCode);
+						calculateSubtotal();
+						$('#part_two').show();
+						$('#table_1').show();
+					}else{					
+						$('#part_three').show();
+					}
+				}
+			});
+
+			//Check group id
+			$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "usp_GetGroup", savings_ac_no: $groupCode }
+			  })
+			.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$('#GroupId').val($res1.GrpId);
+				}
+			});
 		}//end if
 	});
 	

@@ -81,6 +81,11 @@
 		include('pages/social_activity.php');		
 		break;
 
+		case 'livelihood-activity':
+		$title = "Livelihood Activity";
+		include('pages/livelihood_activity.php');		
+		break;
+
 		case 'cash-book':
 		$title = "Cash Book";
 		include('pages/cash_book.php');		

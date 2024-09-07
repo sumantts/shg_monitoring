@@ -1506,9 +1506,11 @@
 		$remarks = $_POST["remarks"];
 		$StfId = $_POST["StfId"]; 
 		$MemNo = $_POST["totalAttendant"];
+		$gpName = $_POST["gpName"];
+		$samsadName = $_POST["samsadName"];
 
 		//GetGroup
-		$query = "CALL usp_InsertSamsadMeeting('".$meetingDate."', '".$StfId."', '".$noOfGroupAttend."', '".$MemNo."', '".$remarks."')";
+		$query = "CALL usp_InsertSansadMeeting('".$meetingDate."', '".$StfId."', '".$samsadName."', '".$noOfGroupAttend."', '".$MemNo."', '".$remarks."')";
 		mysqli_multi_query($con, $query);
 		do {
 			/* store the result set in PHP */

@@ -119,6 +119,12 @@
                 <span class="menu-title">Social Activity</span>
               </a>
             </li>
+            <li class="nav-item <?php if($p == 'livelihood-activity'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=livelihood-activity">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Livelihood Activity</span>
+              </a>
+            </li>
             <li class="nav-item <?php if($p == 'cash-book'){?>active<?php } ?>">
               <a class="nav-link" href="?p=cash-book">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>

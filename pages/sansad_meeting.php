@@ -36,6 +36,34 @@ include('common/header.php');
 
                         <div class="col-md-3 mr-2">
                           <div class="form-group row">
+                            <label class="text-danger">GP Name*</label>                             
+                              <select id="gpName" class="form-control">
+                                <option value="0">Select</option> 
+                                <?php if(sizeof($gp) > 0){
+                                  for($i = 0; $i < sizeof($gp); $i++){?>
+                                  <option value="<?=$gp[$i]->GpId?>"><?=$gp[$i]->GpNm?></option> 
+                                <?php
+                                }}
+                                ?>
+                              </select>
+                              <span class="col-form-label  text-danger" id="gpName_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label  text-success" id="gpName_success" style="font-size: 12px;"></span>                             
+                          </div>
+                        </div>  
+
+                        <div class="col-md-3 mr-2">
+                          <div class="form-group row">
+                            <label class="text-danger">Sansad Name*</label>                             
+                              <select id="samsadName" class="form-control">
+                                <option value="0">Select</option> 
+                              </select>
+                              <span class="col-form-label  text-danger" id="samsadName_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label  text-success" id="samsadName_success" style="font-size: 12px;"></span>                             
+                          </div>
+                        </div> 
+
+                        <div class="col-md-3 mr-2">
+                          <div class="form-group row">
                             <label class="text-danger">No. of Group Attend*</label>                             
                               <input type="tel" id="noOfGroupAttend" class="form-control" />
                               <span class="col-form-label  text-danger" id="noOfGroupAttend_error" style="font-size: 12px;"></span>
@@ -50,7 +78,7 @@ include('common/header.php');
                               <span class="col-form-label  text-danger" id="totalAttendant_error" style="font-size: 12px;"></span>
                               <span class="col-form-label  text-success" id="totalAttendant_success" style="font-size: 12px;"></span>                             
                           </div>
-                        </div>
+                        </div> 
 
                         <div class="col-md-3 mr-2">
                           <div class="form-group row">
