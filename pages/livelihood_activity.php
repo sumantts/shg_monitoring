@@ -2,56 +2,40 @@
 if(!$_SESSION["StfId"]){header('location:?p=login');}
 include('common/header.php');
 
-if(isset($_POST['insertMeetingData'])){
-  $CAmt = $_POST['CAmt'];
+if(isset($_POST['insertLivelihoodData'])){
   $collectionDate = $_POST['collectionDate'];
-  $GroupId = $_POST['GroupId'];
+  $GroupId = $_POST['GroupId']; 
   $my_id = $_POST['my_id'];
-  $attendance = $_POST['attendance'];
-  $attendance_text = $_POST['attendance_text'];
-  $GrpSBAc = $_POST['GrpSBAc'];
-  $sub_total = $_POST['sub_total'];
-  $MeetType = $_POST['meetingTypeName'];
+  $Act1Id = $_POST['Act1Id'];
+  $Act2Id = $_POST['Act2Id'];
+  $Act1Amt = $_POST['Act1Amt'];
+  
 
   $StfId = $_SESSION["StfId"];
   
   if($StfId > 0 && $GroupId > 0){
   
   $data_saved = 0;
-  for($i = 0; $i < sizeof($attendance_text); $i++){    
-      $MeetingDt = $collectionDate[$i];
-      $MemId = $my_id[$i];
-      //echo 'MemId: '.$MemId[$i];
-      if($attendance_text[$i] > 0){
-        $Attendance = true;
-      }else{
-        $Attendance = false;
-      }
-      $CollAmt = $CAmt[$i];
+  for($i = 0; $i < sizeof($collectionDate); $i++){    
+    $MeetingDt = $collectionDate[$i];
+    $MemId = $my_id[$i];
+    $Act1_Id = $Act1Id[$i];
+    $Act2_Id = $Act2Id[$i];
+    $Act1_Amt = $Act1Amt[$i];
+    
 
-      //Insert Meeting data
-     $query = "CALL usp_InsertMeetingData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Attendance."', '".$CollAmt."', '".$MeetType."')";
+    //Insert Livelihood Data
+    if(($Act1_Id > 0 || $Act2_Id > 0) && $Act1_Amt > 0){
+      $query = "CALL usp_InsertLivelihoodData('".$MeetingDt."', '".$StfId."', '".$GroupId."', '".$MemId."', '".$Act1_Id."', '".$Act2_Id."', '".$Act1_Amt."')";
       mysqli_multi_query($con, $query);
       $data_saved++;     
-  }//end for
-       
-
-  //Insert Voucher VouPurpId=1
-  if($sub_total > 0){
-    $VouPurpId = 1;
-    $query_2 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
-    mysqli_multi_query($con, $query_2);     
-
-    //Insert Voucher VouPurpId=6
-    /*$VouPurpId = 6;
-    echo $query_3 = "CALL usp_InsertVoucher('".$GroupId."', '".$MeetingDt."', '".$VouPurpId."', '".$sub_total."')";
-    mysqli_multi_query($con, $query_3);*/
-  }//end if
+    }
+  }//end for 
 
   //header("location:?p=meeting-data&save=ok&data_saved=$data_saved");
   ?>
   <script>
-   window.location.href = '?p=meeting-data&save=ok&data_saved=<?=$data_saved?>&MeetingDt=<?=$MeetingDt?>&GrpSBAc=<?=$GrpSBAc?>';
+   window.location.href = '?p=livelihood-activity&save=ok&data_saved=<?=$data_saved?>&MeetingDt=<?=$MeetingDt?>';
   </script>
   <?php
   }else{?>
@@ -61,7 +45,7 @@ if(isset($_POST['insertMeetingData'])){
   <?php }
 }//end form submit
 
-if(isset($_GET['data_saved'])){
+/*if(isset($_GET['data_saved'])){
   if($_GET['data_saved'] > 0){
     $MeetingDt = $_GET['MeetingDt'];
     $GrpSBAc = $_GET['GrpSBAc'];
@@ -71,7 +55,7 @@ if(isset($_GET['data_saved'])){
     </script>
     <?php    
   }
-}//end if
+}*/ //end if
 
 ?>
   <body>
@@ -138,7 +122,6 @@ if(isset($_GET['data_saved'])){
                                 <td scope="col" style="text-align: center;">Member Code</td>
                                 <td scope="col" style="text-align: center;">Member Name</td>
                                 <td scope="col" style="text-align: center;">Activity 1 </td>
-                                <td scope="col" style="text-align: center;">Amount </td>
                                 <td scope="col" style="text-align: center;">Activity 2 </td>
                                 <td scope="col" style="text-align: center;">Amount </td>
                               </tr>
@@ -152,7 +135,7 @@ if(isset($_GET['data_saved'])){
                             <input type="hidden" name="GroupId" id="GroupId" value="">
                             <input type="hidden" name="GrpSBAc" id="GrpSBAc" value="">
                             <input type="hidden" name="meetingTypeName" id="meetingTypeName" value="Normal">
-                            <input type="submit" name="insertMeetingData" id="insertMeetingData" class="btn btn-inverse-success btn-fw" value="Save">
+                            <input type="submit" name="insertLivelihoodData" id="insertLivelihoodData" class="btn btn-inverse-success btn-fw" value="Save">
                             </div>
                           </div>
                         </form>

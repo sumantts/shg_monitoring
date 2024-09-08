@@ -451,7 +451,8 @@
 					$Attnd = $row2['Attnd'];
 					$CAmt = $row2['CAmt'];
 					$OpnAmt = $row2['OpnAmt'];
-					$Opening_Dues = $row2['OpDues'];
+					$Opening_Dues = $row2['OpDues']; 
+
 					if(isset($row2['MemCst'])){
 						$MemCst = $row2['MemCst'];
 					}else{
@@ -478,6 +479,8 @@
 			if (mysqli_more_results($con)) {
 			}
 		} while (mysqli_next_result($con));
+		
+		
 
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
@@ -486,6 +489,7 @@
 		$return_result['GrpAdd'] = $GrpAdd;
 		$return_result['group_members'] = $group_members;
 		$return_result['grantCAmt'] = $grantCAmt;
+		
 
 		//sleep(1);
 		echo json_encode($return_result);
@@ -1668,5 +1672,188 @@
 		//sleep(1);
 		echo json_encode($return_result);
 	}//end function 
+
+	
+	
+	//Livelihood Data
+	if($fn == 'getGroupMembersLD'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$collectionDate = $_POST["collectionDate"];
+		$groupCode = $_POST["groupCode"];
+		$StfId = $_POST["StfId"];	
+		
+		$GrpId = ''; 
+		$GrpNm = '';
+		$GrpAdd = '';
+		$group_members = array();
+		$grantCAmt = 0;
+		$OpnAmt = 0;
+
+		//GetGroup
+		$query = "CALL usp_GetGroup('".$groupCode."')";
+		mysqli_multi_query($con, $query);
+		do {
+			/* store the result set in PHP */
+			if ($result = mysqli_store_result($con)) {
+				while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$GrpId = $row['GrpId'];
+					$GrpNm = $row['GrpNm'];
+					$GrpAdd = $row['GrpAdd'];
+				}
+			}
+			/* print divider */
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		//Get Group Members
+		$query2 = "CALL usp_GetGroupMembersLD('".$groupCode."', '".$StfId."', '".$collectionDate."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) {
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					//printf("%s\n", $row[0]);
+					$MemId = $row2['MemId'];
+					$MemNm = $row2['MemNm'];
+					$Attnd = '';//$row2['Attnd'];
+					$CAmt = '';//$row2['CAmt'];
+					$OpnAmt = '';//$row2['OpnAmt'];
+					$Opening_Dues = '';//$row2['OpDues']; 
+					$Act1 = $row2['Act1']; 
+					$Act2 = $row2['Act2']; 
+					$Amt = $row2['Amt']; 
+
+					if(isset($row2['MemCst'])){
+						$MemCst = $row2['MemCst'];
+					}else{
+						$MemCst = '';
+					}
+					$grantCAmt = 0;//$grantCAmt + $CAmt;
+
+					if($MemId != ''){
+						$group_member = new stdClass();
+						
+						$group_member->MemId = $MemId; 
+						$group_member->MemNm = $MemNm;
+						$group_member->Attnd = $Attnd;
+						$group_member->CAmt = $CAmt;
+						$group_member->OpnAmt = $OpnAmt;
+						$group_member->Opening_Dues = $Opening_Dues;
+						$group_member->grantCAmt = $grantCAmt;
+						$group_member->MemCst = $MemCst;
+						
+						$group_member->Act1 = $Act1;
+						$group_member->Act2 = $Act2;
+						$group_member->Amt = $Amt;
+
+						array_push($group_members, $group_member);
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		$ll_list1 = '[
+			{
+				"Id": "1",
+				"LiveNm": "প্রাণীপালন"
+			},{
+				"Id": "2",
+				"LiveNm": "ফুলগাঁথা"			
+			},{
+				"Id": "3",
+				"LiveNm": "শোলারকাজ"			
+			},{
+				"Id": "4",
+				"LiveNm": "মাটির কাজ"			
+			},{
+				"Id": "5",
+				"LiveNm": "ফুচকাতৈরী"			
+			},{
+				"Id": "6",
+				"LiveNm": "কৃষি কাজ"			
+			},{
+				"Id": "7",
+				"LiveNm": "মাছধরা"			
+			},{
+				"Id": "8",
+				"LiveNm": "স্কুলে রান্না"			
+			},{
+				"Id": "9",
+				"LiveNm": "গৃহ শিক্ষক"			
+			},{
+				"Id": "10",
+				"LiveNm": "সেবিকা"			
+			},{
+				"Id": "11",
+				"LiveNm": "ধূপ তৈরি"			
+			},{
+				"Id": "12",
+				"LiveNm": "বিউটিশিয়ান"			
+			},{
+				"Id": "13",
+				"LiveNm": "জরী"			
+			},{
+				"Id": "14",
+				"LiveNm": "ব্যাগ"			
+			},{
+				"Id": "15",
+				"LiveNm": "হোম ডেলিভারি"			
+			},{
+				"Id": "16",
+				"LiveNm": "পরিচারিকা"			
+			},{
+				"Id": "17",
+				"LiveNm": "টেইলারিং"			
+			},{
+				"Id": "18",
+				"LiveNm": "রাখি"			
+			},{
+				"Id": "19",
+				"LiveNm": "উল নিটিং"			
+			},{
+				"Id": "20",
+				"LiveNm": "সংস্কৃতি চর্চার শিক্ষিকা"			
+			},{
+				"Id": "21",
+				"LiveNm": "তেজ পাতা প্যাকেট তৈরি"			
+			},{
+				"Id": "22",
+				"LiveNm": "খোঁপায় দেওয়া জাল তৈরী"			
+			},{
+				"Id": "23",
+				"LiveNm": "পুঁতির কাজ"			
+			},{
+				"Id": "24",
+				"LiveNm": "খেলনা গাড়ি তৈরি"			
+			},{
+				"Id": "25",
+				"LiveNm": "বাস্কেট তৈরি"			
+			},{
+				"Id": "26",
+				"LiveNm": "বাতি তৈরি"			
+			},{
+				"Id": "27",
+				"LiveNm": "ছাতার কাজ"			
+			}
+		]';
+		$ll_list = json_decode($ll_list1);
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg;
+		$return_result['GrpId'] = $GrpId;
+		$return_result['GrpNm'] = $GrpNm;
+		$return_result['GrpAdd'] = $GrpAdd;
+		$return_result['group_members'] = $group_members;
+		$return_result['grantCAmt'] = $grantCAmt;
+		$return_result['ll_list'] = $ll_list;
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end function LD
 	
 ?>

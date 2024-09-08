@@ -1712,7 +1712,7 @@
 			$.ajax({
 			  method: "POST",
 			  url: "assets/php/function.php",
-			  data: { fn: "getGroupMembers", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
+			  data: { fn: "getGroupMembersLD", collectionDate: $collectionDate, groupCode: $groupCode, StfId: $StfId }
 			})
 			  .done(function( res ) {
 				//console.log(res);
@@ -1722,24 +1722,56 @@
 						$('#GrpNm').html('Group Name: ' + $res1.GrpNm);
 						$('#GrpAdd').html('Group Address: ' + $res1.GrpAdd);					
 						
-						$group_members = $res1.group_members;					
+						$group_members = $res1.group_members;
+						$ll_list = $res1.ll_list;					
 
 						if($group_members.length > 0){
 							$sl = 1;
 							for(var i = 0; i < $group_members.length; i++){
-								$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;"><input type="checkbox" name="attendance[]" id="attendance_'+$group_members[i].MemId+'" checked class="check_class" data-member_id="'+$group_members[i].MemId+'" /><input type="hidden" name="attendance_text[]" id="attendance_text_'+$group_members[i].MemId+'" value="1" /></td> <td style="text-align: right;width: 100px;"><input type="number" name="CAmt[]" id="CAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control" onblur="calculateSubtotal()"> <input type="hidden" name="hiddenCAmt[]" id="hiddenCAmt_'+$group_members[i].MemId+'" value="'+$group_members[i].CAmt+'" class="form-control"><input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'">  <input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"> </td> </tr>';
+								$Act1 = $group_members[i].Act1;
+								$Act2 = $group_members[i].Act2;
+
+								$select_html1 = '';
+								$select_html1 += '<select id="Act1Id_'+$group_members[i].MemId+'" name="Act1Id[]" class="form-control">';
+									$select_html1 += '<option value="0">Select</option>'; 
+									if($ll_list.length > 0){
+										for(var j = 0; j < $ll_list.length; j++){
+											$selected_text1 = '';
+											if($ll_list[j].Id == $Act1){
+												$selected_text1 = 'selected';
+											}
+											$select_html1 += '<option value="'+$ll_list[j].Id+'" '+$selected_text1+'>'+$ll_list[j].LiveNm+'</option>'; 
+										}
+									}
+								$select_html1 += '</select>'; 
+
+								$select_html2 = '';
+								$select_html2 += '<select id="Act2Id_'+$group_members[i].MemId+'" name="Act2Id[]" class="form-control">';
+									$select_html2 += '<option value="0">Select</option>'; 
+									if($ll_list.length > 0){
+										for(var k = 0; k < $ll_list.length; k++){
+											$selected_text2 = '';
+											if($ll_list[k].Id == $Act2){
+												$selected_text2 = 'selected';
+											}
+											$select_html2 += '<option value="'+$ll_list[k].Id+'" '+$selected_text2+'>'+$ll_list[k].LiveNm+'</option>'; 
+										}
+									}
+								$select_html2 += '</select>'; 
+
+								$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$group_members[i].MemId+'</td> <td style="text-align: center;">'+$group_members[i].MemNm+'</td> <td style="text-align: center;">'+$select_html1+'</td> <td style="text-align: center;">'+$select_html2+'</td> <td style="text-align: right;width: 100px;"><input type="number" name="Act1Amt[]" id="Act1Amt_'+$group_members[i].MemId+'" value="'+$group_members[i].Amt+'" class="form-control" onblur="calculateSubtotalAct1Amt()"> <input type="hidden" name="collectionDate[]" id="collectionDate_'+$group_members[i].MemId+'" value="'+$collectionDate+'"><input type="hidden" name="my_id[]" id="my_id_'+$group_members[i].MemId+'" value="'+$group_members[i].MemId+'"></td></tr>';
 								$sl++;
 							}
 						}else{
-							$html += '<tr> <td style="text-align: center;" colspan="7">No data Available</td> </tr>';
+							$html += '<tr> <td style="text-align: center;" colspan="6">No data Available</td> </tr>';
 						}
-						if($group_members.length > 0){
-							$html += '<tr> <td style="text-align: right;" colspan="4">Subtotal</td><td style="text-align: right;"><input type="number" name="sub_total" id="sub_total" value="0.00" class="form-control" readonly></td><td>&nbsp;</td><td style="text-align: right;"><input type="number" name="sub_total" id="sub_total" value="0.00" class="form-control" readonly></td> </tr>';
-						}
+						/*if($group_members.length > 0){
+							$html += '<tr> <td style="text-align: right;" colspan="5">Subtotal</td><td style="text-align: right;"><input type="number" name="sub_total" id="sub_total" value="0.00" class="form-control" readonly></td> </tr>';
+						}*/
 
 						$('#group_members_list').html($html);
 						$('#GrpSBAc').val($groupCode);
-						calculateSubtotal();
+						//calculateSubtotal();
 						$('#part_two').show();
 						$('#table_1').show();
 					}else{					
