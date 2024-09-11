@@ -1583,6 +1583,17 @@
 			}
 		} while (mysqli_next_result($con));
 
+		if(sizeof($activities) > 0){
+			for($a = 0; $a < sizeof($activities); $a++){
+				for($s = 0; $s < sizeof($social_activities); $s++){
+					if($activities[$a]->Activity_Id == $social_activities[$s]->id){
+						$activities[$a]->ActNm = $social_activities[$s]->name;
+						break;
+					}//end if
+				}//end for s
+			}//end for a
+		}//end if
+
 		$return_result['status'] = $status;
 		$return_result['error_msg'] = $error_msg;
 		$return_result['activities'] = $activities;
