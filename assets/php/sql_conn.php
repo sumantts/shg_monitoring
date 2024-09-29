@@ -3,15 +3,17 @@
 
 	session_start();
 	
-  	$p_name = 'Bagnan Mahila Bikash';
-	$logo = 'logo.jpg';
-	$ico = 'logo-mahila.ico';
-
 	//Mysqli DB Connection Procedural style
-	$host_name = "localhost";
-	$user_name = "root";
-	$password = "";
-	$db_name = "pioneers_shg_monitoring";
+	if($_SERVER['HTTP_HOST'] == 'localhost'){
+		$host_name = "localhost";
+		$user_name = "root";
+		$password = "";
+		$db_name = "db_shg_monitoring";
+	}else{
+		$p_name = 'Bagnan Mahila Bikash';
+		$logo = 'logo.jpg';
+		$ico = 'logo-mahila.ico';
+	}
 
 	$con = mysqli_connect($host_name, $user_name, $password, $db_name);
 	

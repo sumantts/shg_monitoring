@@ -1795,6 +1795,55 @@
 			});
 		}//end if
 	});
+
+	
+
+	//Search Sansad Meeting
+	$( "#searchSansadMeeting" ).on( "click", function() {
+		$FrmDate = $('#FrmDate').val();
+		$UptoDate = $('#UptoDate').val();
+		$StfId = $('#StfId').val();
+
+		if($FrmDate == ''){
+			$('#FrmDate_error').html('Please Enter Collection Date');
+			return false;
+		}else if($UptoDate == ''){
+			$('#UptoDate_error').html('Please Enter Savings A/c. No.');
+			return false;
+		}else{	
+			$html = '';
+			$('#FrmDate_error').html($html);
+			$('#UptoDate_error').html(''); 
+			$("#sansad_meet_ser_1 > tbody").html(""); 
+			
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "searchSansadMeeting", FrmDate: $FrmDate, UptoDate: $UptoDate, StfId: $StfId }
+			})
+			  .done(function( res ) {
+				
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					if($res1.GrpNm != ''){	
+						$group_reports = $res1.group_reports;					
+						
+						if($group_reports.length > 0){
+							$sl = 1;
+							for(var i = 0; i < $group_reports.length; i++){
+								$html += '<tr> <td style="text-align: center;">'+$sl+'</td><td style="text-align: center;">'+$group_reports[i].MetDate+'</td> <td style="text-align: center;">'+$group_reports[i].SName+'</td> <td style="text-align: right;width: 100px;">'+$group_reports[i].GrpNo+'</td><td style="text-align: right;width: 100px;">'+$group_reports[i].MemNo+'</td> </tr>';
+								$sl++;
+							}
+						}else{
+							$html += '<tr> <td style="text-align: center;" colspan="5">No data Available</td>$res1.ColAmt_st </tr>';
+						}
+						//console.log($html);
+						$('#sansad_meet_ser_1 > tbody').append($html); 
+					} 
+				}
+			}); 
+		}//end if
+	});
 	
 	//Loading screen
 	$body = $("body");

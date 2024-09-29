@@ -13,6 +13,7 @@ include('common/header.php');
         <div class="main-panel">
           <div class="content-wrapper">
               <div class="col-12 grid-margin">
+                <!-- First Card start -->
                 <div class="card">
                   <div class="card-body">
                     <?php 
@@ -103,6 +104,73 @@ include('common/header.php');
                     </form>
                   </div>
                 </div>
+                <!-- First Card end -->
+
+                
+                <!-- Second Card start -->
+                <div class="card">
+                  <div class="card-body">
+                    <?php 
+                    if(isset($_GET["save"])){
+                    if($_GET["save"] == "ok"){?> 
+                      <span class="col-form-label  text-success" style="font-size: 18px;"><?=$_GET["data_saved"]?> Records inserted successfully</span>
+                    <?php } }?>
+                    
+                    <h4 class="card-title">Search <?=$title?></h4>
+                    <form class="form-sample" >
+                      <!--<p class="card-description"> Personal info </p>-->
+                      <div class="row">
+                        <div class="col-md-3 mr-2">
+                          <div class="form-group row">
+                            <label class="text-danger">From Date*</label> 
+                              <input type="date" id="FrmDate" value="<?=date('Y-m-d')?>" class="form-control" />
+                              <span class="col-form-label text-danger" id="FrmDate_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label text-success" id="FrmDate_success" style="font-size: 12px;"></span>
+                             
+                          </div>
+                        </div>
+
+                        <div class="col-md-3 mr-2">
+                          <div class="form-group row">
+                            <label class="text-danger">Upto Date*</label>                             
+                              <input type="date" id="UptoDate" value="<?=date('Y-m-d')?>" class="form-control" />
+                              <span class="col-form-label  text-danger" id="UptoDate_error" style="font-size: 12px;"></span>
+                              <span class="col-form-label  text-success" id="UptoDate_success" style="font-size: 12px;"></span>                             
+                          </div>
+                        </div>
+                                                
+                        <div class="col-md-2">
+                          <div class="mt-4">
+                            <input type="hidden" name="StfId" id="StfId" value="<?=$_SESSION["StfId"]?>">
+                            <button type="button" id="searchSansadMeeting" class="btn btn-inverse-success btn-fw">Show</button>
+                          </div>
+                        </div>
+
+                      </div>  
+                    </form>
+
+                    <div id="part_two" >
+                      <div class="table-responsive-sm" id="table_2" >
+                          <table class="table table-bordered" id="sansad_meet_ser_1">
+                            <thead>
+                              <tr>
+                                <td scope="col" style="text-align: center;">SL#</td>
+                                <td scope="col" style="text-align: center;">Meeting Date</td>
+                                <td scope="col" style="text-align: center;">Sansad Name </td>
+                                <td scope="col" style="text-align: right;">Group No.</td>
+                                <td scope="col" style="text-align: right;">Member No.</td>
+                              </tr>
+                            </thead>
+                            <tbody id="group_members_list_1">
+                            </tbody>
+                          </table>                          
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                 
+                <!-- Second Card end -->
               </div> 		  
 		  </div>
           <!-- content-wrapper ends --> 

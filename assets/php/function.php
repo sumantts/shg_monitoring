@@ -1867,4 +1867,54 @@
 		echo json_encode($return_result);
 	}//end function LD
 	
+	//Meeting Data
+	if($fn == 'searchSansadMeeting'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$FrmDate = $_POST["FrmDate"];
+		$UptoDate = $_POST["UptoDate"];
+		$StfId = $_POST["StfId"];
+		
+		$MettingDt = '';
+
+		$group_reports = array();
+		
+
+		//Get Group Members
+		$query2 = "CALL usp_RptSansadMeeting('".$StfId."', '".$FrmDate."', '".$UptoDate."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) { 
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+					$MetDate = $row2['MetDate'];
+					$SId = $row2['SId'];
+					$SName = $row2['SName'];
+					$GrpNo = $row2['GrpNo'];
+					$MemNo = $row2['MemNo'];
+
+					
+					if($MetDate != ''){
+						$group_report = new stdClass();
+						
+						$group_report->MetDate = $MetDate;
+						$group_report->SName = $all_samsad[$SId]->SsdName;
+						$group_report->GrpNo = $GrpNo;
+						$group_report->MemNo = $MemNo; 
+
+						array_push($group_reports, $group_report); 
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		$return_result['status'] = $status; 
+		$return_result['group_reports'] = $group_reports; 
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end
+	
 ?>
