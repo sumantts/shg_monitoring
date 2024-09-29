@@ -30,7 +30,7 @@ if(isset($_POST["importSubmit"])){
             $UID = $line[7];
             $OpenBal = $line[8];
             $OPDue = $line[9];
-            $StaffId = $line[10];
+            $StaffId = date('Y-m-d', strtotime($line[10]));
 
             //Call SP to save data into DB
             if($data_saved > 0){

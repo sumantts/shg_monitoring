@@ -25,7 +25,7 @@ if(isset($_POST["importSubmit"])){
             $GroupAdd = $line[2];
             $SBAnNo = $line[3];
             $MemSav = 0.0;
-            $StfId = $line[4];
+            $StfId = date('Y-m-d', strtotime($line[4]));                     
 
             //Call SP to save data into DB
             if($data_saved > 0){
