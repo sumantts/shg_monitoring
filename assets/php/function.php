@@ -1850,6 +1850,15 @@
 			},{
 				"Id": "27",
 				"LiveNm": "ছাতার কাজ"			
+			},{
+				"Id": "28",
+				"LiveNm": "ব্যবসা"			
+			},{
+				"Id": "29",
+				"LiveNm": "চাকুরী / সার্ভিস"			
+			},{
+				"Id": "30",
+				"LiveNm": "কাগজের ঠোঙ্গা তৈরী"			
 			}
 		]';
 		$ll_list = json_decode($ll_list1);
@@ -1894,7 +1903,7 @@
 						$group_report = new stdClass();
 						
 						$group_report->MetDate = $MetDate;
-						$group_report->SName = $all_samsad[$SId]->SsdName;
+						$group_report->SName = $all_samsad[$SId-1]->SsdName;
 						$group_report->GrpNo = $GrpNo;
 						$group_report->MemNo = $MemNo; 
 						array_push($group_reports, $group_report); 
@@ -1923,6 +1932,101 @@
 		$MettingDt = '';
 		$group_reports = array();	
 
+		$ll_list1 = '[
+			{
+				"Id": "1",
+				"LiveNm": "প্রাণীপালন"
+			},{
+				"Id": "2",
+				"LiveNm": "ফুলগাঁথা"			
+			},{
+				"Id": "3",
+				"LiveNm": "শোলারকাজ"			
+			},{
+				"Id": "4",
+				"LiveNm": "মাটির কাজ"			
+			},{
+				"Id": "5",
+				"LiveNm": "ফুচকাতৈরী"			
+			},{
+				"Id": "6",
+				"LiveNm": "কৃষি কাজ"			
+			},{
+				"Id": "7",
+				"LiveNm": "মাছধরা"			
+			},{
+				"Id": "8",
+				"LiveNm": "স্কুলে রান্না"			
+			},{
+				"Id": "9",
+				"LiveNm": "গৃহ শিক্ষক"			
+			},{
+				"Id": "10",
+				"LiveNm": "সেবিকা"			
+			},{
+				"Id": "11",
+				"LiveNm": "ধূপ তৈরি"			
+			},{
+				"Id": "12",
+				"LiveNm": "বিউটিশিয়ান"			
+			},{
+				"Id": "13",
+				"LiveNm": "জরী"			
+			},{
+				"Id": "14",
+				"LiveNm": "ব্যাগ"			
+			},{
+				"Id": "15",
+				"LiveNm": "হোম ডেলিভারি"			
+			},{
+				"Id": "16",
+				"LiveNm": "পরিচারিকা"			
+			},{
+				"Id": "17",
+				"LiveNm": "টেইলারিং"			
+			},{
+				"Id": "18",
+				"LiveNm": "রাখি"			
+			},{
+				"Id": "19",
+				"LiveNm": "উল নিটিং"			
+			},{
+				"Id": "20",
+				"LiveNm": "সংস্কৃতি চর্চার শিক্ষিকা"			
+			},{
+				"Id": "21",
+				"LiveNm": "তেজ পাতা প্যাকেট তৈরি"			
+			},{
+				"Id": "22",
+				"LiveNm": "খোঁপায় দেওয়া জাল তৈরী"			
+			},{
+				"Id": "23",
+				"LiveNm": "পুঁতির কাজ"			
+			},{
+				"Id": "24",
+				"LiveNm": "খেলনা গাড়ি তৈরি"			
+			},{
+				"Id": "25",
+				"LiveNm": "বাস্কেট তৈরি"			
+			},{
+				"Id": "26",
+				"LiveNm": "বাতি তৈরি"			
+			},{
+				"Id": "27",
+				"LiveNm": "ছাতার কাজ"			
+			},{
+				"Id": "28",
+				"LiveNm": "ব্যবসা"			
+			},{
+				"Id": "29",
+				"LiveNm": "চাকুরী / সার্ভিস"			
+			},{
+				"Id": "30",
+				"LiveNm": "কাগজের ঠোঙ্গা তৈরী"			
+			}
+		]';
+		$ll_list = json_decode($ll_list1);
+
 		//Get Group Members
 		$query2 = "CALL usp_RptLivelihoodData('".$StfId."', '".$savingsAccNo."', '".$FrmDate."', '".$UptoDate."')";
 		mysqli_multi_query($con, $query2);
@@ -1941,12 +2045,12 @@
 						$group_report->Sl = $Sl;
 						$group_report->MemNm = $MemNm;
 						if($Act1 != null){
-							$group_report->Act1 = $Act1;
+							$group_report->Act1 = $ll_list[$Act1-1]->LiveNm;
 						}else{
 							$group_report->Act1 = '';
 						}
 						if($Act2 != null){
-							$group_report->Act2 = $Act2;
+							$group_report->Act2 = $ll_list[$Act2-1]->LiveNm;
 						}else{
 							$group_report->Act2 = '';
 						}
