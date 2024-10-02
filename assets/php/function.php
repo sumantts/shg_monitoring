@@ -1874,12 +1874,9 @@
 		$error_msg = '';
 		$FrmDate = $_POST["FrmDate"];
 		$UptoDate = $_POST["UptoDate"];
-		$StfId = $_POST["StfId"];
-		
+		$StfId = $_POST["StfId"];		
 		$MettingDt = '';
-
-		$group_reports = array();
-		
+		$group_reports = array();	
 
 		//Get Group Members
 		$query2 = "CALL usp_RptSansadMeeting('".$StfId."', '".$FrmDate."', '".$UptoDate."')";
@@ -1892,7 +1889,6 @@
 					$SName = $row2['SName'];
 					$GrpNo = $row2['GrpNo'];
 					$MemNo = $row2['MemNo'];
-
 					
 					if($MetDate != ''){
 						$group_report = new stdClass();
@@ -1901,7 +1897,6 @@
 						$group_report->SName = $all_samsad[$SId]->SsdName;
 						$group_report->GrpNo = $GrpNo;
 						$group_report->MemNo = $MemNo; 
-
 						array_push($group_reports, $group_report); 
 					}
 				}
@@ -1912,7 +1907,64 @@
 
 		$return_result['status'] = $status; 
 		$return_result['group_reports'] = $group_reports; 
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end
+	
+	//Lively Hood Data
+	if($fn == 'searchLiveHooData'){
+		$return_result = array();
+		$status = true;
+		$error_msg = '';
+		$savingsAccNo = $_POST["savingsAccNo"];
+		$FrmDate = $_POST["FrmDate"];
+		$UptoDate = $_POST["UptoDate"];
+		$StfId = $_POST["StfId"];		
+		$MettingDt = '';
+		$group_reports = array();	
 
+		//Get Group Members
+		$query2 = "CALL usp_RptLivelihoodData('".$StfId."', '".$savingsAccNo."', '".$FrmDate."', '".$UptoDate."')";
+		mysqli_multi_query($con, $query2);
+		do {
+			if ($result2 = mysqli_store_result($con)) { 
+				while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) { 
+					$Sl = $row2['Sl'];
+					$MemNm = $row2['MemNm'];
+					$Act1 = $row2['Act1'];
+					$Act2 = $row2['Act2'];
+					$Amt = $row2['Amt'];
+					
+					if($Sl != ''){
+						$group_report = new stdClass();
+						
+						$group_report->Sl = $Sl;
+						$group_report->MemNm = $MemNm;
+						if($Act1 != null){
+							$group_report->Act1 = $Act1;
+						}else{
+							$group_report->Act1 = '';
+						}
+						if($Act2 != null){
+							$group_report->Act2 = $Act2;
+						}else{
+							$group_report->Act2 = '';
+						}
+						if($Amt != null){
+							$group_report->Amt = $Amt; 
+						}else{
+							$group_report->Amt = ''; 
+						}
+						array_push($group_reports, $group_report); 
+					}
+				}
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		$return_result['status'] = $status; 
+		$return_result['group_reports'] = $group_reports; 
 		//sleep(1);
 		echo json_encode($return_result);
 	}//end

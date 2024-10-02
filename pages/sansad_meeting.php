@@ -168,8 +168,7 @@ include('common/header.php');
                     </div>
                     
                   </div>
-                </div>
-                 
+                </div>                 
                 <!-- Second Card end -->
               </div> 		  
 		  </div>
