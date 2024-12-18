@@ -67,6 +67,9 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Collection Report of <?=$StfNm?></h4>
+					<div>
+						<a href="./fpdf186/meeting_data_pdf.php?StfId=<?=$StfId?>&MeetingDt=<?=$MeetingDt?>&GrpSBAc=<?=$GrpSBAc?>" target="_blank">PDF Download</a>
+					</div>
 					
                     <div class="table-responsive-sm">
 						<table class="table table-bordered">

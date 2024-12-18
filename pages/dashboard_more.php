@@ -49,11 +49,14 @@
 	}//end if
 		
 	//echo json_encode($all_results);
-
-	
-		
 ?>
   <body>
+	<style>
+		a.disabled {
+		pointer-events: none;
+		cursor: default;
+		}
+	</style>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <?php include('common/navbar.php');?>
@@ -87,7 +90,7 @@
 							<td style="text-align: center;"><?=$all_results[$i]->GrpNm?></td>
 							<td style="text-align: center;"><?=$all_results[$i]->Attnd?></td>
 							<td style="text-align: right;"><?=number_format($all_results[$i]->Amt, 2)?></td>
-							<td style="text-align: center;"><a href="javascript:void(0);" onClick="deleteCollectionRecord('<?=$all_results[$i]->MDate?>', '<?=$all_results[$i]->SBAc?>', '<?=$_GET['dt']?>')">Delete</a></td>
+							<td style="text-align: center;"><a href="javascript:void(0);" onClick="deleteCollectionRecord('<?=$all_results[$i]->MDate?>', '<?=$all_results[$i]->SBAc?>', '<?=$_GET['dt']?>')" class="disabled" >Delete</a></td>
 							</tr>
 							<?php } }else{ ?>
 							<tr>

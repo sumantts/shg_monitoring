@@ -99,7 +99,7 @@ if(isset($_GET['data_saved'])){
                         <div class="col-md-3 mr-2">
                           <div class="form-group row">
                             <label class="text-danger">Collection Date*</label> 
-                              <input type="date" id="collectionDate" value="<?=date('Y-m-d')?>" class="form-control" />
+                              <input type="date" id="collectionDate" value="<?=date('Y-m-d')?>" class="form-control" readonly />
                               <span class="col-form-label  text-danger" id="collectionDate_error" style="font-size: 12px;"></span>
                               <span class="col-form-label  text-success" id="collectionDate_success" style="font-size: 12px;"></span>
                              

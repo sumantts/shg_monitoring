@@ -1,0 +1,32 @@
+1. Meeting Data:
+https://pioneersolution.co.in/shg/?p=meeting-data
+Collection Date Disable - Done
+
+1.A. Print Receipt After Save
+SP: usp_PrintMeetingReceipt
+
+Format:
+Bagnan Mahila Bikash CCSL
+
+Collection Date:
+Group Name: 
+S/B A/c No.:
+Amount:
+Agent Name:
+
+Sl	Member Name	Amount
+
+-Done
+
+2. Dashboard: View ~ Show ==> Action ~ Delete : Disable
+https://pioneersolution.co.in/shg/?p=dashboard - Done
+
+3. New Menu Under 99 : Collection Delete After Member Update
+
+Collection Date:
+Savings A/c. No.
+
+Delete = Confirmation Before run SP
+SP: usp_DeleteCollection
+
+
