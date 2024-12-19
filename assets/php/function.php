@@ -2073,4 +2073,28 @@
 		echo json_encode($return_result);
 	}//end
 	
+	//Delete Collection Data
+	if($fn == 'formColDel'){
+		$return_result = array();
+		$status = true;
+		$error_msg = ''; 
+		$collectionDate = $_POST["collectionDate"];
+		$savingsAcNo = $_POST["savingsAcNo"];
+		
+
+		$query = "CALL usp_DeleteCollection('".$savingsAcNo."', '".$collectionDate."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {
+				$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+		
+		$return_result['status'] = $status;
+		
+		echo json_encode($return_result);
+	}//end fu
+	
 ?>

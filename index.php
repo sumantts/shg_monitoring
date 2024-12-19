@@ -111,6 +111,11 @@
 		include('pages/member_update.php');		
 		break;
 		
+		case 'collection-delete':
+		$title = "Collection Delete";
+		include('pages/collection_delete.php');		
+		break;
+		
 		case 'data-export':
 		$title = "Meeting Data Export";
 		include('pages/data_export.php');		

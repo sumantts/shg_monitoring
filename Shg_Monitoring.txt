@@ -21,7 +21,7 @@ Sl	Member Name	Amount
 2. Dashboard: View ~ Show ==> Action ~ Delete : Disable
 https://pioneersolution.co.in/shg/?p=dashboard - Done
 
-3. New Menu Under 99 : Collection Delete After Member Update
+3. New Menu Under 99 : Collection Delete After Member Update - Done
 
 Collection Date:
 Savings A/c. No.

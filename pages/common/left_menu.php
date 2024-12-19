@@ -160,6 +160,12 @@
               </a>
             </li>
 
+            <li class="nav-item <?php if($p == 'collection-delete'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=collection-delete">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Collection Delete</span>
+              </a>
+            </li>
             
             <li class="nav-item <?php if($p == 'data-export'){?>active<?php } ?>">
               <a class="nav-link" href="?p=data-export">

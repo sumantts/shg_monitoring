@@ -1891,6 +1891,29 @@
 			}); 
 		}//end if
 	});
+
+	$('#formColDel').on('submit', function(){
+		event.preventDefault();
+
+		if(confirm('Are you sure to delete the collection data?')){
+			$collectionDate = $('#collectionDate').val();
+			$savingsAcNo = $('#savingsAcNo').val();
+
+			$.ajax({
+				method: "POST",
+				url: "assets/php/function.php",
+				data: { fn: "formColDel", collectionDate: $collectionDate, savingsAcNo: $savingsAcNo}
+			})
+				.done(function( res ) {
+				//console.log(res);
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					alert('Data deleted successfully');					
+				}					
+			});
+		}
+
+	})
 	
 	//Loading screen
 	$body = $("body");
