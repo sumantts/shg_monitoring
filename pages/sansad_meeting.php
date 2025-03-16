@@ -83,8 +83,14 @@ include('common/header.php');
 
                         <div class="col-md-3 mr-2">
                           <div class="form-group row">
-                            <label>Remarks</label>                             
-                              <input type="text" id="remarks" class="form-control" />
+                            <label class="text-danger">Meeting Type*</label>                             
+                              <!-- <input type="text" id="remarks" class="form-control" /> -->
+                                                          
+                              <select id="remarks" class="form-control">
+                                <option value="Normal">Normal</option>
+                                <option value="Special">Special</option>
+                              </select>
+
                               <span class="col-form-label  text-danger" id="remarks_error" style="font-size: 12px;"></span>
                               <span class="col-form-label  text-success" id="remarks_success" style="font-size: 12px;"></span>                             
                           </div>
