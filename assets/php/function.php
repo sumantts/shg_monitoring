@@ -1498,6 +1498,117 @@
 		echo json_encode($return_result);
 	}//end fu
 	
+	//Incentive Report	
+	if($fn == 'showIcentiveReport'){
+		$IncDate = $_POST["IncDate"];
+		$StfId = $_SESSION["StfId"];
+
+		$ins_month_format = date('F-Y', strtotime($IncDate));
+
+		$return_result = array();
+		$sl_rows = array();
+		$status = true; 
+		$sub_total = 0;
+		$error_msg = '';
+
+		//View Cash Book
+		$query = "CALL usp_RptFoIcentive('".$IncDate."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					$status = true;
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);	 
+
+						$sl_row = new stdClass();
+						$sl_row->Id = $row['Id'];
+						$sl_row->FOName = $row['FOName'];
+						$sl_row->MainPart = number_format($row['MainPart'], 2);
+						$sl_row->ExtraPart = number_format($row['ExtraPart'], 2);
+						$sl_row->SocialPart = number_format($row['SocialPart'], 2);
+						$sl_row->TotAmt = number_format($row['TotAmt'], 2); 
+						$TotAmt = $row['TotAmt'];
+						array_push($sl_rows, $sl_row);
+
+						$sub_total = $sub_total + $TotAmt; 
+					}//end while 
+				}else{
+					$status = false;
+				}//end if
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg; 
+		$return_result['sl_rows'] = $sl_rows; 
+		$return_result['ins_month_format'] = $ins_month_format; 
+		$return_result['sub_total'] = number_format($sub_total, 2);		
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+
+	
+	
+	//Incentive Report	
+	if($fn == 'calculateIcentive'){
+		$IncDate = $_POST["IncDate"];
+		$StfId = $_SESSION["StfId"];
+
+		$ins_month_format = date('F-Y', strtotime($IncDate));
+
+		$return_result = array();
+		$sl_rows = array();
+		$status = true; 
+		$sub_total = 0;
+		$error_msg = '';
+
+		//View Cash Book
+		/*$query = "CALL usp_RptFoIcentive('".$IncDate."')";
+		mysqli_multi_query($con, $query);
+		do {
+			if ($result = mysqli_store_result($con)) {				
+				if(mysqli_num_rows($result) > 0){
+					$status = true;
+					while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+						//printf("%s\n", $row[0]);	 
+
+						$sl_row = new stdClass();
+						$sl_row->Id = $row['Id'];
+						$sl_row->FOName = $row['FOName'];
+						$sl_row->MainPart = number_format($row['MainPart'], 2);
+						$sl_row->ExtraPart = number_format($row['ExtraPart'], 2);
+						$sl_row->SocialPart = number_format($row['SocialPart'], 2);
+						$sl_row->TotAmt = number_format($row['TotAmt'], 2); 
+						$TotAmt = $row['TotAmt'];
+						array_push($sl_rows, $sl_row);
+
+						$sub_total = $sub_total + $TotAmt; 
+					}//end while 
+				}else{
+					$status = false;
+				}//end if
+			}
+			if (mysqli_more_results($con)) {
+			}
+		} while (mysqli_next_result($con));
+
+		$return_result['sl_rows'] = $sl_rows; 
+		$return_result['ins_month_format'] = $ins_month_format; 
+		$return_result['sub_total'] = number_format($sub_total, 2);*/	
+
+
+		$return_result['status'] = $status;
+		$return_result['error_msg'] = $error_msg; 	
+
+		//sleep(1);
+		echo json_encode($return_result);
+	}//end fu
+	
 	//Sansad Meeting
 	if($fn == 'saveSamsadMeeting'){
 		$return_result = array();

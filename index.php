@@ -138,6 +138,10 @@
 		$title = "Loan Register Report";
 		include('pages/loan_register_report.php');		
 		break;
+		case 'incentive-report':
+		$title = "Incentive Report";
+		include('pages/incentive_report.php');		
+		break;
 		
 		case 'change-password':
 		$title = "Change Password";

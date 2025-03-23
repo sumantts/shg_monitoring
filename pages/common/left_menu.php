@@ -223,6 +223,12 @@
                 <span class="menu-title">Loan Register Report</span>
               </a>
             </li>
+            <li class="nav-item <?php if($p == 'incentive-report'){?>active<?php } ?>">
+              <a class="nav-link" href="?p=incentive-report">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Incentive Report</span>
+              </a>
+            </li>
             
             <?php if($_SESSION["StfId"] == 99){?>
             <li class="nav-item">

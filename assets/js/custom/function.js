@@ -1374,6 +1374,80 @@
 			});
 		}//end if
 	});
+	
+	//Incentive Report	
+	$( "#showIcentiveReport" ).on( "click", function() {
+		$IncDate = $('#IncDate').val();
+		$html = '';
+		
+		$('#IncDate_error').html('');
+		$('#part_three').hide();		
+
+		if($IncDate == ''){
+			$('#IncDate_error').html('Please Select date');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "showIcentiveReport", IncDate: $IncDate }
+			})
+			  .done(function( res ) {
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					$sl_rows = $res1.sl_rows; 
+
+					$('#table_heading').html('Incentive For The Month Of ' + $res1.ins_month_format);
+
+					$('#sl_repo_tbody').html($html);
+					if($sl_rows.length > 0){
+						for($i = 0; $i < $sl_rows.length; $i++){
+							$html += '<tr> <td>'+$sl_rows[$i].Id+'</td> <td>'+$sl_rows[$i].FOName+'</td> <td class="text-right">'+$sl_rows[$i].MainPart+'</td>  <td class="text-right">'+$sl_rows[$i].ExtraPart+'</td> <td class="text-right">'+$sl_rows[$i].SocialPart+'</td> <td class="text-right">'+$sl_rows[$i].TotAmt+'</td></tr>';
+						}//end for
+							
+						$html += '<tr> <td colspan="5" class="text-center font-weight-bold">Sub Total</td> <td class="text-right font-weight-bold">'+$res1.sub_total+'</td></tr>';
+					}else{
+						$html += '<tr> <td colspan="6">Sorry! No data Found</td> </tr>';
+					}//end if
+
+					$('#sl_repo_tbody').html($html);
+					$('#part_three').show();
+						
+				}else{
+					alert('No Data found');
+				}
+			});
+		}//end if
+	});
+
+	//Incentive Report	
+	$( "#calculateIcentive" ).on( "click", function() {
+		$IncDate = $('#IncDate').val();
+		$html = '';
+		
+		$('#IncDate_error').html('');
+		$('#part_three').hide();		
+
+		if($IncDate == ''){
+			$('#IncDate_error').html('Please Select date');
+			return false;
+		}else{
+			$.ajax({
+			  method: "POST",
+			  url: "assets/php/function.php",
+			  data: { fn: "calculateIcentive", IncDate: $IncDate }
+			})
+			  .done(function( res ) {
+				$res1 = JSON.parse(res);
+				if($res1.status == true){
+					
+						
+				}else{
+					alert('No Data found');
+				}
+			});
+		}//end if
+	});
 
 	//save Samsad Meeting
 	$( "#saveSamsadMeeting" ).on( "click", function() {
